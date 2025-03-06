@@ -1,7 +1,6 @@
 import { motion } from "framer-motion"
 import { GitlabIcon as GitHub, Linkedin, Mail, Download, ArrowRight } from "lucide-react"
 import { DrawCircleText } from "./DrawCircleText"
-import portfoliopic from "../assets/ProtfolioPic.jpg"
 
 export default function Hero() {
   const socialLinks = [
@@ -109,7 +108,7 @@ export default function Hero() {
               <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 dark:from-purple-600 dark:to-blue-600 rounded-3xl transform -rotate-6 opacity-50"></div>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src={portfoliopic}
+                  src="https://res.cloudinary.com/dnlrwuxxs/image/upload/fl_preserve_transparency/v1741251967/RahulChoudharyPortfolio/ProtfolioPic_i4sml0.jpg?_s=public-apps"
                   alt="Rahul Choudhary"
                   className="w-full h-full object-cover"
                 />
