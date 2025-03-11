@@ -80,13 +80,13 @@ const mailSender = async (to, data) => {
 };
 
 app.post("/api/contact", async (req, res) => {
-  const { email, name, message } = req.body;
-
-  if (!email || !name || !message) {
-    return res.status(400).json({ error: "All fields are required!" });
-  }
-
   try {
+    const { email, name, message } = req.body;
+
+    if (!email || !name || !message) {
+      return res.status(400).json({ error: "All fields are required!" });
+    }
+
     const existingContact = await Contact.findOne({ email });
     if (existingContact) {
       return res.status(400).json({ error: "You have already submitted the form!" });
@@ -97,10 +97,10 @@ app.post("/api/contact", async (req, res) => {
 
     await mailSender(process.env.RECEIVER_EMAIL, { email, name, message });
 
-    res.status(200).json({ message: "Form submitted successfully and email sent!" });
+    res.status(200).json({ message: "Form submitted successfully!" });
   } catch (error) {
-    console.error("Error submitting the form:", error);
-    res.status(500).json({ error: "Internal server error. Please try again later." });
+    console.error("Server Error:", error);
+    res.status(500).json({ error: "Internal server error. Try again later." });
   }
 });
 
