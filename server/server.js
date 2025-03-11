@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config(); // Load environment variables
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -8,28 +8,40 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(cors({ origin: "https://rahulchoudhary05.vercel.app", credentials: true }));
+// Middleware
+app.use(
+  cors({
+    origin: "https://rahulchoudhary05.vercel.app", // Replace with your frontend URL
+    credentials: true,
+  })
+);
 app.use(bodyParser.json());
 
+// MongoDB Connection
 mongoose
-  .connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGODB_URL)
   .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("MongoDB connection error: ", err));
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+    process.exit(1); // Exit on MongoDB connection failure
+  });
 
+// Mongoose Schema
 const ContactSchema = new mongoose.Schema({
-  email: { type: String, unique: true },
-  name: String,
-  message: String,
+  email: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+  message: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });
 const Contact = mongoose.model("Contact", ContactSchema);
 
+// Nodemailer Email Sending Function
 const mailSender = async (to, data) => {
   try {
     const transporter = nodemailer.createTransport({
-      host: process.env.MAIL_HOST,
+      host: process.env.MAIL_HOST, // e.g., smtp.ethereal.email or smtp.gmail.com
       port: 587,
-      secure: false,
+      secure: false, // Use STARTTLS
       auth: {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS,
@@ -64,44 +76,49 @@ const mailSender = async (to, data) => {
       </div>
     `;
 
-    const info = await transporter.sendMail({
-      from: `"Rahul Choudhary | Portfolio Contact Notifications" <${process.env.MAIL_USER}>`,
-      to,
-      subject: `Rahul Choudhary | New Contact Submission from ${data.name}`,
+    await transporter.sendMail({
+      from: `"Portfolio Contact" <${process.env.MAIL_USER}>`,
+      to: to,
+      subject: `New Contact Submission from ${data.name}`,
       html: emailTemplate,
     });
 
-    console.log("Email sent successfully:", info.messageId);
-    return info;
+    console.log("Email sent successfully");
   } catch (error) {
-    console.error("Error occurred while sending email:", error.message);
-    throw error;
+    console.error("Error occurred while sending email:", error);
+    throw new Error("Email sending failed.");
   }
 };
 
+// API Endpoints
 app.post("/api/contact", async (req, res) => {
   const { email, name, message } = req.body;
 
+  // Validation
   if (!email || !name || !message) {
     return res.status(400).json({ error: "All fields are required!" });
   }
 
   try {
+    // Check for existing email
     const existingContact = await Contact.findOne({ email });
     if (existingContact) {
       return res.status(400).json({ error: "You have already submitted the form!" });
     }
 
+    // Save to MongoDB
     const newContact = new Contact({ email, name, message });
     await newContact.save();
 
+    // Send Email Notification
     await mailSender(process.env.RECEIVER_EMAIL, { email, name, message });
 
-    res.status(200).json({ message: "Form submitted successfully and email sent!" });
+    res.status(200).json({ message: "Form submitted successfully!" });
   } catch (error) {
     console.error("Error submitting the form:", error);
     res.status(500).json({ error: "Internal server error. Please try again later." });
   }
 });
 
+// Server Listener
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

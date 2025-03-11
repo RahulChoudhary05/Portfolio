@@ -25,17 +25,17 @@ const Contact = () => {
   ];
 
   const validate = () => {
-    const newErrors = {};
-    if (step === 0 && !formData.email.match(/^\S+@\S+\.\S+$/)) {
-      newErrors.email = "Invalid email address";
+    const errors = {};
+    if (!formData.email.match(/^\S+@\S+\.\S+$/)) {
+      errors.email = "Invalid email address.";
     }
-    if (step === 1 && formData.name.trim() === "") {
-      newErrors.name = "Name cannot be empty";
+    if (!formData.name.trim()) {
+      errors.name = "Name cannot be empty.";
     }
-    if (step === 2 && formData.message.trim() === "") {
-      newErrors.message = "Message cannot be empty";
+    if (!formData.message.trim()) {
+      errors.message = "Message cannot be empty.";
     }
-    return newErrors;
+    return errors;
   };
 
   const handleKeyDown = async (e) => {
@@ -56,17 +56,15 @@ const Contact = () => {
     const newErrors = validate();
     setErrors(newErrors);
 
-    if (!Object.keys(newErrors).length) {
+    if (Object.keys(newErrors).length === 0) {
       try {
         const response = await axios.post("https://portfolio-4ra3.onrender.com/api/contact", formData);
-        if (response.status === 200) {
-          console.log("Form submitted:", response.data);
-          setStep(4); // Move to the "success message" step
-          setSuccess(true);
-        }
+        setSuccessMessage(response.data.message);
+        setErrorMessage(null);
+        setFormData({ email: "", name: "", message: "" });
       } catch (error) {
-        console.error("Error submitting form:", error);
-        setErrorMessage(error.response?.data?.error || "Failed to submit the form. Please try again.");
+        setErrorMessage(error.response?.data?.error || "Something went wrong. Please try again.");
+        setSuccessMessage(null);
       }
     }
   };
