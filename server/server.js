@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(cors({ origin: "https://portfolio-4ra3.onrender.com", credentials: true }));
+app.use(cors({ origin: "https://rahulchoudhary05.vercel.app", credentials: true }));
 app.use(bodyParser.json());
 
 mongoose.connect(process.env.MONGODB_URL, {
