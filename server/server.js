@@ -11,16 +11,10 @@ const PORT = process.env.PORT || 4000;
 app.use(cors({ origin: "https://rahulchoudhary05.vercel.app", credentials: true }));
 app.use(bodyParser.json());
 
-mongoose.connect(process.env.MONGODB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log("Connected to MongoDB"))
-.catch((err) => {
-  console.error("MongoDB connection error: ", err);
-  process.exit(1);
-});
-
+mongoose
+  .connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("MongoDB connection error: ", err));
 
 const ContactSchema = new mongoose.Schema({
   email: { type: String, unique: true },
@@ -86,13 +80,13 @@ const mailSender = async (to, data) => {
 };
 
 app.post("/api/contact", async (req, res) => {
+  const { email, name, message } = req.body;
+
+  if (!email || !name || !message) {
+    return res.status(400).json({ error: "All fields are required!" });
+  }
+
   try {
-    const { email, name, message } = req.body;
-
-    if (!email || !name || !message) {
-      return res.status(400).json({ error: "All fields are required!" });
-    }
-
     const existingContact = await Contact.findOne({ email });
     if (existingContact) {
       return res.status(400).json({ error: "You have already submitted the form!" });
@@ -103,10 +97,10 @@ app.post("/api/contact", async (req, res) => {
 
     await mailSender(process.env.RECEIVER_EMAIL, { email, name, message });
 
-    res.status(200).json({ message: "Form submitted successfully!" });
+    res.status(200).json({ message: "Form submitted successfully and email sent!" });
   } catch (error) {
-    console.error("Server Error:", error);
-    res.status(500).json({ error: "Internal server error. Try again later." });
+    console.error("Error submitting the form:", error);
+    res.status(500).json({ error: "Internal server error. Please try again later." });
   }
 });
 
