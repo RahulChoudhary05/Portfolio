@@ -1,4 +1,4 @@
-require("dotenv").config(); // Load environment variables
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -11,19 +11,18 @@ const PORT = process.env.PORT || 4000;
 // Middleware
 app.use(
   cors({
-    origin: "https://rahulchoudhary05.vercel.app", // Replace with your frontend URL
+    origin: ["https://rahulchoudhary05.vercel.app", "http://localhost:3000"],
     credentials: true,
   })
 );
 app.use(bodyParser.json());
 
-// MongoDB Connection
 mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => {
     console.error("MongoDB connection error:", err);
-    process.exit(1); // Exit on MongoDB connection failure
+    process.exit(1);
   });
 
 // Mongoose Schema
@@ -35,13 +34,12 @@ const ContactSchema = new mongoose.Schema({
 });
 const Contact = mongoose.model("Contact", ContactSchema);
 
-// Nodemailer Email Sending Function
 const mailSender = async (to, data) => {
   try {
     const transporter = nodemailer.createTransport({
-      host: process.env.MAIL_HOST, // e.g., smtp.ethereal.email or smtp.gmail.com
+      host: process.env.MAIL_HOST,
       port: 587,
-      secure: false, // Use STARTTLS
+      secure: false,
       auth: {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS,
@@ -90,27 +88,22 @@ const mailSender = async (to, data) => {
   }
 };
 
-// API Endpoints
 app.post("/api/contact", async (req, res) => {
   const { email, name, message } = req.body;
 
-  // Validation
   if (!email || !name || !message) {
     return res.status(400).json({ error: "All fields are required!" });
   }
 
   try {
-    // Check for existing email
     const existingContact = await Contact.findOne({ email });
     if (existingContact) {
       return res.status(400).json({ error: "You have already submitted the form!" });
     }
 
-    // Save to MongoDB
     const newContact = new Contact({ email, name, message });
     await newContact.save();
 
-    // Send Email Notification
     await mailSender(process.env.RECEIVER_EMAIL, { email, name, message });
 
     res.status(200).json({ message: "Form submitted successfully!" });
@@ -120,5 +113,4 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
-// Server Listener
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

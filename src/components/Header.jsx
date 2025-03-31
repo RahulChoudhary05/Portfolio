@@ -5,7 +5,7 @@ export default function Header() {
   const [mounted, setMounted] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
-  const [activeSection, setActiveSection] = useState("home")
+  const [activeSection, setActiveSection] = useState("hero")
   const { theme } = useTheme()
 
   useEffect(() => setMounted(true), [])

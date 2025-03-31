@@ -32,7 +32,7 @@ export default function Footer() {
       whileInView="visible"
       viewport={{ once: true }}
       variants={footerVariants}
-      className="bg-white dark:bg-gray-900 py-12 mt-20"
+      className="bg-white dark:bg-gray-900 py-12"
     >
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
