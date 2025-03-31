@@ -12,7 +12,7 @@ const Contact = () => {
   });
   const [errors, setErrors] = useState({});
   const [typing, setTyping] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const questions = ["your email?", "your name?", "your message?"];
@@ -59,12 +59,12 @@ const Contact = () => {
     if (Object.keys(newErrors).length === 0) {
       try {
         const response = await axios.post("https://portfolio-4ra3.onrender.com/api/contact", formData);
-        setSuccessMessage(response.data.message);
+        setSuccessMessage("Form submitted successfully!");
         setErrorMessage(null);
         setFormData({ email: "", name: "", message: "" });
       } catch (error) {
         setErrorMessage(error.response?.data?.error || "Something went wrong. Please try again.");
-        setSuccessMessage(null);
+        setSuccessMessage("");
       }
     }
   };
