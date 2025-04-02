@@ -10,6 +10,7 @@ const Contact = () => {
     name: "",
     message: "",
   })
+  const [submittedData, setSubmittedData] = useState(null) // New state for submitted data
   const [errors, setErrors] = useState({})
   const [typing, setTyping] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -107,6 +108,7 @@ const Contact = () => {
     try {
       const response = await axios.post("https://portfolio-4ra3.onrender.com/api/contact", formData)
       setSuccessMessage(response.data.message || "Message sent successfully!")
+      setSubmittedData(formData) // Store submitted data
       setStep(3)
 
       setTimeout(() => {
@@ -126,11 +128,14 @@ const Contact = () => {
   }, [step])
 
   useEffect(() => {
-    const input = document.getElementById(`input-${step}`)
-    if (input) {
-      setTimeout(() => {
-        input.focus()
-      }, 500)
+    // Only focus on the input when the step changes, not on initial render
+    if (step > 0) {
+      const input = document.getElementById(` input-${step}`)
+      if (input) {
+        setTimeout(() => {
+          input.focus()
+        }, 500)
+      }
     }
   }, [step])
 
@@ -163,7 +168,6 @@ const Contact = () => {
             transition={{ duration: 0.5 }}
             className="bg-[#1E1E1E] rounded-lg overflow-hidden shadow-xl"
           >
-            {/* Terminal Header */}
             <div className="flex items-center px-4 py-3 bg-[#2D2D2D] border-b border-[#3D3D3D]">
               <div className="flex space-x-2">
                 <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -173,7 +177,6 @@ const Contact = () => {
               <div className="mx-auto text-gray-400 text-sm font-mono">contact@rahulchoudhary.com</div>
             </div>
 
-            {/* Terminal Body */}
             <div className="p-6 font-mono text-gray-100 min-h-[250px] relative">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -210,7 +213,7 @@ const Contact = () => {
 
                   {step >= 1 && (
                     <div>
-                      <span className="text-blue-400 mr-2">~</span> Email: {formData.email}
+                      <span className="text-blue-400 mr-2">~</span> Email: {submittedData?.email || formData.email}
                     </div>
                   )}
 
@@ -230,13 +233,13 @@ const Contact = () => {
 
                   {step >= 2 && (
                     <div>
-                      <span className="text-blue-400 mr-2">~</span> Name: {formData.name}
+                      <span className="text-blue-400 mr-2">~</span> Name: {submittedData?.name || formData.name}
                     </div>
                   )}
 
                   {step === 2 && (
                     <div className="flex items-center">
-                      <span className="text-blue-400 mr-2">~</span>
+ <span className="text-blue-400 mr-2">~</span>
                       <input type="text" {...getInputProps("message", 2)} />
                       {typing && step === 2 && <span className="animate-pulse">▋</span>}
                     </div>
@@ -251,14 +254,14 @@ const Contact = () => {
                   {step === 3 && (
                     <>
                       <div>
-                        <span className="text-blue-400 mr-2">~</span> Message: {formData.message}
+                        <span className="text-blue-400 mr-2">~</span> Message: {submittedData?.message || formData.message}
                       </div>
                       <div className="mt-6 p-4 bg-[#2D2D2D] rounded-lg">
                         <div className="text-green-400 mb-2">✓ {successMessage || "Form submitted successfully!"}</div>
                         <div className="text-gray-400">
-                          <div>Email: {formData.email}</div>
-                          <div>Name: {formData.name}</div>
-                          <div>Message: {formData.message}</div>
+                          <div>Email: {submittedData?.email}</div>
+                          <div>Name: {submittedData?.name}</div>
+                          <div>Message: {submittedData?.message}</div>
                         </div>
                       </div>
                     </>
