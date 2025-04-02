@@ -19,8 +19,9 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false)
-      window.scrollTo({ top: 0, behavior: "smooth" })
-      window.location.hash = "#hero"
+      if(window.scrollY > 0){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      }
     }, 2000)
     return () => clearTimeout(timer)
   }, [])
