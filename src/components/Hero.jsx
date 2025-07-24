@@ -17,12 +17,12 @@ export default function Hero() {
       </div>
 
       <div className="container mx-auto px-4 py-20 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:w-1/2 text-center lg:text-left"
+            className="lg:w-1/2 text-center"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -52,18 +52,18 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-8"
+              className="flex flex-col sm:flex-row gap-4 justify-center mt-8"
             >
-          <motion.a
-              href="https://drive.google.com/file/d/1yGmRR1Je-v3xwucBwCuJJuHDDywIS1LC/view?usp=sharing"
-              target="_blank"
-              className="inline-flex items-center px-6 py-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-            <FaEye className="w-5 h-5 mr-2" />
-            View CV
-          </motion.a>
+              <motion.a
+                href="https://drive.google.com/file/d/1yGmRR1Je-v3xwucBwCuJJuHDDywIS1LC/view?usp=sharing"
+                target="_blank"
+                className="inline-flex items-center px-6 py-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaEye className="w-5 h-5 mr-2" />
+                View CV
+              </motion.a>
 
               <motion.a
                 href="#contact"
@@ -80,7 +80,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="mt-8 flex justify-center lg:justify-start space-x-4"
+              className="mt-8 flex justify-center space-x-4"
             >
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <motion.a
@@ -131,4 +131,3 @@ export default function Hero() {
     </section>
   )
 }
-

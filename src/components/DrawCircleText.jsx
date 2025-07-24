@@ -1,12 +1,13 @@
+
 import { motion } from "framer-motion"
 
 export const DrawCircleText = () => {
   return (
     <div className="grid place-content-center px-4 py-9 text-gray-800 dark:text-gray-200">
       <h2 className="max-w-2xl text-center text-2xl md:text-3xl lg:text-4xl leading-snug">
-      Building modern, scalable digital solutions {" "} 
+        Building modern, scalable digital solutions {" "} 
         <span className="relative">
-        with the MERN stack.
+          with the MERN stack.
           <svg
             viewBox="0 0 286 73"
             fill="none"
@@ -33,7 +34,7 @@ export const DrawCircleText = () => {
         </span>
       </h2>
       <p className="mt-4 text-center text-lg md:text-xl text-gray-600 dark:text-gray-400">
-      Simplifying complex problems into elegant and intuitive designs.
+        Simplifying complex problems into elegant and intuitive designs.
       </p>
     </div>
   )
