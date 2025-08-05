@@ -55,7 +55,7 @@ export default function Hero() {
               className="flex flex-col sm:flex-row gap-4 justify-center mt-8"
             >
               <motion.a
-                href="https://drive.google.com/file/d/1yGmRR1Je-v3xwucBwCuJJuHDDywIS1LC/view?usp=sharing"
+                href="https://drive.google.com/file/d/1ItRdMUbhFqB-WhU-e9S1Sw-iq2Qpik2D/view?usp=drive_link"
                 target="_blank"
                 className="inline-flex items-center px-6 py-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors"
                 whileHover={{ scale: 1.05 }}
@@ -110,7 +110,7 @@ export default function Hero() {
               <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 dark:from-purple-600 dark:to-blue-600 rounded-3xl transform -rotate-6 opacity-50"></div>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://res.cloudinary.com/dnlrwuxxs/image/upload/fl_preserve_transparency/v1741251967/RahulChoudharyPortfolio/ProtfolioPic_i4sml0.jpg?_s=public-apps"
+                  src="https://res.cloudinary.com/dnlrwuxxs/image/upload/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg"
                   alt="Rahul Choudhary"
                   className="w-full h-full object-cover"
                 />

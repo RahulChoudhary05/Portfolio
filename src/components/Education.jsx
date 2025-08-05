@@ -8,14 +8,14 @@ export default function Education() {
       degree: "High School",
       institution: "St D. R. Public Senior Secondary School",
       period: "March 2020 – March 2022",
-      achievements: ["High school percentage: 74.8%", "Intermediate percentage: 70.3%"],
+      achievements: ["Intermediate percentage: 70.3%", "High school percentage: 74.8%"],
     },
     {
       degree: "Bachelor's Degree in Computer Science",
       institution: "Chandigarh University",
       period: "August 2022 – Present",
       achievements: [
-        "Current CGPA: 7.31",
+        "Current CGPA: 7.44",
         "Proven ability to work collaboratively in team projects",
         "Commitment to continuous learning and self-improvement",
       ],
