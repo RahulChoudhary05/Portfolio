@@ -28,7 +28,7 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
-      <div className="min-h-screen bg-background text-foreground">
+      <div className="relative min-h-screen bg-background text-foreground">
         <AnimatePresence mode="wait">
           {loading ? (
             <motion.div key="loader" initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>

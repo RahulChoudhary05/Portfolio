@@ -15,7 +15,7 @@ export default function Education() {
       institution: "Chandigarh University",
       period: "August 2022 – Present",
       achievements: [
-        "Current CGPA: 7.44",
+        "Current CGPA: 7.54",
         "Proven ability to work collaboratively in team projects",
         "Commitment to continuous learning and self-improvement",
       ],

@@ -3,6 +3,12 @@ import { motion, AnimatePresence } from "framer-motion"
 import axios from "axios"
 import AnimatedSectionHeader from "./AnimatedSectionHeader"
 
+const API_BASE_URL =
+  process.env.REACT_APP_API_URL ||
+  (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://localhost:4000"
+    : "https://portfolio-4ra3.onrender.com")
+
 const Contact = () => {
   const [step, setStep] = useState(0)
   const [formData, setFormData] = useState({
@@ -106,16 +112,29 @@ const Contact = () => {
     setErrorMessage("")
 
     try {
-      const response = await axios.post("https://portfolio-4ra3.onrender.com/api/contact", formData)
+      const payload = {
+        email: formData.email.trim(),
+        name: formData.name.trim(),
+        message: formData.message.trim(),
+      }
+
+      const response = await axios.post(`${API_BASE_URL}/api/contact`, payload, {
+        headers: { "Content-Type": "application/json" },
+        timeout: 45000,
+      })
       setSuccessMessage(response.data.message || "Message sent successfully!")
-      setSubmittedData(formData) // Store submitted data
+      setSubmittedData(payload)
       setStep(3)
 
       setTimeout(() => {
         setFormData({ email: "", name: "", message: "" })
       }, 3000)
     } catch (error) {
-      setErrorMessage(error.response?.data?.error || "Something went wrong. Please try again.")
+      if (error.code === "ECONNABORTED") {
+        setErrorMessage("Request timed out. Please try again.")
+      } else {
+        setErrorMessage(error.response?.data?.error || "Something went wrong. Please try again.")
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -128,14 +147,15 @@ const Contact = () => {
   }, [step])
 
   useEffect(() => {
-    // Only focus on the input when the step changes, not on initial render
-    if (step > 0) {
-      const input = document.getElementById(` input-${step}`)
-      if (input) {
-        setTimeout(() => {
-          input.focus()
-        }, 500)
-      }
+    if (step === 0) {
+      return
+    }
+
+    const input = document.getElementById(`input-${step}`)
+    if (input) {
+      setTimeout(() => {
+        input.focus({ preventScroll: true })
+      }, 500)
     }
   }, [step])
 

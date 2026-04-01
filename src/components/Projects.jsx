@@ -28,6 +28,9 @@ const ProjectCard = ({ project, onClick }) => {
         />
       </motion.div>
       <motion.div className="p-5">
+        <motion.p className="text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400 mb-2">
+          {project.date}
+        </motion.p>
         <motion.h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-200">{project.title}</motion.h3>
         <motion.p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2 mb-4">
           {project.description}
@@ -99,6 +102,21 @@ const ProjectModal = ({ project, onClose }) => (
         >
           {project.description}
         </motion.p>
+        {project.highlights && project.highlights.length > 0 && (
+          <motion.ul
+            className="space-y-2 mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+          >
+            {project.highlights.map((point) => (
+              <li key={point} className="text-sm text-gray-700 dark:text-gray-300 flex gap-2">
+                <span className="text-blue-500 mt-0.5">•</span>
+                <span>{point}</span>
+              </li>
+            ))}
+          </motion.ul>
+        )}
         <motion.div
           className="flex flex-wrap gap-3 mb-6"
           initial={{ opacity: 0 }}
@@ -119,11 +137,14 @@ const ProjectModal = ({ project, onClose }) => (
           ))}
         </motion.div>
         <motion.div
-          className="flex gap-4"
+          className="flex flex-wrap items-center gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
+          <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300 text-sm font-medium">
+            {project.date}
+          </span>
           <motion.a
             href={project.github}
             target="_blank"

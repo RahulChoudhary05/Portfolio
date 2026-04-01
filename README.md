@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# Rahul Choudhary Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern full-stack developer portfolio built with React, Framer Motion, and Tailwind CSS.
 
-## Available Scripts
+## About
 
-In the project directory, you can run:
+This repository contains my personal portfolio website with animated sections for:
 
-### `npm start`
+- Hero and introduction
+- About and experience timeline
+- Skills and services
+- Project journey with detailed modal showcases
+- Education and contact form
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The project is focused on performance, clean UI, and recruiter-friendly project storytelling.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+- Frontend: React, Tailwind CSS, Framer Motion
+- Icons: Lucide React, React Icons
+- Backend (contact API): Node.js/Express (deployed separately)
+- Deployment: Vercel (frontend), Render (API)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Featured Projects
 
-### `npm run build`
+### 1. MEDO SHIELD AI (January 2026)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Stack: React, FastAPI, Python, MongoDB, Docker, Gemini AI
+- GitHub: https://github.com/RahulChoudhary05/MEDO_SHIELD_AI
+- Live: https://medoshieldai.vercel.app/
+- Highlights:
+	- Engineered a privacy-focused processor that converts Parkinson's videos into 33-point skeletal motion data without storing raw video.
+	- Built an AI motion engine for tremor (4-12 Hz) and gait pattern analysis.
+	- Implemented Low/Medium/High risk classification with personalized patient baselines.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2. CipherSQL Studio (March 2026)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Stack: JavaScript, SQL (Full-Stack Web App)
+- GitHub: https://github.com/RahulChoudhary05/CipherSchools
+- Live: https://ciphersqlschool.vercel.app/
+- Highlights:
+	- Built an interactive SQL learning platform with instant query feedback, AI hints, and auto-recovery.
+	- Designed a Kaggle-based challenge pipeline that turns real datasets into structured SQL tasks.
+	- Improved workspace initialization from 60s+ to under 1 second for scalable multi-user usage.
 
-### `npm run eject`
+## Local Development
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Prerequisites
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Node.js 18+
+- npm
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Install
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm install
+```
 
-## Learn More
+### Run Frontend
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+App runs on http://localhost:3000
 
-### Code Splitting
+### Build for Production
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm run build
+```
 
-### Analyzing the Bundle Size
+## Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```text
+src/
+	components/
+		DataBase/
+			projects.js        # Project timeline data source
+		Hero.jsx
+		About.jsx
+		Experience.jsx
+		Skills.jsx
+		Projects.jsx         # Projects timeline + modal showcase
+		Services.jsx
+		Education.jsx
+		Contact.jsx
+```
 
-### Making a Progressive Web App
+## Contact
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- LinkedIn: https://www.linkedin.com/in/rahulchoudhary210505/
+- GitHub: https://github.com/RahulChoudhary05/
+- Email: rahulchoudhary.sk@gmail.com
 
-### Advanced Configuration
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is open for learning and reference.
