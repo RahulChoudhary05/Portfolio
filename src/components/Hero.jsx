@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { GitlabIcon as GitHub, Linkedin, Mail, Download, ArrowRight } from "lucide-react"
+import { GitlabIcon as GitHub, Linkedin, Mail, ArrowRight } from "lucide-react"
 import { DrawCircleText } from "./DrawCircleText"
 import { FaEye } from 'react-icons/fa';
 
