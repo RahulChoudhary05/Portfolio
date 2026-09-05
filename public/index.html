@@ -8,6 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#191b21" />
 
+    <!-- Speed: warm up the image CDN and preload the profile photo so it paints instantly -->
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+    <link
+      rel="preload"
+      as="image"
+      fetchpriority="high"
+      href="https://res.cloudinary.com/dnlrwuxxs/image/upload/f_auto,q_auto:best,dpr_2.0,c_fill,w_180,h_180,g_face,e_sharpen:40/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg"
+    />
+
     <!-- Primary meta -->
     <title>Rahul Choudhary — Full Stack &amp; AI Developer</title>
     <meta

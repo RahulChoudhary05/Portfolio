@@ -26,6 +26,8 @@ export default function About() {
                 sizes="(max-width: 640px) 90vw, 400px"
                 alt="Rahul Choudhary, Full Stack & AI Developer"
                 loading="eager"
+                fetchpriority="high"
+                decoding="async"
                 className="absolute inset-0 h-full w-full object-cover grayscale contrast-[1.03]"
               />
               <span className="absolute left-3 top-3 rounded-md bg-background/85 px-2.5 py-1 font-mono text-[11px] text-foreground backdrop-blur">

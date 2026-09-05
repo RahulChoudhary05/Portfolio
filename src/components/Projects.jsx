@@ -44,6 +44,7 @@ function Thumb({ image, title, className = "" }) {
         src={image}
         alt={`${title.trim()} — project screenshot`}
         loading="lazy"
+        decoding="async"
         className={`h-full w-full object-cover contrast-[1.03] transition-[filter] duration-500 group-hover/thumb:grayscale-0 ${
           colored ? "grayscale-0" : "grayscale"
         }`}

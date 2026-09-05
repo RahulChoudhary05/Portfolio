@@ -1,9 +1,9 @@
-import RKTECHNICALSUPPORT from "../../components/DataBase/ProjectImages/RKTECHNICALSUPPORT.png"
-import srajinfra from "../../components/DataBase/ProjectImages/srajinfra.png"
-import BharatMarket from "../../components/DataBase/ProjectImages/BharatMarket.png"
-import ComboFinder from "../../components/DataBase/ProjectImages/ComboFinder.png"
-import MEDO_SHIELD_AI from "../../components/DataBase/ProjectImages/medoshieldai.png"
-import CipherSQLStudio from "../../components/DataBase/ProjectImages/ciphersqlschool.png"
+import RKTECHNICALSUPPORT from "../../components/DataBase/ProjectImages/RKTECHNICALSUPPORT.webp"
+import srajinfra from "../../components/DataBase/ProjectImages/srajinfra.webp"
+import BharatMarket from "../../components/DataBase/ProjectImages/BharatMarket.webp"
+import ComboFinder from "../../components/DataBase/ProjectImages/ComboFinder.webp"
+import MEDO_SHIELD_AI from "../../components/DataBase/ProjectImages/medoshieldai.webp"
+import CipherSQLStudio from "../../components/DataBase/ProjectImages/ciphersqlschool.webp"
 import durabolt from "../../components/DataBase/ProjectImages/durabolt.svg"
 
 const projects = [

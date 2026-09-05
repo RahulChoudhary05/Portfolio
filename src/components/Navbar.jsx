@@ -57,6 +57,10 @@ export default function Navbar() {
               <img
                 src="https://res.cloudinary.com/dnlrwuxxs/image/upload/f_auto,q_auto:best,dpr_2.0,c_fill,w_180,h_180,g_face,e_sharpen:40/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg"
                 alt="Rahul Choudhary"
+                width="36"
+                height="36"
+                fetchpriority="high"
+                decoding="async"
                 className="h-9 w-9 rounded-md object-cover grayscale border border-border"
               />
               <span className="hidden sm:flex flex-col leading-tight">
