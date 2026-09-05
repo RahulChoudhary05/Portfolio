@@ -1,200 +1,131 @@
-import { useState, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { GitlabIcon as GitHub, ExternalLink, X } from "lucide-react"
-import { Timeline } from "./Timeline"
-import projects from "../components/DataBase/projects"
+import { useState } from "react"
+import { Github, ArrowUpRight, Calendar } from "lucide-react"
+import { Section, SectionTitle, Reveal, Panel } from "./ui/Bento"
+import Tilt from "./ui/Tilt"
+import projects from "./DataBase/projects"
 
-const ProjectCard = ({ project, onClick }) => {
-  const cardRef = useRef(null)
-
+function Links({ github, demo }) {
+  const isNpm = demo.includes("npmjs.com")
   return (
-    <motion.div
-      ref={cardRef}
-      onClick={() => onClick(project)}
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-lg cursor-pointer overflow-hidden group"
-      whileHover={{ y: -10 }}
-      layoutId={`project-card-${project.id}`}
-    >
-      <motion.div className="relative h-48 overflow-hidden">
-        <motion.img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-        />
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          initial={{ opacity: 0 }}
-          whileHover={{ opacity: 1 }}
-        />
-      </motion.div>
-      <motion.div className="p-5">
-        <motion.p className="text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400 mb-2">
-          {project.date}
-        </motion.p>
-        <motion.h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-200">{project.title}</motion.h3>
-        <motion.p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2 mb-4">
-          {project.description}
-        </motion.p>
-        <motion.div className="flex flex-wrap gap-2 mt-2">
-          {project.technologies.map((tech) => (
-            <motion.span
-              key={tech}
-              className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-              whileHover={{ scale: 1.05 }}
-            >
-              {tech}
-            </motion.span>
-          ))}
-        </motion.div>
-      </motion.div>
-    </motion.div>
+    <div className="flex items-center gap-2">
+      <a
+        href={demo}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
+        className="btn btn-primary !py-2 !px-3.5 text-xs"
+      >
+        {isNpm ? "View on npm" : "Live demo"} <ArrowUpRight className="w-3.5 h-3.5" />
+      </a>
+      <a
+        href={github}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
+        aria-label="GitHub repository"
+        className="icon-btn !h-9 !w-9"
+      >
+        <Github className="w-4 h-4" />
+      </a>
+    </div>
   )
 }
 
-const ProjectModal = ({ project, onClose }) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0.3 }}
-    className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-    onClick={onClose}
-  >
-    <motion.div
-      layoutId={`project-card-${project.id}`}
-      className="bg-white dark:bg-gray-900 rounded-lg max-w-3xl w-full overflow-hidden relative"
-      onClick={(e) => e.stopPropagation()}
+function Thumb({ image, title, className = "" }) {
+  const [colored, setColored] = useState(false)
+  return (
+    <button
+      type="button"
+      onClick={() => setColored((c) => !c)}
+      aria-label={`${colored ? "Hide" : "Show"} color for ${title.trim()}`}
+      className={`group/thumb relative block w-full overflow-hidden rounded-[10px] border border-border bg-muted ${className}`}
     >
-      <motion.button
-        onClick={onClose}
-        className="absolute top-4 right-4 text-gray-400 dark:text-gray-300 hover:text-gray-600 z-10"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <X size={24} />
-      </motion.button>
-      <motion.div className="relative h-64 overflow-hidden">
-        <motion.img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover"
-          layoutId={`project-image-${project.id}`}
-        />
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        />
-      </motion.div>
-      <motion.div className="p-8">
-        <motion.h2
-          className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4"
-          layoutId={`project-title-${project.id}`}
-        >
-          {project.title}
-        </motion.h2>
-        <motion.p
-          className="text-gray-600 dark:text-gray-300 mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          {project.description}
-        </motion.p>
-        {project.highlights && project.highlights.length > 0 && (
-          <motion.ul
-            className="space-y-2 mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
-          >
-            {project.highlights.map((point) => (
-              <li key={point} className="text-sm text-gray-700 dark:text-gray-300 flex gap-2">
-                <span className="text-blue-500 mt-0.5">•</span>
-                <span>{point}</span>
-              </li>
-            ))}
-          </motion.ul>
-        )}
-        <motion.div
-          className="flex flex-wrap gap-3 mb-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          {project.technologies.map((tech, index) => (
-            <motion.span
-              key={tech}
-              className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-sm rounded-full text-gray-800 dark:text-gray-100"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5 + index * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-            >
-              {tech}
-            </motion.span>
-          ))}
-        </motion.div>
-        <motion.div
-          className="flex flex-wrap items-center gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-        >
-          <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300 text-sm font-medium">
-            {project.date}
-          </span>
-          <motion.a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 transition-all"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <GitHub size={20} /> GitHub
-          </motion.a>
-          <motion.a
-            href={project.demo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-400 transition-all"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <ExternalLink size={20} /> Live Demo
-          </motion.a>
-        </motion.div>
-      </motion.div>
-    </motion.div>
-  </motion.div>
-)
+      <img
+        src={image}
+        alt={`${title.trim()} — project screenshot`}
+        loading="lazy"
+        className={`h-full w-full object-cover contrast-[1.03] transition-[filter] duration-500 group-hover/thumb:grayscale-0 ${
+          colored ? "grayscale-0" : "grayscale"
+        }`}
+      />
+      <span className="pointer-events-none absolute bottom-2 right-2 rounded-md bg-background/85 px-2 py-0.5 font-mono text-[10px] text-muted-foreground backdrop-blur">
+        {colored ? "tap · B&W" : "tap · color"}
+      </span>
+    </button>
+  )
+}
 
 export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState(null)
-
-  const data = projects.map((project) => ({
-    title: project.date,
-    content: <ProjectCard project={project} onClick={setSelectedProject} />,
-  }))
+  const [featured, ...rest] = projects
 
   return (
-    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto px-4">
-        <motion.h2
-          className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          My Projects Journey
-        </motion.h2>
-        <Timeline data={data} />
+    <Section id="projects">
+      <SectionTitle
+        eyebrow="Selected work"
+        title="Featured Projects"
+        kicker="Full-stack products, tools, and open-source work I've designed and shipped."
+      />
+
+      <div className="grid grid-cols-12 gap-4">
+        {/* Featured */}
+        <Reveal className="col-span-12">
+          <Panel className="h-full p-4 md:p-5">
+            <div className="grid md:grid-cols-2 gap-5 items-stretch">
+              <Thumb image={featured.image} title={featured.title} className="min-h-[240px] md:min-h-[340px]" />
+              <div className="flex flex-col justify-center p-2 md:p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="tag tag-cobalt">Featured</span>
+                  <span className="inline-flex items-center gap-1 font-mono text-xs text-muted-foreground">
+                    <Calendar className="w-3.5 h-3.5" /> {featured.date}
+                  </span>
+                </div>
+                <h3 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+                  {featured.title.trim()}
+                </h3>
+                <p className="mt-3 text-sm md:text-base text-muted-foreground leading-relaxed line-clamp-4">
+                  {featured.description}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {featured.technologies.slice(0, 6).map((t) => (
+                    <span key={t} className="tag">{t}</span>
+                  ))}
+                </div>
+                <div className="mt-6">
+                  <Links github={featured.github} demo={featured.demo} />
+                </div>
+              </div>
+            </div>
+          </Panel>
+        </Reveal>
+
+        {/* Rest */}
+        {rest.map((p, i) => (
+          <Reveal key={p.id} delay={(i % 2) * 0.06} className="col-span-12 sm:col-span-6">
+            <Tilt intensity={5} className="h-full">
+            <Panel className="h-full p-4 flex flex-col">
+              <Thumb image={p.image} title={p.title} className="h-48" />
+              <div className="flex flex-col flex-1 p-2 pt-4">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <h3 className="font-display text-lg font-semibold tracking-tight text-foreground leading-tight">
+                    {p.title.trim()}
+                  </h3>
+                  <span className="font-mono text-[11px] text-muted-foreground whitespace-nowrap">{p.date}</span>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">{p.description}</p>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {p.technologies.slice(0, 4).map((t) => (
+                    <span key={t} className="tag">{t}</span>
+                  ))}
+                </div>
+                <div className="mt-auto pt-5">
+                  <Links github={p.github} demo={p.demo} />
+                </div>
+              </div>
+            </Panel>
+            </Tilt>
+          </Reveal>
+        ))}
       </div>
-      <AnimatePresence>
-        {selectedProject && <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />}
-      </AnimatePresence>
-    </section>
+    </Section>
   )
 }

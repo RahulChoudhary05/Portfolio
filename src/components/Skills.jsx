@@ -1,131 +1,83 @@
-import { motion } from "framer-motion"
-import { Code, Database, Server, Layout, GitBranch, Terminal, Layers, Cpu, Globe, Workflow } from "lucide-react"
-import AnimatedSectionHeader from "./AnimatedSectionHeader"
+import { Code2, Layout, Server, Database, BrainCircuit, Wrench } from "lucide-react"
+import { Section, SectionTitle, Reveal, Panel } from "./ui/Bento"
+import SkillRing from "./ui/SkillRing"
+import Tilt from "./ui/Tilt"
 
-const SkillIcon = ({ icon: Icon, color }) => (
-  <div className={`p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg`}>
-    <Icon className={`w-6 h-6 ${color}`} />
-  </div>
-)
+const marquee = ["React", "Next.js", "TypeScript", "Node.js", "Express", "FastAPI", "PostgreSQL", "MongoDB", "Python", "Docker", "Azure", "Databricks", "Tailwind CSS", "Framer Motion", "Agentic AI", "LLM", "RAG", "Kotlin", "GraphQL", "WebSockets"]
 
-const skills = [
-  {
-    icon: Code,
-    name: "Frontend Development",
-    tech: "React.js, Next.js",
-    description:
-      "Building responsive and interactive user interfaces with modern React features and Next.js for optimal performance.",
-    color: "text-blue-500",
-  },
-  {
-    icon: Server,
-    name: "Backend Development",
-    tech: "Node.js, Express, Fastify",
-    description: "Creating robust server-side applications with focus on scalability and clean architecture.",
-    color: "text-green-500",
-  },
-  {
-    icon: Database,
-    name: "Database Management",
-    tech: "MongoDB, Mongoose, Firebase",
-    description: "Designing and implementing efficient database schemas and queries for optimal data management.",
-    color: "text-purple-500",
-  },
-  {
-    icon: Layout,
-    name: "UI/UX Design",
-    tech: "Tailwind CSS",
-    description: "Crafting beautiful and intuitive user interfaces with modern design principles and frameworks.",
-    color: "text-pink-500",
-  },
-  {
-    icon: GitBranch,
-    name: "Version Control",
-    tech: "Git, GitHub",
-    description: "Managing code versions efficiently with Git and collaborating effectively through GitHub.",
-    color: "text-orange-500",
-  },
-  {
-    icon: Terminal,
-    name: "JavaScript",
-    tech: "JavaScript",
-    description: "Writing type-safe code for better maintainability and developer experience.",
-    color: "text-yellow-500",
-  },
-  {
-    icon: Layers,
-    name: "State Management",
-    tech: "Redux, Context API",
-    description: "Managing complex application state with modern state management solutions.",
-    color: "text-indigo-500",
-  },
-  {
-    icon: Cpu,
-    name: "API Development",
-    tech: "REST, GraphQL",
-    description: "Designing and implementing efficient APIs for seamless data communication.",
-    color: "text-red-500",
-  },
-  {
-    icon: Globe,
-    name: "Web Performance",
-    tech: "Optimization, SEO",
-    description: "Optimizing web applications for speed, accessibility, and search engine visibility.",
-    color: "text-teal-500",
-  },
-  {
-    icon: Workflow,
-    name: "Agile Methodologies",
-    tech: "Scrum, Kanban",
-    description: "Working efficiently in agile environments with focus on continuous delivery.",
-    color: "text-cyan-500",
-  },
+const categories = [
+  { icon: Code2, name: "Languages", chip: "chip-blue", items: ["Java", "JavaScript", "TypeScript", "Python", "SQL"] },
+  { icon: Layout, name: "Frontend", chip: "chip-violet", items: ["React.js", "Next.js", "HTML", "CSS", "Tailwind CSS", "Framer Motion"] },
+  { icon: Server, name: "Backend", chip: "chip-emerald", items: ["Node.js", "Express.js", "FastAPI", "REST APIs", "WebSockets", "Auth"] },
+  { icon: Database, name: "Databases & Cloud", chip: "chip-amber", items: ["PostgreSQL", "MongoDB", "SQL Server", "Firebase", "Supabase", "Azure", "Databricks"] },
+  { icon: BrainCircuit, name: "AI & Automation", chip: "chip-fuchsia", items: ["Agentic AI", "LLM Integration", "Gemini AI", "Claude AI", "Prompt Eng."] },
+  { icon: Wrench, name: "Tools & DevOps", chip: "chip-cyan", items: ["Docker", "Git", "GitHub", "CI/CD", "Postman", "PostHog", "Vercel"] },
 ]
+
+const soft = ["Problem Solving", "System Design", "Ownership", "Collaboration", "Communication"]
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-indigo-900 dark:to-purple-900"></div>
+    <Section id="skills">
+      <SectionTitle
+        eyebrow="What I do"
+        title="Skills & Expertise"
+        kicker="A full-stack + AI toolkit refined across production projects — from pixel-perfect UI to resilient backends and LLM-powered automation."
+      />
 
-      <div className="absolute inset-0 opacity-10">
-        <svg className="w-full h-full" xmlns="">
-          <defs>
-            <pattern id="skill-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-              <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="2" />
-              <path d="M50 30 L50 70 M30 50 L70 50" stroke="currentColor" strokeWidth="2" />
-            </pattern>
-          </defs>
-          <rect x="0" y="0" width="100%" height="100%" fill="url(#skill-pattern)" />
-        </svg>
+      <div className="grid grid-cols-12 gap-4">
+        <Reveal className="col-span-12 md:col-span-8">
+          <Panel className="h-full p-7">
+            <span className="eyebrow">Expertise</span>
+            <p className="mt-4 text-muted-foreground leading-relaxed max-w-2xl">
+              I specialize in building end-to-end web products across the MERN and PERN stacks — architecting clean APIs,
+              designing efficient data models, and integrating Agentic AI / LLM workflows into reliable, scalable systems.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-1.5">
+              {soft.map((s, i) => (
+                <span key={s} className={i === 0 ? "tag tag-cobalt" : "tag"}>{s}</span>
+              ))}
+            </div>
+          </Panel>
+        </Reveal>
+
+        <Reveal delay={0.06} className="col-span-12 md:col-span-4">
+          <Panel className="h-full p-7 grid place-items-center">
+            <SkillRing value={92} label="Full-Stack" />
+          </Panel>
+        </Reveal>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <AnimatedSectionHeader title="Skills & Expertise" />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skills.map((skill, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group">
-                <div className="flex items-center mb-4">
-                  <SkillIcon icon={skill.icon} color={skill.color} />
-                  <div className="ml-4">
-                    <h3 className="text-lg font-semibold dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-                      {skill.name}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">{skill.tech}</p>
-                  </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        {categories.map((c, i) => (
+          <Reveal key={c.name} delay={(i % 3) * 0.05}>
+            <Tilt intensity={5} className="h-full">
+              <Panel className="h-full p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className={`chip ${c.chip} h-10 w-10`} style={{ transform: "translateZ(22px)" }}>
+                    <c.icon className="w-5 h-5" />
+                  </span>
+                  <h4 className="font-display font-semibold text-foreground leading-tight">{c.name}</h4>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 text-sm">{skill.description}</p>
-              </div>
-            </motion.div>
+                <div className="flex flex-wrap gap-1.5">
+                  {c.items.map((t) => (
+                    <span key={t} className="tag">{t}</span>
+                  ))}
+                </div>
+              </Panel>
+            </Tilt>
+          </Reveal>
+        ))}
+      </div>
+
+      {/* Sliding tech marquee */}
+      <div className="relative mt-8 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+        <div className="flex w-max animate-marquee pause-on-hover gap-3">
+          {[...marquee, ...marquee].map((t, i) => (
+            <span key={i} className="whitespace-nowrap tag">{t}</span>
           ))}
         </div>
       </div>
-    </section>
+    </Section>
   )
 }

@@ -46,10 +46,10 @@ export const TracingBeam = ({ children, className = "" }) => {
           />
           <defs>
             <motion.linearGradient id="gradient" gradientUnits="userSpaceOnUse" x1="0" x2="0" y1={y1} y2={y2}>
-              <stop stopColor="#3B82F6" stopOpacity="0" />
-              <stop stopColor="#3B82F6" />
-              <stop offset="0.325" stopColor="#6344F5" />
-              <stop offset="1" stopColor="#AE48FF" stopOpacity="0" />
+              <stop stopColor="#22d3ee" stopOpacity="0" />
+              <stop stopColor="#22d3ee" />
+              <stop offset="0.325" stopColor="#8b5cf6" />
+              <stop offset="1" stopColor="#d946ef" stopOpacity="0" />
             </motion.linearGradient>
           </defs>
         </svg>

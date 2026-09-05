@@ -1,133 +1,142 @@
-import { motion } from "framer-motion"
-import { GitlabIcon as GitHub, Linkedin, Mail, ArrowRight } from "lucide-react"
-import { DrawCircleText } from "./DrawCircleText"
-import { FaEye } from 'react-icons/fa';
+import { GitlabIcon as GitHub, Linkedin, Mail, ArrowRight, Package } from "lucide-react"
+import { FaEye } from "react-icons/fa"
+import { Reveal } from "./ui/Bento"
+import CountUp from "./ui/CountUp"
+import TypingText from "./ui/TypingText"
+import Tilt from "./ui/Tilt"
+import Magnetic from "./ui/Magnetic"
+
+const socials = [
+  { icon: GitHub, href: "https://github.com/RahulChoudhary05/", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/rahulchoudhary210505/", label: "LinkedIn" },
+  { icon: Package, href: "https://www.npmjs.com/package/@rahulchoudhary05/durabolt", label: "npm" },
+  { icon: Mail, href: "mailto:rahulchoudhary.sk@gmail.com", label: "Email" },
+]
+
+const stats = [
+  { end: 7, suffix: "+", label: "Projects shipped" },
+  { end: 400, suffix: "+", label: "DSA solved" },
+  { end: 1000, suffix: "+", label: "Contributions" },
+]
+
+/* Graphite code card — the focal element (real code, no fake browser chrome). */
+function CodeCard() {
+  const L = ({ n, children }) => (
+    <div className="grid grid-cols-[1.6rem_1fr] gap-3">
+      <span className="text-right text-white/25 select-none">{n}</span>
+      <span className="[overflow-wrap:anywhere]">{children}</span>
+    </div>
+  )
+  return (
+    <div className="card-code text-[13px] leading-[1.9]">
+      <div className="flex items-center justify-between border-b px-4 py-2.5" style={{ borderColor: "hsl(var(--graphite-2))" }}>
+        <span className="font-mono text-xs text-white/50">developer.ts</span>
+        <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-white/50">
+          <span className="h-2 w-2 rounded-full bg-white/70" /> live
+        </span>
+      </div>
+      <div className="p-4 font-mono">
+        <L n="1"><span className="tok-key">const</span> <span className="tok-fn">rahul</span><span className="tok-punc">: Developer = {"{"}</span></L>
+        <L n="2">
+          <span className="pl-4 tok-str">role</span><span className="tok-punc">: </span>
+          <span className="tok-str">"<TypingText words={["Full Stack & AI Developer"]} loop={false} typeSpeed={55} />"</span><span className="tok-punc">,</span>
+        </L>
+        <L n="3"><span className="pl-4 tok-str">stack</span><span className="tok-punc">: [</span><span className="tok-str">"React"</span><span className="tok-punc">, </span><span className="tok-str">"Next"</span><span className="tok-punc">, </span><span className="tok-str">"Node"</span><span className="tok-punc">, </span><span className="tok-str">"FastAPI"</span><span className="tok-punc">],</span></L>
+        <L n="4"><span className="pl-4 tok-str">ai</span><span className="tok-punc">: [</span><span className="tok-str">"Agentic AI"</span><span className="tok-punc">, </span><span className="tok-str">"LLM"</span><span className="tok-punc">],</span></L>
+        <L n="5"><span className="pl-4 tok-str">open</span><span className="tok-punc">: </span><span className="tok-num">true</span><span className="tok-punc">,</span></L>
+        <L n="6"><span className="tok-punc">{"}"}</span></L>
+      </div>
+      <div className="flex items-center gap-2 border-t px-4 py-2.5" style={{ borderColor: "hsl(var(--graphite-2))" }}>
+        <span className="rounded bg-white/10 px-2 py-0.5 font-mono text-[11px] font-medium text-white">200 OK</span>
+        <span className="font-mono text-[11px] text-white/50">available for freelance &amp; full-time</span>
+      </div>
+    </div>
+  )
+}
 
 export default function Hero() {
-  const socialLinks = [
-    { icon: GitHub, href: "https://github.com/RahulChoudhary05/", label: "GitHub" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/rahulchoudhary210505/", label: "LinkedIn" },
-    { icon: Mail, href: "mailto:rahulchoudhary.sk@gmail.com", label: "Email" },
-  ]
-
   return (
-    <section id="hero" className="min-h-screen relative overflow-hidden flex items-center">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-indigo-900 dark:to-purple-900">
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.2] dark:opacity-[0.1]"></div>
-      </div>
-
-      <div className="container mx-auto px-4 py-20 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="lg:w-1/2 text-center"
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="mb-6"
-            >
-              <span className="px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 text-sm font-medium">
-                Full Stack Developer
+    <section id="hero" className="relative pt-24 md:pt-28 pb-8 overflow-hidden">
+      <div className="bw-grid pointer-events-none absolute inset-0 -z-0" aria-hidden />
+      <div className="relative z-10 mx-auto w-full max-w-[1120px] px-5 sm:px-6">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-6 items-center">
+          {/* Left — title / lede */}
+          <div className="lg:col-span-7">
+            <Reveal>
+              <span className="eyebrow inline-flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-foreground opacity-50" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-foreground" />
+                </span>
+                Available for freelance &amp; full-time
               </span>
-            </motion.div>
+            </Reveal>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
-            >
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <Reveal delay={0.05}>
+              <h1 className="mt-5 font-display text-5xl sm:text-6xl lg:text-[4.5rem] font-semibold tracking-[-0.03em] leading-[0.98] text-foreground [overflow-wrap:anywhere]">
                 Rahul Choudhary
-              </span>
-            </motion.h1>
+                <span className="sr-only"> — Full Stack &amp; AI Developer</span>
+              </h1>
+            </Reveal>
 
-            <DrawCircleText />
+            <Reveal delay={0.1}>
+              <p className="mt-6 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed">
+                <span className="text-foreground font-medium">Full Stack &amp; AI Developer</span> building
+                production-grade platforms and Agentic AI / LLM systems with the MERN &amp; PERN stacks —
+                from architecture to deployment.
+              </p>
+            </Reveal>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center mt-8"
-            >
-              <motion.a
-                href="https://drive.google.com/file/d/1-KWYB-Xr2OHwTnSPgI-YSIZf_UoSr_5h/view?usp=sharing"
-                target="_blank"
-                className="inline-flex items-center px-6 py-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <FaEye className="w-5 h-5 mr-2" />
-                View CV
-              </motion.a>
-
-              <motion.a
-                href="#contact"
-                className="inline-flex items-center px-6 py-3 rounded-full border-2 border-blue-600 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Contact Me
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </motion.a>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="mt-8 flex justify-center space-x-4"
-            >
-              {socialLinks.map(({ icon: Icon, href, label }) => (
-                <motion.a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-full bg-white/80 hover:bg-white dark:bg-gray-800/80 dark:hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Icon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
-                  <span className="sr-only">{label}</span>
-                </motion.a>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="lg:w-1/2"
-          >
-            <div className="relative w-72 h-72 md:w-96 md:h-96 mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 dark:from-blue-600 dark:to-purple-600 rounded-3xl transform rotate-6 opacity-50"></div>
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 dark:from-purple-600 dark:to-blue-600 rounded-3xl transform -rotate-6 opacity-50"></div>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img
-                  src="https://res.cloudinary.com/dnlrwuxxs/image/upload/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg"
-                  alt="Rahul Choudhary"
-                  className="w-full h-full object-cover"
-                />
+            <Reveal delay={0.15}>
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <Magnetic strength={0.4}>
+                  <a href="#contact" className="btn btn-primary">
+                    Hire me <ArrowRight className="w-4 h-4" />
+                  </a>
+                </Magnetic>
+                <Magnetic strength={0.4}>
+                  <a
+                    href="https://drive.google.com/file/d/1Jj0pxIaMYz1qWwOoHxd5HTJwZhQR41Di/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-ghost"
+                  >
+                    <FaEye /> View CV
+                  </a>
+                </Magnetic>
+                <div className="flex items-center gap-2">
+                  {socials.map(({ icon: Icon, href, label }) => (
+                    <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="icon-btn">
+                      <Icon className="w-4 h-4" />
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </Reveal>
+
+            {/* hairline stats */}
+            <Reveal delay={0.2}>
+              <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-5">
+                {stats.map((s) => (
+                  <div key={s.label}>
+                    <dt className="font-display text-2xl md:text-3xl font-semibold text-foreground">
+                      <CountUp end={s.end} suffix={s.suffix} />
+                    </dt>
+                    <dd className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted-foreground mt-1">{s.label}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+          </div>
+
+          {/* Right — code card */}
+          <Reveal delay={0.1} className="lg:col-span-5">
+            <Tilt intensity={7}>
+              <CodeCard />
+            </Tilt>
+          </Reveal>
         </div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.6 }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-      >
-        <div className="w-1 h-12 bg-gradient-to-b from-blue-600 to-purple-600 rounded-full animate-pulse"></div>
-      </motion.div>
     </section>
   )
 }

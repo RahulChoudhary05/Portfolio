@@ -1,68 +1,100 @@
-import { motion } from "framer-motion"
-import { Code, Layout, Server, Smartphone } from "lucide-react"
+import { Layout, BrainCircuit, Bot, Cloud, Database, Webhook, Smartphone, Sparkles, ArrowUpRight } from "lucide-react"
+import { Section, SectionTitle, Reveal, Panel } from "./ui/Bento"
+import Tilt from "./ui/Tilt"
+
+const services = [
+  {
+    icon: Layout,
+    title: "Full-Stack Web Development",
+    desc: "End-to-end web apps on the MERN & PERN stacks — React, Next.js, Node, Express, and FastAPI. Type-safe, performant, and production-ready from architecture to deployment.",
+    tags: ["React", "Next.js", "Node", "FastAPI", "TypeScript"],
+    span: "lg:col-span-7",
+  },
+  {
+    icon: BrainCircuit,
+    title: "AI & LLM Engineering",
+    desc: "Bring LLMs (Gemini, Claude, GPT) into your product — RAG pipelines, prompt engineering, streaming, and evals.",
+    tags: ["LLM", "RAG", "Prompt Eng."],
+    span: "lg:col-span-5",
+  },
+  {
+    icon: Bot,
+    title: "AI Agents & Automation",
+    desc: "Agentic AI workflows with tool-calling and multi-step reasoning that automate real business operations.",
+    tags: ["Agentic AI", "Tool-calling"],
+    span: "lg:col-span-4",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & DevOps",
+    desc: "Deploy and scale on Azure & Databricks with Docker, CI/CD, and Vercel — reliable, observable releases.",
+    tags: ["Azure", "Docker", "CI/CD"],
+    span: "lg:col-span-4",
+  },
+  {
+    icon: Database,
+    title: "Database Design & Management",
+    desc: "Schema design, indexing, and query optimization across PostgreSQL, MongoDB, and SQL Server.",
+    tags: ["PostgreSQL", "MongoDB", "SQL Server"],
+    span: "lg:col-span-4",
+  },
+  {
+    icon: Webhook,
+    title: "API Development & Integrations",
+    desc: "REST, GraphQL, and WebSocket APIs, plus third-party integrations — ABHA healthcare, Google Maps, SMTP, and payments.",
+    tags: ["REST", "GraphQL", "WebSockets"],
+    span: "lg:col-span-6",
+  },
+  {
+    icon: Smartphone,
+    title: "App & Mobile Development",
+    desc: "Cross-platform apps and installable PWAs with Kotlin and responsive, offline-capable frontends.",
+    tags: ["Kotlin", "PWA", "Responsive"],
+    span: "lg:col-span-6",
+  },
+  {
+    icon: Sparkles,
+    title: "Responsive UI/UX & Motion",
+    desc: "Mobile-first, accessible interfaces with polished micro-interactions, 3D tilt, and motion design that feels alive.",
+    tags: ["Tailwind CSS", "Framer Motion", "Accessibility"],
+    span: "lg:col-span-12",
+  },
+]
 
 export default function Services() {
-  const services = [
-    {
-      icon: <Layout className="w-12 h-12 text-blue-500" />,
-      title: "Web Application Development",
-      description: "Custom web applications built with React and Next.js, focusing on performance and user experience.",
-    },
-    {
-      icon: <Server className="w-12 h-12 text-green-500" />,
-      title: "Backend Development",
-      description: "Robust and scalable server-side solutions using Node.js, Express, and Fastify.",
-    },
-    {
-      icon: <Code className="w-12 h-12 text-purple-500" />,
-      title: "API Development",
-      description:
-        "RESTful and GraphQL API design and implementation for seamless data flow between client and server.",
-    },
-    {
-      icon: <Smartphone className="w-12 h-12 text-yellow-500" />,
-      title: "Responsive Design",
-      description: "Mobile-first, responsive web designs that work flawlessly across all devices and screen sizes.",
-    },
-  ]
-
   return (
-    <section
-      id="services"
-      className="py-20 bg-gradient-to-br from-indigo-50 to-blue-100 dark:from-gray-900 dark:to-blue-900 transition-colors duration-300 overflow-hidden relative"
-    >
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.h2
-          className="text-4xl font-bold mb-12 text-center dark:text-white"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          My Services
-        </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl relative transition-all duration-300 overflow-hidden"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="flex items-center mb-4">
-                {service.icon}
-                <h3 className="text-2xl font-semibold ml-4 dark:text-white">{service.title}</h3>
-              </div>
-              <p className="text-gray-600 dark:text-gray-300">{service.description}</p>
-            </motion.div>
-          ))}
-        </div>
+    <Section id="services">
+      <SectionTitle
+        eyebrow="How I help"
+        title="Services"
+        kicker="From full-stack web and mobile apps to AI agents, LLM integrations, cloud, and data — end-to-end product engineering. Available for freelance and contract work."
+      />
+
+      <div className="grid grid-cols-12 gap-4 perspective-1000">
+        {services.map((s, i) => (
+          <Reveal key={s.title} delay={(i % 3) * 0.05} className={`col-span-12 md:col-span-6 ${s.span}`}>
+            <Tilt intensity={5} className="h-full">
+              <Panel className="group h-full p-6 md:p-7 flex items-start gap-4 min-h-[150px]">
+                <span className="chip chip-blue h-12 w-12" style={{ transform: "translateZ(24px)" }}>
+                  <s.icon className="w-6 h-6" />
+                </span>
+                <div className="flex-1" style={{ transform: "translateZ(16px)" }}>
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="font-display text-lg md:text-xl font-semibold tracking-tight text-foreground">{s.title}</h3>
+                    <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform shrink-0 mt-1" />
+                  </div>
+                  <p className="mt-2 text-sm md:text-[15px] text-muted-foreground leading-relaxed">{s.desc}</p>
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {s.tags.map((t) => (
+                      <span key={t} className="tag">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </Panel>
+            </Tilt>
+          </Reveal>
+        ))}
       </div>
-      <div className="absolute top-0 left-0 w-64 h-64 -mt-32 -ml-32 opacity-20">
-        <div className="w-full h-full bg-blue-500 rounded-full"></div>
-      </div>
-    </section>
+    </Section>
   )
 }

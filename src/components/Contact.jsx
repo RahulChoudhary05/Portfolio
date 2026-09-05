@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import axios from "axios"
-import AnimatedSectionHeader from "./AnimatedSectionHeader"
+import { Mail, Linkedin, Github, Twitter, ArrowUpRight, Check, Loader2, Send, CalendarClock, Phone } from "lucide-react"
+import { Section, SectionTitle, Reveal, Panel } from "./ui/Bento"
+import Tilt from "./ui/Tilt"
 
 const API_BASE_URL =
   process.env.REACT_APP_API_URL ||
@@ -9,350 +11,175 @@ const API_BASE_URL =
     ? "http://localhost:4000"
     : "https://portfolio-4ra3.onrender.com")
 
-const Contact = () => {
-  const [step, setStep] = useState(0)
-  const [formData, setFormData] = useState({
-    email: "",
-    name: "",
-    message: "",
-  })
-  const [submittedData, setSubmittedData] = useState(null) // New state for submitted data
+const tiles = [
+  { icon: Github, label: "GitHub", value: "RahulChoudhary05", href: "https://github.com/RahulChoudhary05/", chip: "chip-violet" },
+  { icon: Linkedin, label: "LinkedIn", value: "in/rahulchoudhary210505", href: "https://www.linkedin.com/in/rahulchoudhary210505/", chip: "chip-blue" },
+  { icon: Twitter, label: "Twitter / X", value: "@krahul_21", href: "https://twitter.com/krahul_21/", chip: "chip-sky" },
+  { icon: Mail, label: "Email", value: "rahulchoudhary.sk@gmail.com", href: "mailto:rahulchoudhary.sk@gmail.com", chip: "chip-rose" },
+]
+
+export default function Contact() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" })
   const [errors, setErrors] = useState({})
-  const [typing, setTyping] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [successMessage, setSuccessMessage] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
+  const [status, setStatus] = useState("idle")
+  const [serverError, setServerError] = useState("")
 
-  const questions = ["your email?", "your name?", "your message?"]
-  const prompts = [
-    "Hey there! We're excited to link.",
-    "To start, could you give us",
-    "Great! Now, what's",
-    "Finally, what's",
-    "Thanks! Here's what we got:",
-  ]
-
-  const validate = (field) => {
-    const newErrors = { ...errors }
-
-    if (field === "email" || field === "all") {
-      if (!formData.email) {
-        newErrors.email = "Email is required."
-      } else if (!formData.email.match(/^\S+@\S+\.\S+$/)) {
-        newErrors.email = "Invalid email address."
-      } else {
-        delete newErrors.email
-      }
-    }
-
-    if (field === "name" || field === "all") {
-      if (!formData.name.trim()) {
-        newErrors.name = "Name cannot be empty."
-      } else {
-        delete newErrors.name
-      }
-    }
-
-    if (field === "message" || field === "all") {
-      if (!formData.message.trim()) {
-        newErrors.message = "Message cannot be empty."
-      } else {
-        delete newErrors.message
-      }
-    }
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
+  const validate = () => {
+    const e = {}
+    if (!form.name.trim()) e.name = "Name is required."
+    if (!form.email.trim()) e.email = "Email is required."
+    else if (!/^\S+@\S+\.\S+$/.test(form.email)) e.email = "Enter a valid email."
+    if (!form.message.trim()) e.message = "Message can't be empty."
+    setErrors(e)
+    return Object.keys(e).length === 0
   }
 
-  const handleKeyDown = async (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault()
-
-      const currentField = Object.keys(formData)[step]
-      const isValid = validate(currentField)
-
-      if (isValid) {
-        if (step < 2) {
-          setStep(step + 1)
-          setTyping(true)
-          setTimeout(() => {
-            document.getElementById(`input-${step + 1}`)?.focus()
-          }, 100)
-        } else {
-          await handleSubmit(e)
-        }
-      }
-    }
+  const onChange = (k) => (ev) => {
+    setForm((f) => ({ ...f, [k]: ev.target.value }))
+    if (errors[k]) setErrors((e) => ({ ...e, [k]: null }))
   }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData({
-      ...formData,
-      [name]: value,
-    })
-
-    if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: null,
-      })
-    }
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    if (!validate("all")) {
-      return
-    }
-
-    setIsSubmitting(true)
-    setErrorMessage("")
-
+  const onSubmit = async (ev) => {
+    ev.preventDefault()
+    if (!validate()) return
+    setStatus("loading")
+    setServerError("")
     try {
-      const payload = {
-        email: formData.email.trim(),
-        name: formData.name.trim(),
-        message: formData.message.trim(),
-      }
-
-      const response = await axios.post(`${API_BASE_URL}/api/contact`, payload, {
-        headers: { "Content-Type": "application/json" },
-        timeout: 45000,
-      })
-      setSuccessMessage(response.data.message || "Message sent successfully!")
-      setSubmittedData(payload)
-      setStep(3)
-
-      setTimeout(() => {
-        setFormData({ email: "", name: "", message: "" })
-      }, 3000)
-    } catch (error) {
-      if (error.code === "ECONNABORTED") {
-        setErrorMessage("Request timed out. Please try again.")
-      } else {
-        setErrorMessage(error.response?.data?.error || "Something went wrong. Please try again.")
-      }
-    } finally {
-      setIsSubmitting(false)
+      await axios.post(
+        `${API_BASE_URL}/api/contact`,
+        { name: form.name.trim(), email: form.email.trim(), message: form.message.trim() },
+        { headers: { "Content-Type": "application/json" }, timeout: 45000 }
+      )
+      setStatus("success")
+      setForm({ name: "", email: "", message: "" })
+    } catch (err) {
+      setStatus("error")
+      setServerError(
+        err.code === "ECONNABORTED"
+          ? "Request timed out. Please try again."
+          : err.response?.data?.error || "Something went wrong. Please try again."
+      )
     }
   }
 
-  useEffect(() => {
-    setTyping(true)
-    const timeout = setTimeout(() => setTyping(false), 1000)
-    return () => clearTimeout(timeout)
-  }, [step])
-
-  useEffect(() => {
-    if (step === 0) {
-      return
-    }
-
-    const input = document.getElementById(`input-${step}`)
-    if (input) {
-      setTimeout(() => {
-        input.focus({ preventScroll: true })
-      }, 500)
-    }
-  }, [step])
-
-  const getInputProps = (fieldName, index) => {
-    return {
-      id: `input-${index}`,
-      name: fieldName,
-      value: formData[fieldName] || "",
-      onChange: handleChange,
-      onKeyDown: handleKeyDown,
-      className: `bg-transparent border-none outline-none flex-1 text-gray-100 ${
-        errors[fieldName] ? "border-b border-red-500" : "border-none"
-      }`,
-      placeholder: `Enter ${questions[index]}`,
-      disabled: step !== index || isSubmitting,
-      "aria-describedby": errors[fieldName] ? `error-${index}` : undefined,
-      autoComplete: fieldName === "email" ? "email" : fieldName === "name" ? "name" : "off",
-    }
-  }
+  const inputCls = (k) =>
+    `w-full rounded-md border bg-background px-3.5 py-2.5 text-sm text-foreground placeholder:text-faint outline-none transition-colors focus:border-cobalt ${
+      errors[k] ? "border-destructive" : "border-border"
+    }`
 
   return (
-    <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto px-4">
-        <AnimatedSectionHeader title="Get In Touch" />
+    <Section id="contact">
+      <SectionTitle
+        eyebrow="Say hello"
+        title="Get In Touch"
+        kicker="Have a project in mind, a freelance brief, or a role to discuss? I usually reply within a day."
+      />
 
-        <div className="max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-[#1E1E1E] rounded-lg overflow-hidden shadow-xl"
-          >
-            <div className="flex items-center px-4 py-3 bg-[#2D2D2D] border-b border-[#3D3D3D]">
-              <div className="flex space-x-2">
-                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-              </div>
-              <div className="mx-auto text-gray-400 text-sm font-mono">contact@rahulchoudhary.com</div>
+      <div className="grid grid-cols-12 gap-4">
+        {/* CTA */}
+        <Reveal className="col-span-12 lg:col-span-7">
+          <Panel className="h-full p-6 md:p-8 flex flex-col justify-between min-h-[240px]">
+            <div>
+              <span className="eyebrow inline-flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-cobalt" /> Let's collaborate
+              </span>
+              <h3 className="mt-4 font-display text-3xl md:text-4xl font-semibold tracking-tight text-foreground leading-[1.1]">
+                Let's build something great together.
+              </h3>
+              <p className="mt-4 text-muted-foreground max-w-md">
+                Open to freelance projects, contract work, and full-time roles. Name the endpoint, the command, or the
+                idea — I'll help you ship it.
+              </p>
             </div>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a href="mailto:rahulchoudhary.sk@gmail.com" className="btn btn-primary">
+                <CalendarClock className="w-4 h-4" /> Book a call
+              </a>
+              <a href="tel:+918628032512" className="btn btn-ghost">
+                <Phone className="w-4 h-4" /> +91 86280 32512
+              </a>
+              <span className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-foreground opacity-50" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-foreground" />
+                </span>
+                Available now
+              </span>
+            </div>
+          </Panel>
+        </Reveal>
 
-            <div className="p-6 font-mono text-gray-100 min-h-[250px] relative">
-              <AnimatePresence mode="wait">
+        {/* Form */}
+        <Reveal delay={0.06} className="col-span-12 lg:col-span-5">
+          <Panel className="h-full p-7 md:p-8">
+            <AnimatePresence mode="wait">
+              {status === "success" ? (
                 <motion.div
-                  key={step}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.2 }}
-                  className="space-y-4"
-                >
-                  <div>
-                    <span className="text-green-400">➜</span> {prompts[0]}
-                  </div>
-
-                  {step <= 2 && (
-                    <div>
-                      <span className="text-purple-400">?</span> {prompts[step + 1]} {questions[step]}
-                    </div>
-                  )}
-
-                  {step === 0 && (
-                    <div className="flex items-center">
-                      <span className="text-blue-400 mr-2">~</span>
-                      <input type="email" {...getInputProps("email", 0)} />
-                      {typing && step === 0 && <span className="animate-pulse">▋</span>}
-                    </div>
-                  )}
-
-                  {errors.email && step === 0 && (
-                    <p id="error-0" className="text-xs text-red-500 ml-6">
-                      {errors.email}
-                    </p>
-                  )}
-
-                  {step >= 1 && (
-                    <div>
-                      <span className="text-blue-400 mr-2">~</span> Email: {submittedData?.email || formData.email}
-                    </div>
-                  )}
-
-                  {step === 1 && (
-                    <div className="flex items-center">
-                      <span className="text-blue-400 mr-2">~</span>
-                      <input type="text" {...getInputProps("name", 1)} />
-                      {typing && step === 1 && <span className="animate-pulse">▋</span>}
-                    </div>
-                  )}
-
-                  {errors.name && step === 1 && (
-                    <p id="error-1" className="text-xs text-red-500 ml-6">
-                      {errors.name}
-                    </p>
-                  )}
-
-                  {step >= 2 && (
-                    <div>
-                      <span className="text-blue-400 mr-2">~</span> Name: {submittedData?.name || formData.name}
-                    </div>
-                  )}
-
-                  {step === 2 && (
-                    <div className="flex items-center">
- <span className="text-blue-400 mr-2">~</span>
-                      <input type="text" {...getInputProps("message", 2)} />
-                      {typing && step === 2 && <span className="animate-pulse">▋</span>}
-                    </div>
-                  )}
-
-                  {errors.message && step === 2 && (
-                    <p id="error-2" className="text-xs text-red-500 ml-6">
-                      {errors.message}
-                    </p>
-                  )}
-
-                  {step === 3 && (
-                    <>
-                      <div>
-                        <span className="text-blue-400 mr-2">~</span> Message: {submittedData?.message || formData.message}
-                      </div>
-                      <div className="mt-6 p-4 bg-[#2D2D2D] rounded-lg">
-                        <div className="text-green-400 mb-2">✓ {successMessage || "Form submitted successfully!"}</div>
-                        <div className="text-gray-400">
-                          <div>Email: {submittedData?.email}</div>
-                          <div>Name: {submittedData?.name}</div>
-                          <div>Message: {submittedData?.message}</div>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </motion.div>
-              </AnimatePresence>
-
-              {errorMessage && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="absolute bottom-6 left-6 right-6 p-3 bg-red-900/50 border border-red-500 rounded text-red-200 text-sm"
-                >
-                  {errorMessage}
-                </motion.div>
-              )}
-
-              {step === 2 && !isSubmitting && (
-                <motion.div
+                  key="success"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                  className="mt-6"
+                  className="flex flex-col items-center justify-center text-center h-full py-10"
                 >
-                  <button
-                    onClick={handleSubmit}
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors duration-300 flex items-center"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <svg
-                          className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          ></circle>
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          ></path>
-                        </svg>
-                        Processing...
-                      </>
-                    ) : (
-                      "Submit Message"
-                    )}
+                  <div className="grid place-items-center h-14 w-14 rounded-full border border-cobalt/40 mb-5 text-cobalt">
+                    <Check className="w-7 h-7" />
+                  </div>
+                  <h3 className="font-display text-xl font-semibold text-foreground">Message sent</h3>
+                  <p className="mt-2 text-sm text-muted-foreground max-w-xs">
+                    Thanks for reaching out — I'll get back to you soon.
+                  </p>
+                  <button onClick={() => setStatus("idle")} className="mt-6 link-underline text-sm font-medium text-cobalt">
+                    Send another
                   </button>
                 </motion.div>
+              ) : (
+                <motion.form key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} onSubmit={onSubmit} className="space-y-4">
+                  <span className="eyebrow">Message me</span>
+                  <div>
+                    <input type="text" value={form.name} onChange={onChange("name")} placeholder="Your name" disabled={status === "loading"} className={inputCls("name")} />
+                    {errors.name && <p className="mt-1.5 text-xs text-destructive">{errors.name}</p>}
+                  </div>
+                  <div>
+                    <input type="email" value={form.email} onChange={onChange("email")} placeholder="you@example.com" disabled={status === "loading"} className={inputCls("email")} />
+                    {errors.email && <p className="mt-1.5 text-xs text-destructive">{errors.email}</p>}
+                  </div>
+                  <div>
+                    <textarea value={form.message} onChange={onChange("message")} placeholder="Tell me about your project…" rows={4} disabled={status === "loading"} className={`${inputCls("message")} resize-none`} />
+                    {errors.message && <p className="mt-1.5 text-xs text-destructive">{errors.message}</p>}
+                  </div>
+                  {status === "error" && serverError && (
+                    <p className="rounded-md border border-destructive/40 bg-destructive/5 px-3 py-2 text-xs text-destructive">{serverError}</p>
+                  )}
+                  <button type="submit" disabled={status === "loading"} className="btn btn-primary w-full justify-center">
+                    {status === "loading" ? (<><Loader2 className="w-4 h-4 animate-spin" /> Sending…</>) : (<>Send message <Send className="w-4 h-4" /></>)}
+                  </button>
+                </motion.form>
               )}
+            </AnimatePresence>
+          </Panel>
+        </Reveal>
 
-              {step < 3 && (
-                <div className="absolute bottom-6 right-6 text-gray-500 text-sm">
-                  Press <kbd className="px-2 py-1 bg-gray-700 rounded text-xs">Enter</kbd> to continue
-                </div>
-              )}
-            </div>
-          </motion.div>
-        </div>
+        {/* Social tiles */}
+        {tiles.map(({ icon: Icon, label, value, href, chip }, i) => (
+          <Reveal key={label} delay={i * 0.05} className="col-span-6 lg:col-span-3">
+            <a href={href} target="_blank" rel="noopener noreferrer" className="block h-full">
+              <Tilt intensity={6} className="h-full">
+                <Panel className="group h-full p-5 flex flex-col justify-between min-h-[120px]">
+                  <div className="flex items-start justify-between">
+                    <span className={`chip ${chip} h-10 w-10`} style={{ transform: "translateZ(20px)" }}>
+                      <Icon className="w-5 h-5" />
+                    </span>
+                    <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                  <div>
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{label}</p>
+                    <p className="mt-1 text-sm font-medium text-foreground truncate">{value}</p>
+                  </div>
+                </Panel>
+              </Tilt>
+            </a>
+          </Reveal>
+        ))}
       </div>
-    </section>
+    </Section>
   )
 }
-
-export default Contact

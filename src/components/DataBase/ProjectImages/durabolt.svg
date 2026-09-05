@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#20232b"/>
+      <stop offset="1" stop-color="#15171d"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f5f7"/>
+      <stop offset="1" stop-color="#c7cbd3"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.85" cy="0.1" r="0.9">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <rect width="1200" height="750" fill="url(#glow)"/>
+
+  <g stroke="#ffffff" stroke-opacity="0.05">
+    <path d="M0 150H1200M0 300H1200M0 450H1200M0 600H1200"/>
+    <path d="M150 0V750M300 0V750M450 0V750M600 0V750M750 0V750M900 0V750M1050 0V750"/>
+  </g>
+
+  <!-- bolt mark -->
+  <g transform="translate(96,96)">
+    <rect width="88" height="88" rx="22" fill="url(#mark)"/>
+    <path d="M50 20 L30 48 H44 L38 68 L60 40 H46 Z" fill="#191b21"/>
+  </g>
+  <text x="208" y="132" fill="#f4f5f7" font-size="46" font-weight="700" letter-spacing="-1">durabolt</text>
+  <text x="210" y="164" fill="#9a9fa9" font-size="20">npm · @rahulchoudhary05/durabolt</text>
+
+  <!-- headline -->
+  <text x="96" y="330" fill="#f4f5f7" font-size="68" font-weight="800" letter-spacing="-2" font-family="'Space Grotesk', ui-sans-serif, system-ui, sans-serif">Durable side-effects</text>
+  <text x="96" y="404" fill="#b7bcc6" font-size="68" font-weight="800" letter-spacing="-2" font-family="'Space Grotesk', ui-sans-serif, system-ui, sans-serif">for Node.js</text>
+
+  <text x="96" y="470" fill="#9a9fa9" font-size="24">Exactly-once idempotency · transactional outbox · reliable signed webhooks</text>
+
+  <!-- primitive chips -->
+  <g font-size="24" font-weight="600">
+    <g transform="translate(96,540)">
+      <rect width="300" height="86" rx="18" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.14"/>
+      <text x="28" y="40" fill="#f4f5f7" font-size="30">once()</text>
+      <text x="28" y="68" fill="#8b909a" font-size="18">exactly-once</text>
+    </g>
+    <g transform="translate(420,540)">
+      <rect width="300" height="86" rx="18" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.14"/>
+      <text x="28" y="40" fill="#f4f5f7" font-size="30">Outbox</text>
+      <text x="28" y="68" fill="#8b909a" font-size="18">atomic write + event</text>
+    </g>
+    <g transform="translate(744,540)">
+      <rect width="300" height="86" rx="18" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.14"/>
+      <text x="28" y="40" fill="#f4f5f7" font-size="30">Webhooks</text>
+      <text x="28" y="68" fill="#8b909a" font-size="18">signed · retried</text>
+    </g>
+  </g>
+
+  <!-- zero-dep badge -->
+  <g transform="translate(96,666)">
+    <rect width="230" height="44" rx="22" fill="#f4f5f7"/>
+    <text x="115" y="29" fill="#191b21" font-size="18" font-weight="700" text-anchor="middle">ZERO DEPENDENCIES</text>
+  </g>
+  <text x="352" y="695" fill="#8b909a" font-size="18">Just Postgres · Node 18+ · MIT</text>
+</svg>

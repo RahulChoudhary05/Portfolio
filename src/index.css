@@ -1,171 +1,308 @@
+/* Hallmark · macrostructure: workbench · theme: cobalt · genre: modern-minimal
+ * pre-emit critique: P5 H5 E5 S4 R5 V4
+ * contrast: pass · light-only · reduced-motion safe
+ */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import "react-vertical-timeline-component/style.min.css";
+
+/* ================================================================== *
+ *  COBALT — "engineered cool-white" developer design system
+ *  Light-only. Hairlines, not glass. One electric-cobalt signal.
+ *  Space Grotesk (display) · Inter (body) · JetBrains Mono (labels).
+ * ================================================================== */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.75rem;
+    /* Cool engineered paper — never pure #fff */
+    --paper: 228 24% 98%;            /* page ground                 */
+    --paper-2: 228 30% 99%;          /* raised surface              */
+    --background: 228 24% 98%;
+    --foreground: 220 12% 25%;       /* light-black soft charcoal (not deep black) */
+    --card: 228 30% 99%;
+    --card-foreground: 220 12% 25%;
+    --popover: 228 30% 99%;
+    --popover-foreground: 222 16% 15%;
+
+    --primary: 220 12% 27%;          /* light-black soft charcoal — the mono signal */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 228 20% 95%;
+    --secondary-foreground: 220 12% 25%;
+    --muted: 224 16% 93%;            /* light grey fill (icon chips) */
+    --muted-foreground: 220 8% 44%;  /* grey body-secondary          */
+    --accent: 220 12% 27%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 0% 32%;         /* mono: dark grey for errors   */
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 14% 88%;           /* the hairline (--color-rule)  */
+    --input: 222 14% 88%;
+    --ring: 220 12% 27%;
+    --radius: 0.75rem;               /* technical radii, drawn with a ruler */
+
+    /* signature tokens — monochrome light-black */
+    --cobalt: 220 12% 27%;
+    --cobalt-dim: 220 14% 20%;
+    --cobalt-fore: 0 0% 100%;
+    --cyan: 220 12% 27%;
+    --faint: 222 10% 58%;
+    --ink: 220 12% 27%;              /* light-black soft charcoal (band / code card) */
+    --ink-fore: 226 22% 94%;
+    --graphite: 220 12% 27%;
+    --graphite-2: 220 10% 40%;       /* graphite hairline            */
+
+    color-scheme: light;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+  * { border-color: hsl(var(--border)); }
+
+  html, body { overflow-x: clip; }   /* gate 34 — no horizontal scroll */
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
+
+  body {
+    background-color: hsl(var(--paper));
+    color: hsl(var(--foreground));
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.02em;
+    font-style: normal;              /* gate 38a — headers never italic */
+  }
+
+  ::selection { background-color: hsl(var(--cobalt)); color: #fff; }
 }
 
-html {
-  scroll-behavior: smooth;
+/* ================================================================== *
+ *  Surfaces — hairlines do the work (no glass, no drop-shadow)
+ * ================================================================== */
+.panel {
+  position: relative;
+  border-radius: var(--radius);
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.panel-hover:hover { border-color: hsl(var(--cobalt) / 0.55); }
+
+/* Dark graphite band / card — the page's one dark beat */
+.band {
+  background: hsl(var(--graphite));
+  color: hsl(var(--ink-fore));
+  border-radius: var(--radius);
+}
+.card-code {
+  background: hsl(var(--graphite));
+  color: hsl(var(--ink-fore));
+  border: 1px solid hsl(var(--graphite-2));
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 2px hsl(224 20% 20% / 0.06);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  overflow: hidden;
 }
 
-body {
-  @apply text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-900 transition-colors duration-300;
+/* Colored icon chips — tasteful multi-accent color, tinted fills */
+.chip {
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+/* monochrome — all icon chips render as neutral ink-on-grey */
+.chip-blue, .chip-emerald, .chip-violet, .chip-amber,
+.chip-rose, .chip-cyan, .chip-fuchsia, .chip-sky {
+  background: hsl(var(--muted));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
 }
 
-/* Grid Pattern Background */
-.bg-grid-pattern {
-  background-image: linear-gradient(
-      to right,
-      rgba(128, 128, 128, 0.1) 1px,
-      transparent 1px
-    ),
-    linear-gradient(to bottom, rgba(128, 128, 128, 0.1) 1px, transparent 1px);
-  background-size: 24px 24px;
+/* circular hairline action button in panel headers */
+.panel-action {
+  display: grid;
+  place-items: center;
+  height: 2.25rem;
+  width: 2.25rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--muted-foreground));
+  transition: color 0.25s ease, border-color 0.25s ease;
+  flex-shrink: 0;
 }
+.panel-action:hover { color: hsl(var(--cobalt)); border-color: hsl(var(--cobalt) / 0.6); }
+
+/* ================================================================== *
+ *  Buttons — one solid cobalt, 6px radius, never a pill or gradient
+ * ================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 6px;
+  padding: 0.65rem 1.05rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.btn-primary { background: hsl(var(--cobalt)); color: #fff; }
+.btn-primary:hover { background: hsl(var(--cobalt-dim)); }
+.btn-ghost {
+  background: transparent;
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+}
+.btn-ghost:hover { border-color: hsl(var(--cobalt) / 0.6); color: hsl(var(--cobalt)); }
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 6px;
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--muted-foreground));
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.icon-btn:hover { color: hsl(var(--cobalt)); border-color: hsl(var(--cobalt) / 0.6); }
+
+/* cobalt underline-grow on links */
+.link-underline {
+  position: relative;
+  color: hsl(var(--foreground));
+  transition: color 0.2s ease;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  height: 1.5px; width: 100%;
+  background: hsl(var(--cobalt));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover { color: hsl(var(--cobalt)); }
+.link-underline:hover::after { transform: scaleX(1); }
+
+/* ================================================================== *
+ *  Typography helpers
+ * ================================================================== */
+.font-mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+.eyebrow {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.28rem 0.55rem;
+  border-radius: 6px;
+  color: hsl(var(--muted-foreground));
+  background: transparent;
+  border: 1px solid hsl(var(--border));
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.tag:hover { color: hsl(var(--cobalt)); border-color: hsl(var(--cobalt) / 0.5); }
+.tag-cobalt { color: #fff; background: hsl(var(--cobalt)); border-color: transparent; }
+
+.text-cobalt { color: hsl(var(--cobalt)); }
+.bg-cobalt { background-color: hsl(var(--cobalt)); }
+.text-gradient { color: hsl(var(--foreground)); }  /* gradient text forbidden */
+
+/* code syntax tokens (graphite hero card) — monochrome greys */
+.tok-key { color: #eef0f3; font-weight: 600; }
+.tok-str { color: #b7bcc6; }
+.tok-fn { color: #eef0f3; }
+.tok-num { color: #cbd0d8; }
+.tok-punc { color: #7c818b; }
+.tok-comment { color: #6b6f78; font-style: italic; }
+
+/* ================================================================== *
+ *  Motion — composed & sparse (fade + rise). No bounce/parallax/autoplay.
+ * ================================================================== */
+.caret::after {
+  content: "";
+  display: inline-block;
+  width: 0.55rem;
+  height: 1.05em;
+  margin-left: 0.1rem;
+  vertical-align: text-bottom;
+  background: hsl(var(--cobalt));
+  animation: blink 1.05s steps(1) infinite;
+}
+@keyframes blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes grid-pan { from { background-position: 0 0; } to { background-position: 46px 46px; } }
+@keyframes float-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes sheen { from { background-position: -120% 0; } to { background-position: 220% 0; } }
 
 @layer utilities {
-  .animate-gradient-x {
-    animation: gradient-x 15s ease infinite;
-  }
-
-  @keyframes gradient-x {
-    0%,
-    100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-  }
-
-  /* New animations */
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
-  }
-
-  .animate-pulse-slow {
-    animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  @keyframes pulse-slow {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.5;
-    }
-  }
-
-  .animate-spin-slow {
-    animation: spin 8s linear infinite;
-  }
-
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
-  }
-
-  @keyframes glow {
-    from {
-      box-shadow: 0 0 10px -10px rgba(59, 130, 246, 0.5);
-    }
-    to {
-      box-shadow: 0 0 20px 10px rgba(59, 130, 246, 0.5);
-    }
-  }
+  .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .line-clamp-4 { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .animate-marquee { animation: marquee 34s linear infinite; }
+  .animate-float { animation: float-bob 5s ease-in-out infinite; }
+  .pause-on-hover:hover { animation-play-state: paused; }
+  .perspective-1000 { perspective: 1000px; }
+  .preserve-3d { transform-style: preserve-3d; }
 }
 
-/* Custom styles for react-vertical-timeline-component */
-.vertical-timeline-element-content {
-  box-shadow: 0 3px 0 #3b82f6;
+/* Monochrome animated grid backdrop (subtle) */
+.bw-grid {
+  background-image:
+    linear-gradient(to right, hsl(var(--foreground) / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--foreground) / 0.05) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 35%, transparent 100%);
+  animation: grid-pan 7s linear infinite;
 }
 
-.vertical-timeline-element-icon {
-  box-shadow: 0 0 0 4px #3b82f6, inset 0 2px 0 rgba(0, 0, 0, 0.08),
-    0 3px 0 4px rgba(0, 0, 0, 0.05);
+/* Monochrome dot field */
+.bw-dots {
+  background-image: radial-gradient(hsl(var(--foreground) / 0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
 
-.vertical-timeline-element-content-arrow {
-  border-right: 7px solid #3b82f6;
+/* sheen sweep for skeleton/hover accents */
+.sheen {
+  background: linear-gradient(100deg, transparent 30%, hsl(var(--foreground) / 0.06) 50%, transparent 70%);
+  background-size: 220% 100%;
+  animation: sheen 3.2s ease-in-out infinite;
 }
 
-/* Improved scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
+/* ================================================================== *
+ *  Scrollbar
+ * ================================================================== */
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(59, 130, 246, 0.5);
-  border-radius: 4px;
+  background: hsl(var(--cobalt) / 0.4);
+  border-radius: 8px;
+  border: 3px solid hsl(var(--paper));
 }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--cobalt)); }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(59, 130, 246, 0.7);
-}
-
-/* Improved selection */
-::selection {
-  background-color: rgba(59, 130, 246, 0.3);
-  color: inherit;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

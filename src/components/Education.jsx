@@ -1,77 +1,136 @@
-import { GraduationCap, Calendar, Award } from "lucide-react"
-import AnimatedSectionHeader from "./AnimatedSectionHeader"
-import { motion } from "framer-motion"
+import { GraduationCap, Award, Check, ScrollText, BadgeCheck, Code2, GitCommitHorizontal } from "lucide-react"
+import { Section, SectionTitle, Reveal, Panel } from "./ui/Bento"
+import CountUp from "./ui/CountUp"
+import Tilt from "./ui/Tilt"
+
+const education = [
+  {
+    chip: "chip-blue",
+    degree: "B.E. in Computer Science & Engineering",
+    institution: "Chandigarh University (CU), Mohali",
+    year: "Aug 2022 — Jun 2026",
+    achievements: [
+      "CGPA: 7.56",
+      "Solid foundation in DSA, System Design, DBMS, OS & Networks",
+      "Continuous focus on shipping production-grade software",
+    ],
+  },
+  {
+    chip: "chip-violet",
+    degree: "Senior Secondary (High School)",
+    institution: "St D. R. Public Senior Secondary School",
+    year: "2020 — 2022",
+    achievements: ["Intermediate percentage: 70.3%", "High school percentage: 74.8%"],
+  },
+]
+
+const certs = [
+  { icon: BadgeCheck, title: "Advanced SQL & Database Design", issuer: "AWS Training & Certification", meta: "Mar 2026", chip: "chip-amber" },
+  { icon: BadgeCheck, title: "Full-Stack Web Development", issuer: "IBM · Udemy", meta: "Certified", chip: "chip-emerald" },
+]
 
 export default function Education() {
-  const education = [
-    {
-      degree: "High School",
-      institution: "St D. R. Public Senior Secondary School",
-      period: "March 2020 – March 2022",
-      achievements: ["Intermediate percentage: 70.3%", "High school percentage: 74.8%"],
-    },
-    {
-      degree: "Bachelor's Degree in Computer Science",
-      institution: "Chandigarh University",
-      period: "August 2022 – Present",
-      achievements: [
-        "Current CGPA: 7.54",
-        "Proven ability to work collaboratively in team projects",
-        "Commitment to continuous learning and self-improvement",
-      ],
-    },
-  ]
-
   return (
-    <section
-      id="education"
-      className="py-20 bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-gray-900 dark:to-purple-900 transition-colors duration-300 overflow-hidden relative"
-    >
-      <div className="container mx-auto px-6 relative z-10">
-        <AnimatedSectionHeader title="Education" />
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-10">
-          {education.map((edu, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-              className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-2xl relative transition-all duration-300 overflow-hidden"
-              
-            >
-              <div className="absolute top-0 left-0 w-32 h-32 rounded-br-full bg-purple-200  dark:bg-purple-700 opacity-50"></div>
+    <Section id="education">
+      <SectionTitle
+        eyebrow="Background"
+        title="Education & Achievements"
+        kicker="Academic foundation, certifications, and recognition backing the work."
+      />
 
-              <div className="relative z-10">
-                <h3 className="text-2xl font-semibold mb-2 dark:text-white flex items-center">
-                  <GraduationCap className="w-6 h-6 mr-2" />
-                  {edu.degree}
-                </h3>
-                <p className="text-xl text-gray-600 dark:text-gray-300 mb-4">{edu.institution}</p>
-                <p className="text-gray-600 dark:text-gray-300 mb-4 flex items-center">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  {edu.period}
-                </p>
-                <h4 className="text-lg font-medium mb-2 dark:text-gray-200 flex items-center">
-                  <Award className="w-5 h-5 mr-2" />
-                  Key Achievements:
-                </h4>
-                <ul className="list-disc list-inside space-y-2">
-                  {edu.achievements.map((achievement, idx) => (
-                    <li key={idx} className="text-gray-700 dark:text-gray-300">
-                      {achievement}
-                    </li>
-                  ))}
-                </ul>
+      {/* Education */}
+      <div className="grid grid-cols-12 gap-4">
+        {education.map((edu, i) => (
+          <Reveal key={edu.degree} delay={i * 0.06} className="col-span-12 lg:col-span-6">
+            <Tilt intensity={4} className="h-full">
+            <Panel className="h-full p-6 md:p-7 flex flex-col">
+              <div className="flex items-start justify-between">
+                <span className="font-mono text-xs text-muted-foreground">{edu.year}</span>
+                <span className={`chip ${edu.chip} h-10 w-10`}>
+                  <GraduationCap className="w-5 h-5" />
+                </span>
               </div>
-            </motion.div>
-          ))}
-        </div>
+              <h3 className="mt-4 font-display text-xl md:text-2xl font-semibold tracking-tight text-foreground leading-snug">
+                {edu.degree}
+              </h3>
+              <p className="mt-1 text-muted-foreground">{edu.institution}</p>
+              <div className="mt-5 flex items-center gap-2 text-foreground">
+                <Award className="w-4 h-4 text-cobalt" />
+                <span className="font-mono text-xs uppercase tracking-widest">Highlights</span>
+              </div>
+              <ul className="mt-3 space-y-2.5">
+                {edu.achievements.map((a, idx) => (
+                  <li key={idx} className="flex gap-2.5 text-sm text-muted-foreground">
+                    <Check className="w-4 h-4 mt-0.5 shrink-0 text-cobalt" />
+                    <span>{a}</span>
+                  </li>
+                ))}
+              </ul>
+            </Panel>
+            </Tilt>
+          </Reveal>
+        ))}
       </div>
 
-      <div className="absolute top-0 left-0 w-64 h-64 -mt-32 -ml-32 opacity-20">
-        <div className="w-full h-full bg-purple-500 rounded-full"></div>
+      {/* Patent — cobalt-accented hairline */}
+      <Reveal className="mt-4">
+        <Panel className="relative overflow-hidden p-6 md:p-8">
+          <span className="absolute left-0 top-0 h-full w-1 bg-cobalt" aria-hidden />
+          <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-8 pl-2">
+            <span className="chip chip-rose h-14 w-14">
+              <ScrollText className="w-7 h-7" />
+            </span>
+            <div className="flex-1">
+              <span className="eyebrow inline-flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-cobalt" /> Patent · Published
+              </span>
+              <h3 className="mt-2 font-display text-xl md:text-2xl font-semibold tracking-tight text-foreground">
+                AI-Enhanced Neuroadaptive VR Therapy System
+              </h3>
+              <p className="mt-1 text-muted-foreground text-sm font-mono">
+                Indian Government Patent Portal · Application No. 202511113779
+              </p>
+            </div>
+          </div>
+        </Panel>
+      </Reveal>
+
+      {/* Certs + stats */}
+      <div className="grid grid-cols-12 gap-4 mt-4">
+        {certs.map((c, i) => (
+          <Reveal key={c.title} delay={i * 0.05} className="col-span-12 sm:col-span-6 lg:col-span-4">
+            <Panel className="h-full p-5 flex items-start gap-4">
+              <span className={`chip ${c.chip} h-10 w-10`}>
+                <c.icon className="w-5 h-5" />
+              </span>
+              <div>
+                <h4 className="font-display font-semibold text-foreground leading-tight">{c.title}</h4>
+                <p className="text-sm text-muted-foreground mt-0.5">{c.issuer}</p>
+                <span className="mt-2 inline-block font-mono text-[11px] uppercase tracking-widest text-cobalt">{c.meta}</span>
+              </div>
+            </Panel>
+          </Reveal>
+        ))}
+
+        <Reveal delay={0.1} className="col-span-12 lg:col-span-4">
+          <Panel className="h-full p-6 grid grid-cols-2 gap-4">
+            <div className="flex flex-col justify-center">
+              <Code2 className="w-4 h-4 text-cobalt mb-2" />
+              <span className="font-display text-3xl font-semibold text-foreground">
+                <CountUp end={400} suffix="+" />
+              </span>
+              <span className="font-mono text-[11px] text-muted-foreground mt-1">DSA on LeetCode</span>
+            </div>
+            <div className="flex flex-col justify-center border-l border-border pl-4">
+              <GitCommitHorizontal className="w-4 h-4 text-cobalt mb-2" />
+              <span className="font-display text-3xl font-semibold text-foreground">
+                <CountUp end={1000} suffix="+" />
+              </span>
+              <span className="font-mono text-[11px] text-muted-foreground mt-1">GitHub Contributions</span>
+            </div>
+          </Panel>
+        </Reveal>
       </div>
-    </section>
+    </Section>
   )
 }

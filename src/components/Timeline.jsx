@@ -35,14 +35,14 @@ export const Timeline = ({ data }) => {
           >
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
               <motion.div
-                className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center"
+                className="h-10 absolute left-3 md:left-3 w-10 rounded-full glass-strong flex items-center justify-center"
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <motion.div
-                  className="h-4 w-4 rounded-full bg-blue-500 dark:bg-blue-400"
+                  className="h-4 w-4 rounded-full bg-gradient-to-br from-violet to-cyan shadow-[0_0_12px_hsl(var(--violet))]"
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
@@ -50,7 +50,7 @@ export const Timeline = ({ data }) => {
                 />
               </motion.div>
               <motion.h3
-                className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-gray-800 dark:text-gray-200"
+                className="hidden md:block text-xl md:pl-20 md:text-4xl font-display font-bold text-gradient"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -62,7 +62,7 @@ export const Timeline = ({ data }) => {
 
             <div className="relative pl-20 pr-4 md:pl-4 w-full">
               <motion.h3
-                className="md:hidden block text-2xl mb-4 text-left font-bold text-gray-800 dark:text-gray-200"
+                className="md:hidden block text-2xl mb-4 text-left font-display font-bold text-gradient"
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -78,14 +78,14 @@ export const Timeline = ({ data }) => {
           style={{
             height: height + "px",
           }}
-          className="absolute md:left-8 left-8 top-0 overflow-hidden w-[2px] bg-gradient-to-b from-transparent via-gray-300 dark:via-gray-700 to-transparent"
+          className="absolute md:left-8 left-8 top-0 overflow-hidden w-[2px] bg-gradient-to-b from-transparent via-border to-transparent"
         >
           <motion.div
             style={{
               height: heightTransform,
               opacity: opacityTransform,
             }}
-            className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-t from-blue-500 to-purple-500 rounded-full"
+            className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-t from-violet via-cyan to-fuchsia rounded-full shadow-[0_0_10px_hsl(var(--violet))]"
           />
         </motion.div>
       </div>
