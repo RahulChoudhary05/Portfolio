@@ -24,15 +24,15 @@ export default function Contact() {
                 <span className="chan-k">Phone</span><span className="chan-v">+91 86280 32512</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
               </a>
-              <a className="chan" href="https://github.com/RahulChoudhary05" target="_blank" rel="noopener me" data-cur="open">
+              <a className="chan" href="https://github.com/RahulChoudhary05" target="_blank" rel="noopener noreferrer me" data-cur="open">
                 <span className="chan-k">GitHub</span><span className="chan-v">RahulChoudhary05</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
               </a>
-              <a className="chan" href="https://www.linkedin.com/in/rahulchoudhary210505/" target="_blank" rel="noopener me" data-cur="open">
+              <a className="chan" href="https://www.linkedin.com/in/rahulchoudhary210505/" target="_blank" rel="noopener noreferrer me" data-cur="open">
                 <span className="chan-k">LinkedIn</span><span className="chan-v">in/rahulchoudhary210505</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
               </a>
-              <a className="chan" href="https://twitter.com/krahul_21" target="_blank" rel="noopener me" data-cur="open">
+              <a className="chan" href="https://twitter.com/krahul_21" target="_blank" rel="noopener noreferrer me" data-cur="open">
                 <span className="chan-k">X</span><span className="chan-v">@krahul_21</span>
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
               </a>

@@ -19,7 +19,7 @@ export default function Hero() {
 
           <div className="hero-cta rv">
             <a className="btn" href="#contact" data-cur="hire">Start a project</a>
-            <a className="btn btn-ghost" href="https://drive.google.com/file/d/1Jj0pxIaMYz1qWwOoHxd5HTJwZhQR41Di/view?usp=sharing" target="_blank" rel="noopener" data-cur="open">Download CV</a>
+            <a className="btn btn-ghost" href="https://drive.google.com/file/d/1Jj0pxIaMYz1qWwOoHxd5HTJwZhQR41Di/view?usp=sharing" target="_blank" rel="noopener noreferrer" data-cur="open">Download CV</a>
             <a className="btn btn-ghost" href="#work" data-cur="view">See the work</a>
           </div>
 
