@@ -1,100 +1,26 @@
-import { Layout, BrainCircuit, Bot, Cloud, Database, Webhook, Smartphone, Sparkles, ArrowUpRight } from "lucide-react"
-import { Section, SectionTitle, Reveal, Panel } from "./ui/Bento"
-import Tilt from "./ui/Tilt"
-
-const services = [
-  {
-    icon: Layout,
-    title: "Full-Stack Web Development",
-    desc: "End-to-end web apps on the MERN & PERN stacks — React, Next.js, Node, Express, and FastAPI. Type-safe, performant, and production-ready from architecture to deployment.",
-    tags: ["React", "Next.js", "Node", "FastAPI", "TypeScript"],
-    span: "lg:col-span-7",
-  },
-  {
-    icon: BrainCircuit,
-    title: "AI & LLM Engineering",
-    desc: "Bring LLMs (Gemini, Claude, GPT) into your product — RAG pipelines, prompt engineering, streaming, and evals.",
-    tags: ["LLM", "RAG", "Prompt Eng."],
-    span: "lg:col-span-5",
-  },
-  {
-    icon: Bot,
-    title: "AI Agents & Automation",
-    desc: "Agentic AI workflows with tool-calling and multi-step reasoning that automate real business operations.",
-    tags: ["Agentic AI", "Tool-calling"],
-    span: "lg:col-span-4",
-  },
-  {
-    icon: Cloud,
-    title: "Cloud & DevOps",
-    desc: "Deploy and scale on Azure & Databricks with Docker, CI/CD, and Vercel — reliable, observable releases.",
-    tags: ["Azure", "Docker", "CI/CD"],
-    span: "lg:col-span-4",
-  },
-  {
-    icon: Database,
-    title: "Database Design & Management",
-    desc: "Schema design, indexing, and query optimization across PostgreSQL, MongoDB, and SQL Server.",
-    tags: ["PostgreSQL", "MongoDB", "SQL Server"],
-    span: "lg:col-span-4",
-  },
-  {
-    icon: Webhook,
-    title: "API Development & Integrations",
-    desc: "REST, GraphQL, and WebSocket APIs, plus third-party integrations — ABHA healthcare, Google Maps, SMTP, and payments.",
-    tags: ["REST", "GraphQL", "WebSockets"],
-    span: "lg:col-span-6",
-  },
-  {
-    icon: Smartphone,
-    title: "App & Mobile Development",
-    desc: "Cross-platform apps and installable PWAs with Kotlin and responsive, offline-capable frontends.",
-    tags: ["Kotlin", "PWA", "Responsive"],
-    span: "lg:col-span-6",
-  },
-  {
-    icon: Sparkles,
-    title: "Responsive UI/UX & Motion",
-    desc: "Mobile-first, accessible interfaces with polished micro-interactions, 3D tilt, and motion design that feels alive.",
-    tags: ["Tailwind CSS", "Framer Motion", "Accessibility"],
-    span: "lg:col-span-12",
-  },
-]
-
 export default function Services() {
   return (
-    <Section id="services">
-      <SectionTitle
-        eyebrow="How I help"
-        title="Services"
-        kicker="From full-stack web and mobile apps to AI agents, LLM integrations, cloud, and data — end-to-end product engineering. Available for freelance and contract work."
-      />
+    <section className="section" id="services">
+      <div className="shell">
+        <div className="sec-head">
+          <div>
+            <p className="sec-marker">Services</p>
+            <h2 className="sec-title rv">What you can hire me to build</h2>
+          </div>
+          <p className="sec-lede rv">Full-stack web and mobile, AI agents, LLM integration, cloud and data - end-to-end product engineering, available for freelance and contract work.</p>
+        </div>
 
-      <div className="grid grid-cols-12 gap-4 perspective-1000">
-        {services.map((s, i) => (
-          <Reveal key={s.title} delay={(i % 3) * 0.05} className={`col-span-12 md:col-span-6 ${s.span}`}>
-            <Tilt intensity={5} className="h-full">
-              <Panel className="group h-full p-6 md:p-7 flex items-start gap-4 min-h-[150px]">
-                <span className="chip chip-blue h-12 w-12" style={{ transform: "translateZ(24px)" }}>
-                  <s.icon className="w-6 h-6" />
-                </span>
-                <div className="flex-1" style={{ transform: "translateZ(16px)" }}>
-                  <div className="flex items-start justify-between gap-3">
-                    <h3 className="font-display text-lg md:text-xl font-semibold tracking-tight text-foreground">{s.title}</h3>
-                    <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform shrink-0 mt-1" />
-                  </div>
-                  <p className="mt-2 text-sm md:text-[15px] text-muted-foreground leading-relaxed">{s.desc}</p>
-                  <div className="mt-3 flex flex-wrap gap-1.5">
-                    {s.tags.map((t) => (
-                      <span key={t} className="tag">{t}</span>
-                    ))}
-                  </div>
-                </div>
-              </Panel>
-            </Tilt>
-          </Reveal>
-        ))}
+        <div className="svc-grid rv" id="svcGrid">
+          <article className="svc"><p className="svc-n">01</p><h3>Full-stack web development</h3><p>End-to-end apps on MERN and PERN - React, Next.js, Node, Express and FastAPI. Type-safe, fast, and production-ready from architecture to deployment.</p><div className="tags"><span className="tag">React</span><span className="tag">Next.js</span><span className="tag">Node</span><span className="tag">FastAPI</span></div></article>
+          <article className="svc"><p className="svc-n">02</p><h3>AI &amp; LLM engineering</h3><p>Put Gemini, Claude or GPT inside your product properly - RAG pipelines, prompt engineering, streaming responses and evaluation you can measure.</p><div className="tags"><span className="tag">LLM</span><span className="tag">RAG</span><span className="tag">Evals</span></div></article>
+          <article className="svc"><p className="svc-n">03</p><h3>AI agents &amp; automation</h3><p>Agentic workflows with tool-calling and multi-step reasoning that take real operational work off your team's hands.</p><div className="tags"><span className="tag">Agentic AI</span><span className="tag">Tool-calling</span></div></article>
+          <article className="svc"><p className="svc-n">04</p><h3>Cloud &amp; DevOps</h3><p>Ship and scale on Azure and Databricks with Docker, CI/CD and Vercel - releases that are reliable and observable.</p><div className="tags"><span className="tag">Azure</span><span className="tag">Docker</span><span className="tag">CI/CD</span></div></article>
+          <article className="svc"><p className="svc-n">05</p><h3>Database design</h3><p>Schema design, indexing and query optimisation across PostgreSQL, MongoDB and SQL Server - including rescuing queries that have quietly got slow.</p><div className="tags"><span className="tag">PostgreSQL</span><span className="tag">MongoDB</span><span className="tag">SQL Server</span></div></article>
+          <article className="svc"><p className="svc-n">06</p><h3>APIs &amp; integrations</h3><p>REST, GraphQL and WebSocket APIs, plus third-party work - ABHA healthcare interoperability, Google Maps, SMTP and payments.</p><div className="tags"><span className="tag">REST</span><span className="tag">GraphQL</span><span className="tag">WebSockets</span></div></article>
+          <article className="svc"><p className="svc-n">07</p><h3>App &amp; mobile</h3><p>Cross-platform apps and installable PWAs with Kotlin and responsive, offline-capable frontends.</p><div className="tags"><span className="tag">Kotlin</span><span className="tag">PWA</span><span className="tag">Responsive</span></div></article>
+          <article className="svc"><p className="svc-n">08</p><h3>Interface &amp; motion</h3><p>Mobile-first, accessible interfaces with micro-interactions, 3D tilt and motion design that makes a product feel considered.</p><div className="tags"><span className="tag">Tailwind</span><span className="tag">Framer Motion</span><span className="tag">a11y</span></div></article>
+        </div>
       </div>
-    </Section>
+    </section>
   )
 }

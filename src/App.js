@@ -1,7 +1,16 @@
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useEffect } from "react"
+import initPortfolio from "./lib/portfolioEffects"
+
+import Loader from "./components/Loader"
+import Grain from "./components/ui/Grain"
+import ScrollProgress from "./components/ui/ScrollProgress"
+import Cursor from "./components/ui/Cursor"
+import Rail from "./components/ui/Rail"
+import CommandPalette from "./components/ui/CommandPalette"
+
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
+import Ticker from "./components/Ticker"
 import About from "./components/About"
 import Experience from "./components/Experience"
 import Skills from "./components/Skills"
@@ -10,49 +19,40 @@ import Services from "./components/Services"
 import Education from "./components/Education"
 import Contact from "./components/Contact"
 import Footer from "./components/Footer"
-import Loader from "./components/Loader"
-import ScrollProgress from "./components/ui/ScrollProgress"
 
-function App() {
-  const [loading, setLoading] = useState(true)
-
+export default function App() {
   useEffect(() => {
-    // force light theme only
-    document.documentElement.classList.remove("dark")
-    const timer = setTimeout(() => {
-      setLoading(false)
-      if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: "smooth" })
-    }, 1900)
-    return () => clearTimeout(timer)
+    initPortfolio()
   }, [])
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
-      <AnimatePresence mode="wait">
-        {loading ? (
-          <motion.div key="loader" initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
-            <Loader />
-          </motion.div>
-        ) : (
-          <motion.div key="content" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-            <ScrollProgress />
-            <Navbar />
-            <main>
-              <Hero />
-              <About />
-              <Experience />
-              <Skills />
-              <Projects />
-              <Services />
-              <Education />
-              <Contact />
-            </main>
-            <Footer />
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <div>
+      <a className="skip" href="#main">Skip to content</a>
+
+      <Loader />
+      <Grain />
+      <ScrollProgress />
+      <Cursor />
+
+      <Navbar />
+      <Rail />
+
+      <main id="main">
+        <Hero />
+        <Ticker />
+        <About />
+        <Experience />
+        <Skills />
+        <Projects />
+        <Services />
+        <Education />
+        <Contact />
+      </main>
+
+      <Footer />
+      <CommandPalette />
+
+      <div className="toast" id="toast" role="status" aria-live="polite"></div>
     </div>
   )
 }
-
-export default App

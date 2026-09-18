@@ -1,64 +1,112 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-labelledby="t d">
+  <title id="t">durabolt — durable side-effects for Node.js on PostgreSQL</title>
+  <desc id="d">Cover graphic: durabolt wordmark with a bolt glyph and a three-step flow — once(), outbox, webhook — on a dark graphite grid.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#20232b"/>
-      <stop offset="1" stop-color="#15171d"/>
+    <linearGradient id="ground" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#16181B"/>
+      <stop offset="0.55" stop-color="#101215"/>
+      <stop offset="1" stop-color="#0F1013"/>
     </linearGradient>
-    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f4f5f7"/>
-      <stop offset="1" stop-color="#c7cbd3"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="0.85" cy="0.1" r="0.9">
-      <stop offset="0" stop-color="#ffffff" stop-opacity="0.10"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    <radialGradient id="halo" cx="0.18" cy="0.34" r="0.55">
+      <stop offset="0" stop-color="#F3F3F0" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#F3F3F0" stop-opacity="0"/>
     </radialGradient>
+    <linearGradient id="wire" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#F3F3F0" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#8FD0FF" stop-opacity="0.95"/>
+    </linearGradient>
+    <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M100 0H0V100" fill="none" stroke="#F3F3F0" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+    <marker id="head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0 0.5 9.5 5 0 9.5Z" fill="#8FD0FF"/>
+    </marker>
+    <clipPath id="frame"><rect width="1600" height="1000"/></clipPath>
   </defs>
 
-  <rect width="1200" height="750" fill="url(#bg)"/>
-  <rect width="1200" height="750" fill="url(#glow)"/>
-
-  <g stroke="#ffffff" stroke-opacity="0.05">
-    <path d="M0 150H1200M0 300H1200M0 450H1200M0 600H1200"/>
-    <path d="M150 0V750M300 0V750M450 0V750M600 0V750M750 0V750M900 0V750M1050 0V750"/>
-  </g>
-
-  <!-- bolt mark -->
-  <g transform="translate(96,96)">
-    <rect width="88" height="88" rx="22" fill="url(#mark)"/>
-    <path d="M50 20 L30 48 H44 L38 68 L60 40 H46 Z" fill="#191b21"/>
-  </g>
-  <text x="208" y="132" fill="#f4f5f7" font-size="46" font-weight="700" letter-spacing="-1">durabolt</text>
-  <text x="210" y="164" fill="#9a9fa9" font-size="20">npm · @rahulchoudhary05/durabolt</text>
-
-  <!-- headline -->
-  <text x="96" y="330" fill="#f4f5f7" font-size="68" font-weight="800" letter-spacing="-2" font-family="'Space Grotesk', ui-sans-serif, system-ui, sans-serif">Durable side-effects</text>
-  <text x="96" y="404" fill="#b7bcc6" font-size="68" font-weight="800" letter-spacing="-2" font-family="'Space Grotesk', ui-sans-serif, system-ui, sans-serif">for Node.js</text>
-
-  <text x="96" y="470" fill="#9a9fa9" font-size="24">Exactly-once idempotency · transactional outbox · reliable signed webhooks</text>
-
-  <!-- primitive chips -->
-  <g font-size="24" font-weight="600">
-    <g transform="translate(96,540)">
-      <rect width="300" height="86" rx="18" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.14"/>
-      <text x="28" y="40" fill="#f4f5f7" font-size="30">once()</text>
-      <text x="28" y="68" fill="#8b909a" font-size="18">exactly-once</text>
+  <!-- ground -->
+  <g clip-path="url(#frame)">
+    <rect width="1600" height="1000" fill="url(#ground)"/>
+    <rect width="1600" height="1000" fill="url(#grid)"/>
+    <rect width="1600" height="1000" fill="url(#halo)"/>
+    <!-- faint table-grid motif: a few emphasised columns like a pg table -->
+    <g stroke="#F3F3F0" stroke-opacity="0.07" stroke-width="1">
+      <path d="M100 0V1000M1500 0V1000"/>
     </g>
-    <g transform="translate(420,540)">
-      <rect width="300" height="86" rx="18" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.14"/>
-      <text x="28" y="40" fill="#f4f5f7" font-size="30">Outbox</text>
-      <text x="28" y="68" fill="#8b909a" font-size="18">atomic write + event</text>
-    </g>
-    <g transform="translate(744,540)">
-      <rect width="300" height="86" rx="18" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.14"/>
-      <text x="28" y="40" fill="#f4f5f7" font-size="30">Webhooks</text>
-      <text x="28" y="68" fill="#8b909a" font-size="18">signed · retried</text>
+    <!-- large ghosted bolt in the background, top-right -->
+    <path d="M1330 60 1170 320h130l-46 220 214-300h-134Z" fill="#F3F3F0" fill-opacity="0.028"/>
+  </g>
+  <rect x="0.5" y="0.5" width="1599" height="999" fill="none" stroke="#F3F3F0" stroke-opacity="0.14"/>
+
+  <!-- top meta row -->
+  <g font-family="ui-monospace, 'JetBrains Mono', 'Cascadia Code', Consolas, Menlo, monospace" font-size="22" fill="#8A8D93">
+    <text x="120" y="126">@rahulchoudhary05/durabolt</text>
+    <g transform="translate(1480,126)" text-anchor="end">
+      <text x="0" y="0">npm · MIT · zero dependencies</text>
     </g>
   </g>
+  <path d="M120 152H1480" stroke="#F3F3F0" stroke-opacity="0.12" stroke-width="1"/>
 
-  <!-- zero-dep badge -->
-  <g transform="translate(96,666)">
-    <rect width="230" height="44" rx="22" fill="#f4f5f7"/>
-    <text x="115" y="29" fill="#191b21" font-size="18" font-weight="700" text-anchor="middle">ZERO DEPENDENCIES</text>
+  <!-- bolt tile + wordmark -->
+  <g transform="translate(120,300)">
+    <rect width="132" height="132" rx="26" fill="#F3F3F0"/>
+    <path d="M72 18 32 76h30l-8 40 44-60H68Z" fill="#0F1013"/>
   </g>
-  <text x="352" y="695" fill="#8b909a" font-size="18">Just Postgres · Node 18+ · MIT</text>
+  <text x="278" y="416" font-family="Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="156" font-weight="800" letter-spacing="-7" fill="#F3F3F0">durabolt</text>
+
+  <!-- tagline -->
+  <text x="122" y="510" font-family="Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="32" font-weight="500" letter-spacing="-0.4" fill="#B4B7BC">Durable side-effects for Node.js — on the Postgres you already run.</text>
+
+  <!-- section label -->
+  <g font-family="ui-monospace, 'JetBrains Mono', 'Cascadia Code', Consolas, Menlo, monospace" font-size="17" letter-spacing="4" fill="#6B6E74">
+    <text x="122" y="606">THREE PRIMITIVES · ONE DATABASE</text>
+  </g>
+  <path d="M560 600H1480" stroke="#F3F3F0" stroke-opacity="0.10" stroke-width="1"/>
+
+  <!-- flow: once() -> outbox -> webhook -->
+  <g font-family="ui-monospace, 'JetBrains Mono', 'Cascadia Code', Consolas, Menlo, monospace">
+    <!-- card 1 -->
+    <g transform="translate(120,640)">
+      <rect width="392" height="170" rx="16" fill="#16181B" stroke="#F3F3F0" stroke-opacity="0.16"/>
+      <circle cx="40" cy="44" r="6" fill="#8FD0FF"/>
+      <text x="62" y="54" font-size="36" font-weight="700" fill="#F3F3F0">once()</text>
+      <text x="40" y="100" font-size="19" fill="#A5A8AE">key → first result, stored</text>
+      <text x="40" y="132" font-size="19" fill="#6B6E74">retries never repeat</text>
+    </g>
+    <!-- arrow 1 -->
+    <path d="M520 725H600" stroke="url(#wire)" stroke-width="2.5" marker-end="url(#head)"/>
+    <text x="560" y="708" font-size="15" text-anchor="middle" letter-spacing="2" fill="#6B6E74">TX</text>
+
+    <!-- card 2 -->
+    <g transform="translate(604,640)">
+      <rect width="392" height="170" rx="16" fill="#16181B" stroke="#F3F3F0" stroke-opacity="0.16"/>
+      <rect x="32" y="34" width="20" height="20" rx="4" fill="none" stroke="#8FD0FF" stroke-width="2.5"/>
+      <text x="66" y="54" font-size="36" font-weight="700" fill="#F3F3F0">outbox</text>
+      <text x="40" y="100" font-size="19" fill="#A5A8AE">event row commits with the write</text>
+      <text x="40" y="132" font-size="19" fill="#6B6E74">no dual-write drift</text>
+    </g>
+    <!-- arrow 2 -->
+    <path d="M1004 725H1084" stroke="url(#wire)" stroke-width="2.5" marker-end="url(#head)"/>
+    <text x="1044" y="708" font-size="15" text-anchor="middle" letter-spacing="2" fill="#6B6E74">HMAC</text>
+
+    <!-- card 3 -->
+    <g transform="translate(1088,640)">
+      <rect width="392" height="170" rx="16" fill="#16181B" stroke="#F3F3F0" stroke-opacity="0.16"/>
+      <path d="M34 34h20v20H34ZM44 34v-8M44 62v-8" fill="none" stroke="#8FD0FF" stroke-width="2.5"/>
+      <text x="66" y="54" font-size="36" font-weight="700" fill="#F3F3F0">webhook</text>
+      <text x="40" y="100" font-size="19" fill="#A5A8AE">signed · backoff retries</text>
+      <text x="40" y="132" font-size="19" fill="#6B6E74">dead-lettered, replayable</text>
+    </g>
+  </g>
+
+  <!-- footer: install line + pg glyph -->
+  <g font-family="ui-monospace, 'JetBrains Mono', 'Cascadia Code', Consolas, Menlo, monospace" font-size="21" fill="#6B6E74">
+    <text x="120" y="890"><tspan fill="#8FD0FF">$</tspan> npm i @rahulchoudhary05/durabolt</text>
+    <g transform="translate(1408,868)">
+      <ellipse cx="14" cy="6" rx="14" ry="5.5" fill="none" stroke="#8A8D93" stroke-width="2"/>
+      <path d="M0 6v18c0 3 6.3 5.5 14 5.5S28 27 28 24V6" fill="none" stroke="#8A8D93" stroke-width="2"/>
+      <path d="M0 15c0 3 6.3 5.5 14 5.5S28 18 28 15" fill="none" stroke="#8A8D93" stroke-width="2"/>
+      <text x="40" y="22" fill="#8A8D93">PostgreSQL</text>
+    </g>
+  </g>
 </svg>

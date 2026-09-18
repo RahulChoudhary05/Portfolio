@@ -1,142 +1,74 @@
-import { GitlabIcon as GitHub, Linkedin, Mail, ArrowRight, Package } from "lucide-react"
-import { FaEye } from "react-icons/fa"
-import { Reveal } from "./ui/Bento"
-import CountUp from "./ui/CountUp"
-import TypingText from "./ui/TypingText"
-import Tilt from "./ui/Tilt"
-import Magnetic from "./ui/Magnetic"
-
-const socials = [
-  { icon: GitHub, href: "https://github.com/RahulChoudhary05/", label: "GitHub" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/rahulchoudhary210505/", label: "LinkedIn" },
-  { icon: Package, href: "https://www.npmjs.com/package/@rahulchoudhary05/durabolt", label: "npm" },
-  { icon: Mail, href: "mailto:rahulchoudhary.sk@gmail.com", label: "Email" },
-]
-
-const stats = [
-  { end: 7, suffix: "+", label: "Projects shipped" },
-  { end: 400, suffix: "+", label: "DSA solved" },
-  { end: 1000, suffix: "+", label: "Contributions" },
-]
-
-/* Graphite code card — the focal element (real code, no fake browser chrome). */
-function CodeCard() {
-  const L = ({ n, children }) => (
-    <div className="grid grid-cols-[1.6rem_1fr] gap-3">
-      <span className="text-right text-white/25 select-none">{n}</span>
-      <span className="[overflow-wrap:anywhere]">{children}</span>
-    </div>
-  )
-  return (
-    <div className="card-code text-[13px] leading-[1.9]">
-      <div className="flex items-center justify-between border-b px-4 py-2.5" style={{ borderColor: "hsl(var(--graphite-2))" }}>
-        <span className="font-mono text-xs text-white/50">developer.ts</span>
-        <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-white/50">
-          <span className="h-2 w-2 rounded-full bg-white/70" /> live
-        </span>
-      </div>
-      <div className="p-4 font-mono">
-        <L n="1"><span className="tok-key">const</span> <span className="tok-fn">rahul</span><span className="tok-punc">: Developer = {"{"}</span></L>
-        <L n="2">
-          <span className="pl-4 tok-str">role</span><span className="tok-punc">: </span>
-          <span className="tok-str">"<TypingText words={["Full Stack & AI Developer"]} loop={false} typeSpeed={55} />"</span><span className="tok-punc">,</span>
-        </L>
-        <L n="3"><span className="pl-4 tok-str">stack</span><span className="tok-punc">: [</span><span className="tok-str">"React"</span><span className="tok-punc">, </span><span className="tok-str">"Next"</span><span className="tok-punc">, </span><span className="tok-str">"Node"</span><span className="tok-punc">, </span><span className="tok-str">"FastAPI"</span><span className="tok-punc">],</span></L>
-        <L n="4"><span className="pl-4 tok-str">ai</span><span className="tok-punc">: [</span><span className="tok-str">"Agentic AI"</span><span className="tok-punc">, </span><span className="tok-str">"LLM"</span><span className="tok-punc">],</span></L>
-        <L n="5"><span className="pl-4 tok-str">open</span><span className="tok-punc">: </span><span className="tok-num">true</span><span className="tok-punc">,</span></L>
-        <L n="6"><span className="tok-punc">{"}"}</span></L>
-      </div>
-      <div className="flex items-center gap-2 border-t px-4 py-2.5" style={{ borderColor: "hsl(var(--graphite-2))" }}>
-        <span className="rounded bg-white/10 px-2 py-0.5 font-mono text-[11px] font-medium text-white">200 OK</span>
-        <span className="font-mono text-[11px] text-white/50">available for freelance &amp; full-time</span>
-      </div>
-    </div>
-  )
-}
-
 export default function Hero() {
   return (
-    <section id="hero" className="relative pt-24 md:pt-28 pb-8 overflow-hidden">
-      <div className="bw-grid pointer-events-none absolute inset-0 -z-0" aria-hidden />
-      <div className="relative z-10 mx-auto w-full max-w-[1120px] px-5 sm:px-6">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-6 items-center">
-          {/* Left — title / lede */}
-          <div className="lg:col-span-7">
-            <Reveal>
-              <span className="eyebrow inline-flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-foreground opacity-50" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-foreground" />
-                </span>
-                Available for freelance &amp; full-time
-              </span>
-            </Reveal>
+    <section className="hero" id="hero">
+      <div className="hero-mesh" aria-hidden="true"></div>
 
-            <Reveal delay={0.05}>
-              <h1 className="mt-5 font-display text-5xl sm:text-6xl lg:text-[4.5rem] font-semibold tracking-[-0.03em] leading-[0.98] text-foreground [overflow-wrap:anywhere]">
-                Rahul Choudhary
-                <span className="sr-only"> — Full Stack &amp; AI Developer</span>
-              </h1>
-            </Reveal>
+      <div className="hero-shell">
 
-            <Reveal delay={0.1}>
-              <p className="mt-6 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed">
-                <span className="text-foreground font-medium">Full Stack &amp; AI Developer</span> building
-                production-grade platforms and Agentic AI / LLM systems with the MERN &amp; PERN stacks —
-                from architecture to deployment.
-              </p>
-            </Reveal>
+        <div className="hero-copy">
+          <p className="status"><span className="pulse" /> Available for freelance &amp; full-time · India · Remote friendly</p>
 
-            <Reveal delay={0.15}>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <Magnetic strength={0.4}>
-                  <a href="#contact" className="btn btn-primary">
-                    Hire me <ArrowRight className="w-4 h-4" />
-                  </a>
-                </Magnetic>
-                <Magnetic strength={0.4}>
-                  <a
-                    href="https://drive.google.com/file/d/1Jj0pxIaMYz1qWwOoHxd5HTJwZhQR41Di/view?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-ghost"
-                  >
-                    <FaEye /> View CV
-                  </a>
-                </Magnetic>
-                <div className="flex items-center gap-2">
-                  {socials.map(({ icon: Icon, href, label }) => (
-                    <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="icon-btn">
-                      <Icon className="w-4 h-4" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
+          <h1 className="wordmark">
+            <span className="ln"><span>Rahul</span></span>
+            <span className="ln"><span>Choudhary</span></span>
+          </h1>
 
-            {/* hairline stats */}
-            <Reveal delay={0.2}>
-              <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-5">
-                {stats.map((s) => (
-                  <div key={s.label}>
-                    <dt className="font-display text-2xl md:text-3xl font-semibold text-foreground">
-                      <CountUp end={s.end} suffix={s.suffix} />
-                    </dt>
-                    <dd className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted-foreground mt-1">{s.label}</dd>
-                  </div>
-                ))}
-              </dl>
-            </Reveal>
+          <p className="role rv">Full Stack &amp; AI Developer · Software Engineer</p>
+
+          <p className="hero-say rv">I build <b>production-grade platforms</b> and <b>Agentic{' '}AI / LLM systems</b> on the MERN and PERN stacks - owning them from architecture through deployment.</p>
+
+          <div className="hero-cta rv">
+            <a className="btn" href="#contact" data-cur="hire">Start a project</a>
+            <a className="btn btn-ghost" href="https://drive.google.com/file/d/1Jj0pxIaMYz1qWwOoHxd5HTJwZhQR41Di/view?usp=sharing" target="_blank" rel="noopener" data-cur="open">Download CV</a>
+            <a className="btn btn-ghost" href="#work" data-cur="view">See the work</a>
           </div>
 
-          {/* Right — code card */}
-          <Reveal delay={0.1} className="lg:col-span-5">
-            <Tilt intensity={7}>
-              <CodeCard />
-            </Tilt>
-          </Reveal>
+          <dl className="tally rv">
+            <div><dt data-count="7" data-suffix="+">0</dt><dd>Products shipped to production</dd></div>
+            <div><dt data-count="400" data-suffix="+">0</dt><dd>DSA problems solved</dd></div>
+            <div><dt data-count="1000" data-suffix="+">0</dt><dd>GitHub contributions</dd></div>
+          </dl>
         </div>
+
+        <div className="hero-stage rv">
+          <div className="stage slab">
+            <canvas id="field" aria-hidden="true"></canvas>
+            <span className="stage-corner tl" aria-hidden="true"></span>
+            <span className="stage-corner br" aria-hidden="true"></span>
+
+            <figure className="portrait">
+              <img
+                src="https://res.cloudinary.com/dnlrwuxxs/image/upload/c_fill,w_760,h_760,g_face,q_auto:best,f_auto/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg"
+                width={760}
+                height={760}
+                decoding="async"
+                alt="Rahul Choudhary, Full Stack and AI Developer based in India"
+              />
+              <figcaption className="portrait-tag"><span>Rahul Choudhary</span><span>India</span></figcaption>
+            </figure>
+
+            <ul className="stage-meta" aria-hidden="true">
+              <li><em>stack</em><span>MERN · PERN</span></li>
+              <li><em>focus</em><span>Agentic AI · LLM</span></li>
+              <li><em>status</em><span>open to work</span></li>
+            </ul>
+          </div>
+
+          <div className="term" role="img" aria-label="Code snippet describing Rahul Choudhary's role and stack">
+            <div className="term-bar"><span>developer.ts</span><span className="term-dots"><i /><i /><i /></span></div>
+            <div className="term-body" aria-hidden="true">
+              <div><em>1</em><span><span className="t-dim">const</span> <span className="t-key">rahul</span>: Developer = {'{'}</span></div>
+              <div><em>2</em><span>{'  '}stack: [<span className="t-str">"React"</span>, <span className="t-str">"Next"</span>, <span className="t-str">"Node"</span>],</span></div>
+              <div><em>3</em><span>{'  '}data:  [<span className="t-str">"PostgreSQL"</span>, <span className="t-str">"MongoDB"</span>],</span></div>
+              <div><em>4</em><span>{'  '}ai:    [<span className="t-str">"Agentic"</span>, <span className="t-str">"LLM"</span>, <span className="t-str">"RAG"</span>],</span></div>
+              <div><em>5</em><span>{'  '}openToWork: <span className="t-key">true</span>,</span></div>
+              <div><em>6</em><span>{'}'}<span className="caret"></span></span></div>
+            </div>
+            <div className="term-foot"><span>200 OK</span><span>replies within a day</span></div>
+          </div>
+        </div>
+
       </div>
     </section>
-  )
+  );
 }
