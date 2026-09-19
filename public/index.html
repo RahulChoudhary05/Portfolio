@@ -10,14 +10,15 @@
     <link rel="apple-touch-icon" sizes="180x180" href="https://res.cloudinary.com/dnlrwuxxs/image/upload/q_auto:best,f_auto,dpr_2.0,c_fill,w_180,h_180,g_face/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <!-- Speed: warm up the image CDN and preload the profile photo so it paints instantly -->
+    <!-- Speed: warm up the image CDN and preload the hero portrait (the LCP image) so it paints instantly.
+         This href must match the Hero <img> src exactly, or the browser warns the preload went unused. -->
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
     <link rel="dns-prefetch" href="https://res.cloudinary.com" />
     <link
       rel="preload"
       as="image"
       fetchpriority="high"
-      href="https://res.cloudinary.com/dnlrwuxxs/image/upload/f_auto,q_auto:best,dpr_2.0,c_fill,w_180,h_180,g_face,e_sharpen:40/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg"
+      href="https://res.cloudinary.com/dnlrwuxxs/image/upload/c_fill,w_760,h_760,g_face,q_auto:best,f_auto/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg"
     />
 
     <!-- Primary meta -->
@@ -107,8 +108,10 @@
       "url": "https://rahulchoudhary05.vercel.app/",
       "name": "Rahul Choudhary — Portfolio",
       "isPartOf": { "@id": "https://rahulchoudhary05.vercel.app/#website" },
+      "mainEntity": { "@id": "https://rahulchoudhary05.vercel.app/#person" },
       "about": { "@id": "https://rahulchoudhary05.vercel.app/#person" },
-      "dateModified": "2026-09-19"
+      "dateCreated": "2026-08-08T00:00:00+05:30",
+      "dateModified": "2026-09-19T10:30:00+05:30"
     },
     {
       "@type": "ItemList",
