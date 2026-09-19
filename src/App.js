@@ -52,6 +52,13 @@ export default function App() {
       <Footer />
       <CommandPalette />
 
+      <button id="toTop" className="to-top" aria-label="Back to top" data-cur="top">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M12 19V5" />
+          <path d="m5 12 7-7 7 7" />
+        </svg>
+      </button>
+
       <div className="toast" id="toast" role="status" aria-live="polite"></div>
     </div>
   )

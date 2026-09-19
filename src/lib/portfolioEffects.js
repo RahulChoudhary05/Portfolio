@@ -245,7 +245,12 @@ export default function initPortfolio() {
     }
 
     var toTop = $("#toTop");
-    if (toTop) toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: REDUCED ? "auto" : "smooth" }); });
+    if (toTop) {
+      toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: REDUCED ? "auto" : "smooth" }); });
+      var toggleTop = function () { toTop.classList.toggle("show", window.scrollY > 600); };
+      window.addEventListener("scroll", toggleTop, { passive: true });
+      toggleTop();
+    }
     var yr = $("#yr"); if (yr) yr.textContent = new Date().getFullYear();
   })();
 

@@ -32,8 +32,7 @@ export default function Footer() {
         </div>
         <div className="foot-end">
           <span>© <span id="yr">2026</span> Rahul Choudhary</span>
-          <span>Built with React, Tailwind &amp; WebGL · India</span>
-          <span><button id="toTop" style={{cursor:'pointer',fontFamily:'inherit',color:'inherit'}} data-cur="top">Back to top</button></span>
+          <span>Full Stack &amp; AI Developer · India</span>
         </div>
       </div>
     </footer>
