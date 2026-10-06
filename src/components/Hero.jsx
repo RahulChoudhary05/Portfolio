@@ -9,7 +9,7 @@ export default function Hero() {
           <p className="status"><span className="pulse" /> Available for freelance &amp; full-time · India · Remote friendly</p>
 
           <h1 className="wordmark">
-            <span className="ln"><span>Rahul</span></span>
+            <span className="ln"><span>Rahul</span></span>{" "}
             <span className="ln"><span>Choudhary</span></span>
           </h1>
 

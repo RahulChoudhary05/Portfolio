@@ -1,0 +1,45 @@
+# Rahul Choudhary
+
+> Rahul Choudhary is a Full Stack & AI Developer at Omnithrive Technologies, based in India. He builds production-grade web platforms and Agentic AI / LLM-integrated systems with the MERN and PERN stacks, and is open to freelance projects, contract work and full-time software engineering roles.
+
+Portfolio: https://rahulchoudhary05.vercel.app/
+Last updated: 2026-10-06
+
+## Who is Rahul Choudhary?
+
+Rahul Choudhary is a Full Stack & AI Developer at Omnithrive Technologies. He owns features end to end - architecture, API design, data modelling and deployment - building type-safe REST APIs, real-time services, and Agentic AI workflows that call tools and reason across several steps. He is completing a B.E. in Computer Science & Engineering at Chandigarh University (2022-2026) and maintains the open-source Node.js library durabolt.
+
+## What technologies does he work with?
+
+- Frontend: React, Next.js, TypeScript, Tailwind CSS, Framer Motion
+- Backend: Node.js, Express, FastAPI, REST, WebSockets, authentication
+- Data & cloud: PostgreSQL, MongoDB, Microsoft SQL Server, Microsoft Azure, Databricks
+- AI systems: Agentic workflows, LLM integration, retrieval-augmented generation (RAG), evals
+- Delivery: Docker, CI/CD, Vercel, PostHog, Postman
+- Foundations: data structures & algorithms (400+ problems solved), system design, DBMS, operating systems, networks
+
+## Projects
+
+- [durabolt](https://www.npmjs.com/package/@rahulchoudhary05/durabolt): Zero-dependency Node.js library that makes risky backend operations safe using only PostgreSQL - exactly-once execution with once(), a transactional outbox, and signed, retried, dead-lettered webhooks. Source: https://github.com/RahulChoudhary05/durabolt
+- [CipherSQL Studio](https://ciphersqlschool.vercel.app/): Interactive SQL learning platform with real-world dataset challenges, instant query feedback, PK/FK schema visualisation and an AI hint engine; cut workspace provisioning from 60s+ to under 1s.
+- [MEDO Shield AI](https://medoshieldai.vercel.app/): Telemedicine platform with doctor and patient portals, real-time WebSocket chat, AI symptom guidance and a privacy-first engine that turns video into 33-point skeletal data to detect tremors (4-12 Hz) and gait anomalies.
+- [ComboFinder](https://combofinder.vercel.app/): Tool for uploading data files, selecting columns and generating refined output for e-commerce and reporting.
+- [S Raj Infra Projects](https://srajinfra.vercel.app/): Enterprise SaaS platform in React and Tailwind; Framer Motion interfaces lifted engagement by 40%.
+- [BharatMarket](https://github.com/RahulChoudhary05/BharatMarket-EcommerceWebsite): E-commerce site in React, Node.js and Firebase with a Docker + Jenkins CI/CD pipeline.
+- [R K Technical Support](https://www.rktechs.co/): Responsive healthcare clinic website with Google Maps integration.
+
+## Recognition
+
+- Published patent: AI-Enhanced Neuroadaptive VR Therapy System (Indian Patent Application No. 202511113779)
+- Advanced SQL & Database Design - AWS Training & Certification (March 2026)
+- Full-Stack Web Development - IBM / Udemy
+
+## Is he available for work?
+
+Yes. Rahul is open to freelance projects, contract engagements and full-time roles, and usually replies within a day.
+
+- Email: rahulchoudhary.sk@gmail.com
+- GitHub: https://github.com/RahulChoudhary05
+- LinkedIn: https://www.linkedin.com/in/rahulchoudhary210505/
+- X / Twitter: https://twitter.com/krahul_21
+- CV: https://drive.google.com/file/d/1Jj0pxIaMYz1qWwOoHxd5HTJwZhQR41Di/view?usp=sharing

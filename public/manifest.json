@@ -2,28 +2,30 @@
   "short_name": "Rahul Choudhary",
   "name": "Rahul Choudhary — Full Stack & AI Developer",
   "description": "Portfolio of Rahul Choudhary, a Full Stack & AI Developer building production-grade platforms and Agentic AI / LLM-integrated systems.",
+  "id": "/",
+  "lang": "en",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "48x48 32x32",
       "type": "image/x-icon"
     },
     {
       "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "orientation": "portrait",
   "theme_color": "#16181B",
   "background_color": "#F3F3F0"
 }

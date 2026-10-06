@@ -67,6 +67,8 @@
     "dev": "react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "node scripts/prerender.js",
+    "indexnow": "node scripts/indexnow.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

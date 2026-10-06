@@ -4,10 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="192x192" href="https://res.cloudinary.com/dnlrwuxxs/image/upload/f_png,q_auto:best,dpr_2.0,c_fill,w_192,h_192,g_face,r_max/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dnlrwuxxs/image/upload/f_png,q_auto:best,c_fill,w_64,h_64,g_face,r_max/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="https://res.cloudinary.com/dnlrwuxxs/image/upload/q_auto:best,f_auto,dpr_2.0,c_fill,w_180,h_180,g_face/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg" />
+    <!-- Favicons (local, square multiples of 48px for Google Search) -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="96x96" href="%PUBLIC_URL%/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
     <!-- Speed: warm up the image CDN and preload the hero portrait (the LCP image) so it paints instantly.
@@ -23,17 +24,17 @@
 
     <!-- Primary meta -->
     <title>Rahul Choudhary - Full Stack &amp; AI Developer | MERN, PERN &amp; Agentic AI</title>
-    <meta name="description" content="Rahul Choudhary is a Full Stack &amp; AI Developer at Omnithrive Technologies building production-grade platforms and Agentic AI / LLM systems with the MERN and PERN stacks — React, Next.js, Node.js, FastAPI, PostgreSQL, Azure and Databricks. Open to freelance projects and full-time roles." />
+    <meta name="description" content="Rahul Choudhary is a Full Stack &amp; AI Developer in India building production web platforms and Agentic AI / LLM systems with MERN, PERN, Next.js and FastAPI." />
     <meta name="keywords" content="Rahul Choudhary, Rahul Chaudhary, Rahul Choudhary developer, Rahul Choudhary portfolio, Rahul Choudhary Himachal Pradesh, Rahul Choudhary full stack developer, Rahul Choudhary AI developer, Rahul Choudhary Omnithrive, Rahul developer India, hire Rahul Choudhary, freelance full stack developer India, MERN stack developer, PERN stack developer, Agentic AI developer, LLM integration engineer, React Next.js developer, FastAPI developer, durabolt npm, Chandigarh University computer science" />
     <meta name="author" content="Rahul Choudhary" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow" />
     <meta name="theme-color" content="#16181B" />
     <meta name="color-scheme" content="only light" />
     <meta name="geo.region" content="IN-PB" />
     <meta name="geo.placename" content="Mohali, Punjab, India" />
     <meta name="geo.country" content="India" />
     <link rel="canonical" href="https://rahulchoudhary05.vercel.app/" />
+    <link rel="alternate" type="text/plain" title="LLM-readable summary" href="https://rahulchoudhary05.vercel.app/llms.txt" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="profile" />
@@ -45,7 +46,10 @@
     <meta property="og:image" content="https://res.cloudinary.com/dnlrwuxxs/image/upload/c_fill,w_1200,h_630,g_face,q_auto:best,f_jpg/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:secure_url" content="https://res.cloudinary.com/dnlrwuxxs/image/upload/c_fill,w_1200,h_630,g_face,q_auto:best,f_jpg/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="Rahul Choudhary, Full Stack and AI Developer" />
+    <meta property="og:updated_time" content="2026-10-06T10:00:00+05:30" />
     <meta property="profile:first_name" content="Rahul" />
     <meta property="profile:last_name" content="Choudhary" />
     <meta property="profile:username" content="RahulChoudhary05" />
@@ -57,6 +61,7 @@
     <meta name="twitter:title" content="Rahul Choudhary — Full Stack &amp; AI Developer" />
     <meta name="twitter:description" content="MERN &amp; PERN, Agentic AI / LLM systems, and open-source work like durabolt." />
     <meta name="twitter:image" content="https://res.cloudinary.com/dnlrwuxxs/image/upload/c_fill,w_1200,h_630,g_face,q_auto:best,f_jpg/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg" />
+    <meta name="twitter:image:alt" content="Rahul Choudhary, Full Stack and AI Developer" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -72,65 +77,309 @@
       "@type": "Person",
       "@id": "https://rahulchoudhary05.vercel.app/#person",
       "name": "Rahul Choudhary",
-      "alternateName": ["Rahul Chaudhary", "Rahul Choudhary Developer", "Rahul"],
+      "alternateName": [
+        "Rahul Chaudhary",
+        "RahulChoudhary05"
+      ],
       "givenName": "Rahul",
       "familyName": "Choudhary",
       "jobTitle": "Full Stack & AI Developer",
       "description": "Full Stack & AI Developer building production-grade platforms and Agentic AI / LLM-integrated systems with the MERN and PERN stacks.",
       "url": "https://rahulchoudhary05.vercel.app/",
-      "image": "https://res.cloudinary.com/dnlrwuxxs/image/upload/c_fill,w_1200,h_1200,g_face,q_auto:best,f_jpg/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg",
+      "mainEntityOfPage": {
+        "@id": "https://rahulchoudhary05.vercel.app/#profilepage"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "@id": "https://rahulchoudhary05.vercel.app/#portrait",
+        "url": "https://res.cloudinary.com/dnlrwuxxs/image/upload/c_fill,w_1200,h_1200,g_face,q_auto:best,f_jpg/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg",
+        "width": 1200,
+        "height": 1200,
+        "caption": "Rahul Choudhary"
+      },
       "email": "mailto:rahulchoudhary.sk@gmail.com",
       "telephone": "+91-8628032512",
-      "nationality": { "@type": "Country", "name": "India" },
-      "address": { "@type": "PostalAddress", "addressLocality": "Mohali", "addressRegion": "Punjab", "addressCountry": "IN" },
-      "worksFor": { "@type": "Organization", "name": "Omnithrive Technologies" },
-      "alumniOf": { "@type": "CollegeOrUniversity", "name": "Chandigarh University", "address": { "@type": "PostalAddress", "addressLocality": "Mohali", "addressRegion": "Punjab", "addressCountry": "IN" } },
-      "knowsAbout": ["Full Stack Development","MERN Stack","PERN Stack","React.js","Next.js","TypeScript","Node.js","Express.js","FastAPI","Python","Java","PostgreSQL","MongoDB","Microsoft SQL Server","Agentic AI","LLM Integration","Retrieval Augmented Generation","System Design","REST API Architecture","WebSockets","Docker","CI/CD","Microsoft Azure","Databricks"],
+      "nationality": {
+        "@type": "Country",
+        "name": "India"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mohali",
+        "addressRegion": "Punjab",
+        "addressCountry": "IN"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Omnithrive Technologies"
+      },
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Full Stack & AI Developer",
+        "occupationLocation": {
+          "@type": "Country",
+          "name": "India"
+        },
+        "skills": "React, Next.js, TypeScript, Node.js, Express, FastAPI, PostgreSQL, MongoDB, Agentic AI, LLM integration, RAG, Docker, Azure, Databricks"
+      },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Chandigarh University",
+        "sameAs": "https://www.cuchd.in/",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Mohali",
+          "addressRegion": "Punjab",
+          "addressCountry": "IN"
+        }
+      },
+      "award": "Published patent: AI-Enhanced Neuroadaptive VR Therapy System (Indian Patent Application No. 202511113779)",
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "B.E. in Computer Science & Engineering",
+          "credentialCategory": "degree",
+          "recognizedBy": {
+            "@type": "CollegeOrUniversity",
+            "name": "Chandigarh University"
+          }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Advanced SQL & Database Design",
+          "credentialCategory": "certificate",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "AWS Training & Certification"
+          }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Full-Stack Web Development",
+          "credentialCategory": "certificate",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "IBM"
+          }
+        }
+      ],
+      "knowsAbout": [
+        "Full Stack Development",
+        "MERN Stack",
+        "PERN Stack",
+        "React.js",
+        "Next.js",
+        "TypeScript",
+        "Node.js",
+        "Express.js",
+        "FastAPI",
+        "Python",
+        "Java",
+        "PostgreSQL",
+        "MongoDB",
+        "Microsoft SQL Server",
+        "Agentic AI",
+        "LLM Integration",
+        "Retrieval Augmented Generation",
+        "System Design",
+        "REST API Architecture",
+        "WebSockets",
+        "Docker",
+        "CI/CD",
+        "Microsoft Azure",
+        "Databricks"
+      ],
       "sameAs": [
         "https://github.com/RahulChoudhary05",
         "https://www.linkedin.com/in/rahulchoudhary210505/",
         "https://twitter.com/krahul_21",
         "https://www.npmjs.com/package/@rahulchoudhary05/durabolt"
       ],
-      "seeks": { "@type": "Demand", "name": "Freelance projects, contract work and full-time software engineering roles" }
+      "seeks": {
+        "@type": "Demand",
+        "name": "Freelance projects, contract work and full-time software engineering roles"
+      }
     },
     {
       "@type": "WebSite",
       "@id": "https://rahulchoudhary05.vercel.app/#website",
       "url": "https://rahulchoudhary05.vercel.app/",
-      "name": "Rahul Choudhary — Full Stack & AI Developer",
+      "name": "Rahul Choudhary",
+      "alternateName": "Rahul Choudhary — Full Stack & AI Developer",
       "inLanguage": "en",
-      "publisher": { "@id": "https://rahulchoudhary05.vercel.app/#person" }
+      "publisher": {
+        "@id": "https://rahulchoudhary05.vercel.app/#person"
+      },
+      "about": {
+        "@id": "https://rahulchoudhary05.vercel.app/#person"
+      }
     },
     {
       "@type": "ProfilePage",
       "@id": "https://rahulchoudhary05.vercel.app/#profilepage",
       "url": "https://rahulchoudhary05.vercel.app/",
-      "name": "Rahul Choudhary — Portfolio",
-      "isPartOf": { "@id": "https://rahulchoudhary05.vercel.app/#website" },
-      "mainEntity": { "@id": "https://rahulchoudhary05.vercel.app/#person" },
-      "about": { "@id": "https://rahulchoudhary05.vercel.app/#person" },
+      "name": "Rahul Choudhary — Full Stack & AI Developer",
+      "description": "Portfolio of Rahul Choudhary: projects, experience, skills, education and contact details.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://rahulchoudhary05.vercel.app/#website"
+      },
+      "mainEntity": {
+        "@id": "https://rahulchoudhary05.vercel.app/#person"
+      },
+      "about": {
+        "@id": "https://rahulchoudhary05.vercel.app/#person"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://rahulchoudhary05.vercel.app/#portrait"
+      },
       "dateCreated": "2026-08-08T00:00:00+05:30",
-      "dateModified": "2026-09-19T10:30:00+05:30"
+      "dateModified": "2026-10-06T10:00:00+05:30"
     },
     {
       "@type": "ItemList",
+      "@id": "https://rahulchoudhary05.vercel.app/#work",
       "name": "Selected projects by Rahul Choudhary",
-      "itemListOrder": "https://schema.org/ItemListOrderDescending",
+      "numberOfItems": 7,
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "item": { "@type": "SoftwareApplication", "name": "durabolt", "applicationCategory": "DeveloperApplication", "operatingSystem": "Node.js", "url": "https://www.npmjs.com/package/@rahulchoudhary05/durabolt", "description": "Zero-dependency Node.js library giving Postgres-backed exactly-once execution, a transactional outbox and signed retried webhooks.", "author": { "@id": "https://rahulchoudhary05.vercel.app/#person" } } },
-        { "@type": "ListItem", "position": 2, "item": { "@type": "WebApplication", "name": "CipherSQL Studio", "url": "https://ciphersqlschool.vercel.app/", "applicationCategory": "EducationalApplication", "description": "Interactive SQL learning platform with real-world dataset challenges, schema visualisation and an AI hint engine.", "author": { "@id": "https://rahulchoudhary05.vercel.app/#person" } } },
-        { "@type": "ListItem", "position": 3, "item": { "@type": "WebApplication", "name": "MEDO Shield AI", "url": "https://medoshieldai.vercel.app/", "applicationCategory": "HealthApplication", "description": "Telemedicine platform with doctor and patient portals, real-time chat and a privacy-first skeletal video analysis engine.", "author": { "@id": "https://rahulchoudhary05.vercel.app/#person" } } },
-        { "@type": "ListItem", "position": 4, "item": { "@type": "WebApplication", "name": "ComboFinder", "url": "https://combofinder.vercel.app/", "applicationCategory": "BusinessApplication", "description": "Data file processing tool for column selection and refined output generation.", "author": { "@id": "https://rahulchoudhary05.vercel.app/#person" } } }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "Who is Rahul Choudhary?", "acceptedAnswer": { "@type": "Answer", "text": "Rahul Choudhary is a Full Stack & AI Developer at Omnithrive Technologies. He builds production-grade web platforms and Agentic AI / LLM-integrated systems with the MERN and PERN stacks, and is completing a B.E. in Computer Science at Chandigarh University." } },
-        { "@type": "Question", "name": "What technologies does Rahul Choudhary work with?", "acceptedAnswer": { "@type": "Answer", "text": "React, Next.js and TypeScript on the frontend; Node.js, Express and FastAPI on the backend; PostgreSQL, MongoDB and SQL Server for data; Azure, Databricks, Docker and CI/CD for delivery; plus Agentic AI frameworks, LLM integration and RAG pipelines." } },
-        { "@type": "Question", "name": "Is Rahul Choudhary available for freelance work?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Rahul is open to freelance projects, contract engagements and full-time roles, and usually replies within a day at rahulchoudhary.sk@gmail.com." } },
-        { "@type": "Question", "name": "What is durabolt?", "acceptedAnswer": { "@type": "Answer", "text": "durabolt is Rahul Choudhary's open-source, zero-dependency Node.js library that makes risky backend operations safe using only PostgreSQL — exactly-once execution, a transactional outbox, and signed, retried, dead-lettered webhooks." } }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "SoftwareSourceCode",
+            "name": "durabolt",
+            "description": "Zero-dependency Node.js library for Postgres-backed exactly-once execution, a transactional outbox and signed, retried, dead-lettered webhooks.",
+            "codeRepository": "https://github.com/RahulChoudhary05/durabolt",
+            "programmingLanguage": [
+              "TypeScript",
+              "Node.js",
+              "PostgreSQL"
+            ],
+            "author": {
+              "@id": "https://rahulchoudhary05.vercel.app/#person"
+            },
+            "keywords": "open source, npm, idempotency, outbox, webhooks",
+            "url": "https://www.npmjs.com/package/@rahulchoudhary05/durabolt",
+            "dateCreated": "2026"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "SoftwareSourceCode",
+            "name": "CipherSQL Studio",
+            "description": "Interactive SQL learning platform with real-world dataset challenges, instant query feedback, PK/FK schema visualisation and an AI hint engine; workspace provisioning cut from 60s+ to under 1s.",
+            "codeRepository": "https://github.com/RahulChoudhary05/CipherSchools",
+            "programmingLanguage": [
+              "JavaScript",
+              "SQL"
+            ],
+            "author": {
+              "@id": "https://rahulchoudhary05.vercel.app/#person"
+            },
+            "keywords": "edtech, SQL, PostgreSQL, AI hints",
+            "url": "https://ciphersqlschool.vercel.app/",
+            "dateCreated": "2026-03"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "SoftwareSourceCode",
+            "name": "MEDO Shield AI",
+            "description": "Telemedicine platform with doctor and patient portals, real-time WebSocket chat, AI symptom guidance and a privacy-first 33-point skeletal video analysis engine for tremor and gait detection.",
+            "codeRepository": "https://github.com/RahulChoudhary05/MEDO_SHIELD_AI",
+            "programmingLanguage": [
+              "Python",
+              "JavaScript"
+            ],
+            "author": {
+              "@id": "https://rahulchoudhary05.vercel.app/#person"
+            },
+            "keywords": "healthcare AI, FastAPI, React, MongoDB, Gemini",
+            "url": "https://medoshieldai.vercel.app/",
+            "dateCreated": "2026-01"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "SoftwareSourceCode",
+            "name": "ComboFinder",
+            "description": "Web tool for uploading and reshaping data files: select columns such as product name or price and generate refined output.",
+            "codeRepository": "https://github.com/RahulChoudhary05/ComboFinder",
+            "programmingLanguage": [
+              "JavaScript"
+            ],
+            "author": {
+              "@id": "https://rahulchoudhary05.vercel.app/#person"
+            },
+            "keywords": "React, Node.js, data processing",
+            "url": "https://combofinder.vercel.app/",
+            "dateCreated": "2025-03"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "SoftwareSourceCode",
+            "name": "S Raj Infra Projects",
+            "description": "Enterprise SaaS platform in React and Tailwind with Framer Motion interfaces that lifted engagement by 40%, now the company's primary client-acquisition site.",
+            "codeRepository": "https://github.com/RahulChoudhary05/S-RAJ-INFRA",
+            "programmingLanguage": [
+              "JavaScript"
+            ],
+            "author": {
+              "@id": "https://rahulchoudhary05.vercel.app/#person"
+            },
+            "keywords": "client work, React, Firebase",
+            "url": "https://srajinfra.vercel.app/",
+            "dateCreated": "2024-12"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "SoftwareSourceCode",
+            "name": "BharatMarket",
+            "description": "Full e-commerce website in React, Node.js, Express and Firebase with authentication, real-time updates and a Docker + Jenkins CI/CD pipeline.",
+            "codeRepository": "https://github.com/RahulChoudhary05/BharatMarket-EcommerceWebsite",
+            "programmingLanguage": [
+              "JavaScript"
+            ],
+            "author": {
+              "@id": "https://rahulchoudhary05.vercel.app/#person"
+            },
+            "keywords": "e-commerce, React, Firebase, CI/CD",
+            "dateCreated": "2024-03"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "SoftwareSourceCode",
+            "name": "R K Technical Support",
+            "description": "Responsive healthcare clinic website in HTML, CSS and JavaScript with a dynamic Google Maps integration.",
+            "codeRepository": "https://github.com/RahulChoudhary05/RKTECHNICALSUPPORT",
+            "programmingLanguage": [
+              "HTML",
+              "CSS",
+              "JavaScript"
+            ],
+            "author": {
+              "@id": "https://rahulchoudhary05.vercel.app/#person"
+            },
+            "keywords": "client work, healthcare website",
+            "url": "https://www.rktechs.co/",
+            "dateCreated": "2023-12"
+          }
+        }
       ]
     }
   ]
@@ -140,16 +389,6 @@
     <script>document.documentElement.classList.add('js');</script>
   </head>
   <body>
-    <noscript>
-      <h1>Rahul Choudhary — Full Stack &amp; AI Developer</h1>
-      <p>
-        Rahul Choudhary is a Full Stack &amp; AI Developer at Omnithrive Technologies, building
-        production-grade platforms and Agentic AI / LLM-integrated systems with the MERN and PERN
-        stacks. He has also worked with S Raj Infra Projects Pvt. Ltd. and R K Technical Support, and
-        maintains open-source projects including durabolt. This portfolio requires JavaScript to view
-        the full interactive experience.
-      </p>
-    </noscript>
     <div id="root"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

@@ -3,12 +3,12 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://rahulchoudhary05.vercel.app/</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-10-06</lastmod>
     <image:image>
-      <image:loc>https://res.cloudinary.com/dnlrwuxxs/image/upload/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg</image:loc>
-      <image:title>Rahul Choudhary — Full Stack &amp; AI Developer</image:title>
+      <image:loc>https://res.cloudinary.com/dnlrwuxxs/image/upload/c_fill,w_1200,h_1200,g_face,q_auto:best,f_jpg/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/dnlrwuxxs/image/upload/c_fill,w_1200,h_630,g_face,q_auto:best,f_jpg/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg</image:loc>
     </image:image>
   </url>
 </urlset>

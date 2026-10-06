@@ -1,7 +1,11 @@
+import { useEffect, useState } from "react";
+
 export default function Navbar() {
-  const isMac =
-    typeof navigator !== "undefined" &&
-    /Mac|iPod|iPhone|iPad/.test(navigator.platform || navigator.userAgent || "");
+  // Detected after mount so the prerendered HTML ("Ctrl") hydrates without a mismatch.
+  const [isMac, setIsMac] = useState(false);
+  useEffect(() => {
+    setIsMac(/Mac|iPod|iPhone|iPad/.test(navigator.platform || navigator.userAgent || ""));
+  }, []);
   return (
     <>
       <header className="top" id="top">
