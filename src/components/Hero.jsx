@@ -1,3 +1,6 @@
+const PORTRAIT = (w) =>
+  `https://res.cloudinary.com/dnlrwuxxs/image/upload/c_fill,w_${w},h_${w},g_face,q_auto,f_auto/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg`;
+
 export default function Hero() {
   return (
     <section className="hero" id="hero">
@@ -38,9 +41,11 @@ export default function Hero() {
 
             <figure className="portrait">
               <img
-                src="https://res.cloudinary.com/dnlrwuxxs/image/upload/c_fill,w_760,h_760,g_face,q_auto:best,f_auto/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg"
-                width={760}
-                height={760}
+                src={PORTRAIT(640)}
+                srcSet={[360, 480, 640, 760].map((w) => `${PORTRAIT(w)} ${w}w`).join(", ")}
+                sizes="(min-width: 1000px) 20rem, (min-width: 600px) 32rem, calc(100vw - 4.5rem)"
+                width={640}
+                height={640}
                 decoding="async"
                 alt="Rahul Choudhary, Full Stack and AI Developer based in India"
               />

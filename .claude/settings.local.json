@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e ' *)",
+      "Read(//c/Users/DELLJ/AppData/Local/Temp/claude/D--ReactFolio-Portfolio/33b4d8b0-c9ae-4e4b-a716-46d5410a1d4f/scratchpad/**)",
+      "PowerShell(Select-String -Path public/404.html -Pattern \"<script|<link|<style\" | % Line; Get-Content .gitignore; Test-Path .env)",
+      "PowerShell(npm run build 2>&1)",
+      "Bash(node -e 'const r=require\\(\"./lh-mobile.json\"\\);console.log\\(r.environment.benchmarkIndex, r.environment.hostUserAgent.slice\\(0,60\\)\\)')",
+      "Bash(npx -y serve@14 -s build -l 5051 --no-clipboard)",
+      "Bash(npx -y lighthouse@12 http://localhost:5051/ --quiet --only-categories=performance --save-assets --chrome-flags=\"--headless=new\" --output=json --output-path=./lh4.json)",
+      "Bash(npx -y lighthouse@12 https://rahulchoudhary05.vercel.app/ --quiet --chrome-flags=\"--headless=new\" --output=json --output-path=./live-mobile.json)",
+      "Bash(npx -y lighthouse@12 http://localhost:5051/ --quiet --chrome-flags=\"--headless=new\" --output=json --output-path=./lh5-mobile.json)",
+      "PowerShell($env:CI=\"true\"; npx react-scripts test --watchAll=false 2>&1 | Select-Object -Last 12)",
+      "Bash(sed -i 's#<lastmod>2026-10-06</lastmod>#<lastmod>2026-10-23</lastmod>#' public/sitemap.xml)",
+      "Bash(npm run *)",
+      "Bash(node -e 'const r=require\\(\"./f-m1.json\"\\);const a=r.audits[\"layout-shifts\"]||r.audits[\"cls-culprits-insight\"];console.log\\(JSON.stringify\\(r.audits[\"layout-shifts\"].details.items.map\\(i=>\\({s:i.score,n:i.node?.snippet,sel:i.node?.selector,c:i.subItems?.items?.map\\(x=>x.extra?.value||x.cause\\)}\\)\\),null,1\\).slice\\(0,1500\\)\\)')",
+      "Bash(node -e 'const r=require\\(\"./f-m1.json\"\\);console.log\\(JSON.stringify\\(r.audits[\"cls-culprits-insight\"].details,null,0\\).slice\\(0,2500\\)\\); const m=r.audits.metrics.details.items[0]; console.log\\(\"obs FCP\",m.observedFirstContentfulPaint,\"obsLoad\",m.observedLoad\\); const s=r.audits[\"screenshot-thumbnails\"].details.items.map\\(i=>i.timing\\).join\\(\",\"\\);console.log\\(s\\)')",
+      "Bash(node -e 'for \\(const f of [\"g-m1\",\"g-m2\",\"g-d2\"]\\) { const r=require\\(\"./\"+f+\".json\"\\); console.log\\(f, JSON.stringify\\(r.audits[\"layout-shifts\"].details?.items?.map\\(i=>[i.score.toFixed\\(3\\), i.node?.selector, JSON.stringify\\(i.node?.boundingRect\\)]\\)\\)\\); const m=r.audits.metrics.details.items[0]; console.log\\(\"   obsFCP\",m.observedFirstContentfulPaint,\"obsDCL\",m.observedDomContentLoaded,\"obsLoad\",m.observedLoad,\"obsCLS\",m.observedCumulativeLayoutShift\\); }')",
+      "Bash(sed -n '/function count/,/function finish/p' src/lib/portfolioEffects.js)",
+      "Bash(node -e 'for \\(const f of [\"h-m3\",\"h-m2\"]\\) {const r=require\\(\"./\"+f+\".json\"\\);const A=r.audits; *)",
+      "PowerShell(npm run build 2>&1 | Select-String \"prerender:|Failed|rror\"; $env:CI=\"true\"; npx react-scripts test --watchAll=false 2>&1 | Select-String \"Tests:\")",
+      "PowerShell(git rm -q --cached -- \"--legacy-peer-deps\" 2>$null)",
+      "PowerShell(git add -A)",
+      "PowerShell(git reset --soft HEAD~1; git reset -q; git log --oneline -1; git status --short | Measure-Object -Line | % Lines)"
+    ]
+  }
+}

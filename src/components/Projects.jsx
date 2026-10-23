@@ -22,8 +22,8 @@ export default function Projects() {
               <p>A zero-dependency Node.js library that makes risky backend operations - charges, emails, third-party calls, webhooks - safe and self-healing using only the Postgres you already run. Three composable primitives: <em>once()</em> for exactly-once idempotency, a transactional outbox so a write and its event commit or roll back together, and signed, retried, dead-lettered webhooks you can trust.</p>
               <div className="tags"><span className="tag">Node.js</span><span className="tag">TypeScript</span><span className="tag">PostgreSQL</span><span className="tag">npm</span></div>
               <p className="proj-links">
-                <a className="lnk" href="https://www.npmjs.com/package/@rahulchoudhary05/durabolt" target="_blank" rel="noopener noreferrer">View on npm <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-                <a className="lnk" href="https://github.com/RahulChoudhary05/durabolt" target="_blank" rel="noopener noreferrer">Source <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a className="lnk" href="https://www.npmjs.com/package/@rahulchoudhary05/durabolt" target="_blank" rel="noopener noreferrer">View on npm <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a className="lnk" href="https://github.com/RahulChoudhary05/durabolt" target="_blank" rel="noopener noreferrer">Source<span className="vh"> - durabolt</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
               </p>
             </div>
           </article>
@@ -36,8 +36,8 @@ export default function Projects() {
               <p>An interactive SQL learning platform with 20–30 real-world dataset challenges, instant query feedback, PK/FK schema visualisation and an AI hint engine. I cut multi-user workspace provisioning from over 60 seconds to under one, so concurrent learners each get an isolated execution environment without waiting.</p>
               <div className="tags"><span className="tag">JavaScript</span><span className="tag">PostgreSQL</span><span className="tag">SQL Server</span><span className="tag">AI hints</span></div>
               <p className="proj-links">
-                <a className="lnk" href="https://ciphersqlschool.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-                <a className="lnk" href="https://github.com/RahulChoudhary05/CipherSchools" target="_blank" rel="noopener noreferrer">Source <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a className="lnk" href="https://ciphersqlschool.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span className="vh"> - CipherSQL Studio</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a className="lnk" href="https://github.com/RahulChoudhary05/CipherSchools" target="_blank" rel="noopener noreferrer">Source<span className="vh"> - CipherSQL Studio</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
               </p>
             </div>
           </article>
@@ -50,8 +50,8 @@ export default function Projects() {
               <p>A telemedicine platform with separate doctor and patient portals, appointment management, real-time WebSocket chat and AI symptom guidance. Its privacy-first video engine converts patient uploads into 33-point skeletal data without storing raw footage, detecting tremors in the 4–12 Hz band and gait anomalies for neurological risk classification.</p>
               <div className="tags"><span className="tag">React</span><span className="tag">FastAPI</span><span className="tag">Python</span><span className="tag">MongoDB</span><span className="tag">Gemini AI</span><span className="tag">Docker</span></div>
               <p className="proj-links">
-                <a className="lnk" href="https://medoshieldai.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-                <a className="lnk" href="https://github.com/RahulChoudhary05/MEDO_SHIELD_AI" target="_blank" rel="noopener noreferrer">Source <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a className="lnk" href="https://medoshieldai.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span className="vh"> - MEDO Shield AI</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a className="lnk" href="https://github.com/RahulChoudhary05/MEDO_SHIELD_AI" target="_blank" rel="noopener noreferrer">Source<span className="vh"> - MEDO Shield AI</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
               </p>
             </div>
           </article>
@@ -64,8 +64,8 @@ export default function Projects() {
               <p>A web tool for uploading and reshaping data files fast. Pick the columns that matter - product name, price, anything - and generate a refined output. Built with React, Tailwind and Node.js with secure file handling, for e-commerce catalogues, analysis and reporting.</p>
               <div className="tags"><span className="tag">React</span><span className="tag">Node.js</span><span className="tag">Express</span><span className="tag">Vercel</span></div>
               <p className="proj-links">
-                <a className="lnk" href="https://combofinder.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-                <a className="lnk" href="https://github.com/RahulChoudhary05/ComboFinder" target="_blank" rel="noopener noreferrer">Source <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a className="lnk" href="https://combofinder.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo<span className="vh"> - ComboFinder</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a className="lnk" href="https://github.com/RahulChoudhary05/ComboFinder" target="_blank" rel="noopener noreferrer">Source<span className="vh"> - ComboFinder</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
               </p>
             </div>
           </article>
@@ -78,8 +78,8 @@ export default function Projects() {
               <p>An enterprise SaaS platform in React and Tailwind, with Framer Motion interfaces that lifted engagement by 40%. Now in production as the company's primary client-acquisition and service showcase, backed by Firebase and SMTP automation.</p>
               <div className="tags"><span className="tag">React</span><span className="tag">Node.js</span><span className="tag">Express</span><span className="tag">Firebase</span></div>
               <p className="proj-links">
-                <a className="lnk" href="https://srajinfra.vercel.app/" target="_blank" rel="noopener noreferrer">Live site <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-                <a className="lnk" href="https://github.com/RahulChoudhary05/S-RAJ-INFRA" target="_blank" rel="noopener noreferrer">Source <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a className="lnk" href="https://srajinfra.vercel.app/" target="_blank" rel="noopener noreferrer">Live site<span className="vh"> - S Raj Infra Projects</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a className="lnk" href="https://github.com/RahulChoudhary05/S-RAJ-INFRA" target="_blank" rel="noopener noreferrer">Source<span className="vh"> - S Raj Infra Projects</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
               </p>
             </div>
           </article>
@@ -92,7 +92,7 @@ export default function Projects() {
               <p>A full e-commerce build in React, Node.js, Express and Tailwind on Firebase - authentication, real-time database updates and a checkout that doesn't stumble. Docker and Jenkins drive the CI/CD pipeline for automated testing, building and release.</p>
               <div className="tags"><span className="tag">React</span><span className="tag">Node.js</span><span className="tag">Firebase</span><span className="tag">Docker</span><span className="tag">Jenkins</span></div>
               <p className="proj-links">
-                <a className="lnk" href="https://github.com/RahulChoudhary05/BharatMarket-EcommerceWebsite" target="_blank" rel="noopener noreferrer">Source <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a className="lnk" href="https://github.com/RahulChoudhary05/BharatMarket-EcommerceWebsite" target="_blank" rel="noopener noreferrer">Source<span className="vh"> - BharatMarket</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
               </p>
             </div>
           </article>
@@ -105,8 +105,8 @@ export default function Projects() {
               <p>A healthcare clinic website in plain HTML, CSS and JavaScript - fully responsive across phone, tablet and desktop, with a dynamic Google Maps integration for live tracking. Deployed by the client and still in real-world use.</p>
               <div className="tags"><span className="tag">HTML</span><span className="tag">CSS</span><span className="tag">JavaScript</span><span className="tag">Google Maps API</span></div>
               <p className="proj-links">
-                <a className="lnk" href="https://www.rktechs.co/" target="_blank" rel="noopener noreferrer">Live site <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
-                <a className="lnk" href="https://github.com/RahulChoudhary05/RKTECHNICALSUPPORT" target="_blank" rel="noopener noreferrer">Source <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a className="lnk" href="https://www.rktechs.co/" target="_blank" rel="noopener noreferrer">Live site<span className="vh"> - R K Technical Support</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+                <a className="lnk" href="https://github.com/RahulChoudhary05/RKTECHNICALSUPPORT" target="_blank" rel="noopener noreferrer">Source<span className="vh"> - R K Technical Support</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
               </p>
             </div>
           </article>

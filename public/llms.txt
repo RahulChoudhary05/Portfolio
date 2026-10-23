@@ -3,7 +3,7 @@
 > Rahul Choudhary is a Full Stack & AI Developer at Omnithrive Technologies, based in India. He builds production-grade web platforms and Agentic AI / LLM-integrated systems with the MERN and PERN stacks, and is open to freelance projects, contract work and full-time software engineering roles.
 
 Portfolio: https://rahulchoudhary05.vercel.app/
-Last updated: 2026-10-06
+Last updated: 2026-10-23
 
 ## Who is Rahul Choudhary?
 

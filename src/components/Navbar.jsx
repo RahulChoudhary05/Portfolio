@@ -1,16 +1,10 @@
-import { useEffect, useState } from "react";
-
 export default function Navbar() {
-  // Detected after mount so the prerendered HTML ("Ctrl") hydrates without a mismatch.
-  const [isMac, setIsMac] = useState(false);
-  useEffect(() => {
-    setIsMac(/Mac|iPod|iPhone|iPad/.test(navigator.platform || navigator.userAgent || ""));
-  }, []);
+  // Prerendered as "Ctrl"; portfolioEffects swaps in "⌘" on Apple devices.
   return (
     <>
       <header className="top" id="top">
         <div className="top-in">
-          <a className="brand" href="#hero" aria-label="Rahul Choudhary, home">
+          <a className="brand" href="#hero">
             <span className="brand-glyph">
               <img
                 src="https://res.cloudinary.com/dnlrwuxxs/image/upload/c_fill,w_120,h_120,g_face,q_auto:best,f_auto/v1754414883/RahulChoudharyPortfolio/Main_PIC_g3hsym.jpg"
@@ -32,7 +26,7 @@ export default function Navbar() {
             <a href="#contact">Contact</a>
           </nav>
           <div className="top-act">
-            <button className="kbd-btn" id="openCmd" aria-label="Open command menu">Search <kbd>{isMac ? "⌘" : "Ctrl"}</kbd><kbd>K</kbd></button>
+            <button className="kbd-btn" id="openCmd" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K">Search <kbd id="cmdKey">Ctrl</kbd><kbd>K</kbd></button>
             <a className="btn btn-ghost btn-sm nav-hire" href="#contact" data-cur="hire">Hire<span className="hire-tail">&nbsp;me</span></a>
             <button className="burger" id="burger" aria-label="Open menu" aria-expanded="false"><i /><i /><i /></button>
           </div>

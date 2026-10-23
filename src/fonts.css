@@ -1,0 +1,24 @@
+/* Self-hosted typefaces (latin subset only). Bundled into main.css, so there is
+   no render-blocking request to fonts.googleapis.com and no extra origin. */
+@import "@fontsource/inter-tight/latin-300.css";
+@import "@fontsource/inter-tight/latin-400.css";
+@import "@fontsource/inter-tight/latin-400-italic.css";
+@import "@fontsource/inter-tight/latin-500.css";
+@import "@fontsource/inter-tight/latin-600.css";
+@import "@fontsource/jetbrains-mono/latin-400.css";
+@import "@fontsource/jetbrains-mono/latin-500.css";
+
+/* Syne is the wide display face (loader mark, name, headings) — never the LCP text. Its
+   width differs too much from any local font to swap without moving things, so it uses
+   font-display:block: it paints once, already in Syne, instead of reflowing on swap. */
+@font-face{font-family:"Syne";font-style:normal;font-display:block;font-weight:400;src:url(../node_modules/@fontsource/syne/files/syne-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Syne";font-style:normal;font-display:block;font-weight:600;src:url(../node_modules/@fontsource/syne/files/syne-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Syne";font-style:normal;font-display:block;font-weight:700;src:url(../node_modules/@fontsource/syne/files/syne-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Syne";font-style:normal;font-display:block;font-weight:800;src:url(../node_modules/@fontsource/syne/files/syne-latin-800-normal.woff2) format("woff2")}
+
+/* Metric-matched fallbacks (values from Capsize): while a webfont is still loading, text
+   is set in a local font scaled to the same metrics, so the swap moves nothing (no CLS).
+   Liberation Sans/Mono are the metric-compatible Arial/Courier New on Linux. */
+@font-face{font-family:"Inter Tight Fallback";src:local("Arial"),local("ArialMT"),local("Liberation Sans");ascent-override:100.5078%;descent-override:25.0256%;line-gap-override:0%;size-adjust:96.3855%}
+@font-face{font-family:"Syne Fallback";src:local("Arial"),local("ArialMT"),local("Liberation Sans");ascent-override:93.933%;descent-override:27.926%;line-gap-override:0%;size-adjust:98.4745%}
+@font-face{font-family:"JetBrains Mono Fallback";src:local("Courier New"),local("CourierNewPSMT"),local("Liberation Mono");ascent-override:102.0166%;descent-override:30.0049%;line-gap-override:0%;size-adjust:99.9837%}

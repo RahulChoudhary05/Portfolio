@@ -1,19 +1,15 @@
-import React from "react"
-import ReactDOM from "react-dom/client"
-import App from "./App"
+import "./fonts.css"
 import "./index.css"
+import initPortfolio from "./lib/portfolioEffects"
 
 const container = document.getElementById("root")
-const app = (
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-)
 
-// Production builds ship prerendered markup (scripts/prerender.js) - hydrate it
-// in place so crawlers and users get the same DOM. Dev server has an empty root.
+// Production HTML is fully prerendered by scripts/prerender.js, and every interaction
+// is plain DOM code in portfolioEffects - so the static markup is enhanced in place and
+// no React runtime is downloaded or hydrated. The dev server has an empty root, so it
+// renders the React tree (a separate chunk that production never loads).
 if (container.hasChildNodes()) {
-  ReactDOM.hydrateRoot(container, app)
+  initPortfolio()
 } else {
-  ReactDOM.createRoot(container).render(app)
+  import("./renderApp").then((m) => m.default(container))
 }

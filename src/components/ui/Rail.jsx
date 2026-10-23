@@ -1,14 +1,16 @@
+// Decorative duplicate of the primary nav: hidden from assistive tech, so its
+// links are also taken out of the tab order (aria-hidden content must not be focusable).
+const SECTIONS = [
+  ["hero", "Intro"], ["about", "About"], ["experience", "Experience"], ["stack", "Stack"],
+  ["work", "Work"], ["services", "Services"], ["background", "Background"], ["contact", "Contact"],
+]
+
 export default function Rail() {
   return (
     <div className="rail" id="rail" aria-hidden="true">
-      <a href="#hero"><i></i><span>Intro</span></a>
-      <a href="#about"><i></i><span>About</span></a>
-      <a href="#experience"><i></i><span>Experience</span></a>
-      <a href="#stack"><i></i><span>Stack</span></a>
-      <a href="#work"><i></i><span>Work</span></a>
-      <a href="#services"><i></i><span>Services</span></a>
-      <a href="#background"><i></i><span>Background</span></a>
-      <a href="#contact"><i></i><span>Contact</span></a>
+      {SECTIONS.map(([id, label]) => (
+        <a key={id} href={`#${id}`} tabIndex={-1}><i></i><span>{label}</span></a>
+      ))}
     </div>
   )
 }

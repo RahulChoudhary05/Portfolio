@@ -59,5 +59,43 @@ const html = fs.readFileSync(INDEX, "utf8")
 const EMPTY_ROOT = '<div id="root"></div>'
 if (!html.includes(EMPTY_ROOT)) throw new Error("prerender: empty #root not found in build/index.html")
 
-fs.writeFileSync(INDEX, html.replace(EMPTY_ROOT, `<div id="root">${markup}</div>`))
-console.log(`prerender: wrote ${(markup.length / 1024).toFixed(1)} KB of static markup into build/index.html`)
+let out = html.replace(EMPTY_ROOT, `<div id="root">${markup}</div>`)
+
+// Inline the stylesheet: removes the only render-blocking request from the critical path.
+// Asset URLs inside it are root-absolute (/static/media/...), so they resolve unchanged.
+out = out.replace(/<link href="(\/static\/css\/[^"]+\.css)" rel="stylesheet">/g, (tag, href) => {
+  const css = fs.readFileSync(path.join(BUILD, href), "utf8").replace(/\/\*# sourceMappingURL=.*?\*\//g, "")
+  return `<style>${css}</style>`
+})
+
+// Content-Security-Policy with hashes of every inline executable script. It lives in a <meta>
+// because the hashes change per build; the static headers in vercel.json add frame-ancestors etc.
+const crypto = require("crypto")
+const hashes = []
+for (const [, attrs, body] of out.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)) {
+  if (/\bsrc=/.test(attrs) || /application\/ld\+json/.test(attrs)) continue
+  hashes.push(`'sha256-${crypto.createHash("sha256").update(body, "utf8").digest("base64")}'`)
+}
+const csp = [
+  "default-src 'self'",
+  // 'unsafe-inline' is ignored by every browser that understands hashes; it only keeps very old ones working.
+  `script-src 'self' ${hashes.join(" ")} 'unsafe-inline'`,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: https://res.cloudinary.com",
+  "font-src 'self'",
+  "connect-src 'self'",
+  "manifest-src 'self'",
+  "frame-src 'none'",
+  "worker-src 'none'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self' mailto:",
+  "require-trusted-types-for 'script'",
+  "trusted-types default",
+].join("; ")
+const CHARSET = '<meta charset="utf-8"/>'
+if (!out.includes(CHARSET)) throw new Error("prerender: <meta charset> not found in build/index.html")
+out = out.replace(CHARSET, `${CHARSET}<meta http-equiv="Content-Security-Policy" content="${csp}">`)
+
+fs.writeFileSync(INDEX, out)
+console.log(`prerender: wrote ${(markup.length / 1024).toFixed(1)} KB of static markup, inlined CSS, CSP with ${hashes.length} script hash(es)`)

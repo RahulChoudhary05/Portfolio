@@ -5,11 +5,11 @@ export default function Footer() {
         <p className="foot-huge" aria-hidden="true"><span>RAHUL</span></p>
         <div className="foot-cols">
           <div>
-            <h4>Rahul Choudhary</h4>
+            <h2>Rahul Choudhary</h2>
             <p>Full Stack &amp; AI Developer building production-grade platforms and Agentic AI / LLM systems. Open to freelance projects and full-time roles.</p>
           </div>
           <div>
-            <h4>Navigate</h4>
+            <h2>Navigate</h2>
             <ul>
               <li><a href="#work">Work</a></li>
               <li><a href="#about">About</a></li>
@@ -20,7 +20,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4>Elsewhere</h4>
+            <h2>Elsewhere</h2>
             <ul>
               <li><a href="https://github.com/RahulChoudhary05" target="_blank" rel="noopener noreferrer me">GitHub</a></li>
               <li><a href="https://www.linkedin.com/in/rahulchoudhary210505/" target="_blank" rel="noopener noreferrer me">LinkedIn</a></li>

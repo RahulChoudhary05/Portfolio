@@ -29,6 +29,38 @@ export default function initPortfolio() {
   var TOUCH   = window.matchMedia("(hover: none)").matches;
   var lerp = function (a, b, t) { return a + (b - a) * t; };
   var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+  var el = function (tag, attrs, text) {
+    var n = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function (k) {
+      if (k === "className") n.className = attrs[k]; else n.setAttribute(k, attrs[k]);
+    });
+    if (text != null) n.textContent = text;
+    return n;
+  };
+  // Scroll-linked motion and the WebGL field only matter once someone moves, scrolls,
+  // touches or types — so their code-split chunks are fetched then, never on the
+  // critical path (and never as main-thread work during the initial load).
+  var onFirstInteraction = function (fn) {
+    var evs = ["pointermove", "pointerdown", "touchstart", "wheel", "scroll", "keydown"];
+    function go() {
+      evs.forEach(function (e) { window.removeEventListener(e, go, true); });
+      if ("requestIdleCallback" in window) window.requestIdleCallback(fn, { timeout: 400 });
+      else setTimeout(fn, 50);
+    }
+    evs.forEach(function (e) { window.addEventListener(e, go, { capture: true, passive: true }); });
+  };
+
+  /* Code-split enhancements: GSAP ScrollTrigger motion and the WebGL field. */
+  var enhanced = false;
+  function loadEnhancements() {
+    if (enhanced) return;
+    enhanced = true;
+    if (!REDUCED) {
+      import("./motion").then(function (m) { scrollMotion(m.gsap, m.ScrollTrigger); }, function () { scrollMotion(); });
+    }
+    var cv = $("#field");
+    if (cv) import("./heroField").then(function (m) { m.default(cv, REDUCED); }, function () {});
+  }
 
   /* Failsafe: if anything at all throws, drop the enhancement flag so every
      progressively-hidden element becomes visible and the page still reads. */
@@ -68,39 +100,52 @@ export default function initPortfolio() {
      ======================================================== */
   (function boot() {
     var el = $("#boot"), num = $("#bootNum"), bar = $("#bootBar"), log = $("#bootLog");
-    if (!el || !num || !bar || !log) return;
+    if (!el || !num || !bar || !log) { onFirstInteraction(loadEnhancements); return; }
     var lines = [
       "resolving typefaces", "compiling shaders", "seeding particle field",
       "mounting sections", "warming scroll triggers", "ready"
     ];
-    var chars = $$(".boot-mark span");
-    chars.forEach(function (c, i) {
-      if (!c.animate) return;
-      c.animate(
-        [{ transform: "translateY(110%)", opacity: 0 }, { transform: "translateY(0)", opacity: 1 }],
-        { duration: 820, delay: 90 + i * 70, easing: "cubic-bezier(.22,1,.36,1)", fill: "forwards" }
-      );
-    });
-    setTimeout(function () { el.classList.add("lit"); }, 520);
+    // The loader's type is revealed (CSS: #boot.fonts) only once its own webfonts are in,
+    // capped at 1.2s, so a late font swap can never shift it. Nothing else is awaited:
+    // the page is prerendered, and the intro is never gated on window "load".
+    var started = false;
+    var fontsIn = document.fonts && document.fonts.load
+      ? Promise.all(["800 1em Syne", "700 1em Syne", "400 1em 'JetBrains Mono'"].map(function (f) { return document.fonts.load(f); }))
+      : Promise.resolve();
+    fontsIn.then(start, start);
+    setTimeout(start, 1200);
 
-    // The React effect may fire after window "load" has already happened.
-    var pct = 0, loaded = document.readyState === "complete", li = 0;
-    window.addEventListener("load", function () { loaded = true; });
-    var tick = setInterval(function () {
-      var ceiling = loaded ? 100 : 90;
-      pct = Math.min(ceiling, pct + (ceiling - pct) * 0.30 + 3.2);
-      var shown = Math.floor(pct);
-      num.textContent = shown < 10 ? "0" + shown : String(shown);
-      bar.style.width = pct + "%";
-      var next = Math.min(lines.length - 1, Math.floor(pct / 100 * lines.length));
-      if (next !== li) { li = next; log.textContent = lines[li]; }
-      if (pct >= 99.4) {
-        clearInterval(tick);
-        num.textContent = "100";
-        setTimeout(finish, 140);
-      }
-    }, 40);
-    setTimeout(function () { loaded = true; }, 1200);
+    function start() {
+      if (started) return;
+      started = true;
+      el.classList.add("fonts");
+      $$(".boot-mark span").forEach(function (c, i) {
+        if (!c.animate) return;
+        c.animate(
+          [{ transform: "translateY(110%)", opacity: 0 }, { transform: "translateY(0)", opacity: 1 }],
+          { duration: 820, delay: 90 + i * 70, easing: "cubic-bezier(.22,1,.36,1)", fill: "forwards" }
+        );
+      });
+      setTimeout(function () { el.classList.add("lit"); }, 520);
+      count();
+    }
+
+    function count() {
+      var pct = 0, li = 0;
+      var tick = setInterval(function () {
+        pct = Math.min(100, pct + (100 - pct) * 0.30 + 3.2);
+        var shown = Math.floor(pct);
+        num.textContent = shown < 10 ? "0" + shown : String(shown);
+        bar.style.transform = "scaleX(" + (pct / 100) + ")";
+        var next = Math.min(lines.length - 1, Math.floor(pct / 100 * lines.length));
+        if (next !== li) { li = next; log.textContent = lines[li]; }
+        if (pct >= 99.4) {
+          clearInterval(tick);
+          num.textContent = "100";
+          setTimeout(finish, 140);
+        }
+      }, 40);
+    }
 
     function finish() {
       el.classList.add("done");
@@ -108,37 +153,29 @@ export default function initPortfolio() {
       document.body.dataset.ready = "1";
       heroIn();
       var f = $("#field"); if (f) f.classList.add("lit");
+      onFirstInteraction(loadEnhancements);
     }
   })();
 
   /* ========================================================
-     4. HERO ENTRANCE (GSAP when present, WAAPI otherwise)
+     4. HERO ENTRANCE (WAAPI)
      ======================================================== */
   function heroIn() {
     var lines = $$(".wordmark .ln > span");
     var rest = $$(".hero .rv");
     // Guarantee the hero is never left hidden — timers still fire even when the
-    // rAF-driven gsap/WAAPI animation is throttled (background tab, power-save).
+    // rAF-driven WAAPI animation is throttled (background tab, power-save).
     function forceReveal() {
-      lines.forEach(function (l) {
-        if (window.gsap) { try { window.gsap.set(l, { yPercent: 0 }); } catch (e) {} }
-        l.style.transform = "none";
-      });
+      lines.forEach(function (l) { l.style.transform = "none"; });
       rest.forEach(function (r) { r.classList.add("in"); });
     }
     if (REDUCED) { forceReveal(); return; }
-    if (window.gsap && lines.length) {
-      var tl = window.gsap.timeline({ defaults: { ease: "expo.out" } });
-      tl.fromTo(lines, { yPercent: 102 }, { yPercent: 0, duration: 0.8, stagger: 0.06 })
-        .add(function () { rest.forEach(function (r, i) { setTimeout(function () { r.classList.add("in"); }, i * 55); }); }, "-=0.55");
-    } else {
-      lines.forEach(function (l, i) {
-        if (!l.animate) { l.style.transform = "none"; return; }
-        l.animate([{ transform: "translateY(102%)" }, { transform: "translateY(0)" }],
-          { duration: 720, delay: i * 60, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" });
-      });
-      rest.forEach(function (r, i) { setTimeout(function () { r.classList.add("in"); }, 260 + i * 55); });
-    }
+    lines.forEach(function (l, i) {
+      if (!l.animate) { l.style.transform = "none"; return; }
+      l.animate([{ transform: "translateY(102%)" }, { transform: "translateY(0)" }],
+        { duration: 720, delay: i * 60, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" });
+    });
+    rest.forEach(function (r, i) { setTimeout(function () { r.classList.add("in"); }, 260 + i * 55); });
     // Failsafe: if the animation hasn't landed the wordmark within ~1s, snap it in.
     setTimeout(forceReveal, 1000);
     counters();
@@ -225,7 +262,7 @@ export default function initPortfolio() {
       if (top) top.classList.toggle("hide", y > 420 && y > last && !blocked);
       last = y;
       var h = document.documentElement.scrollHeight - window.innerHeight;
-      if (prog) prog.style.width = (h > 0 ? (y / h) * 100 : 0) + "%";
+      if (prog) prog.style.transform = "scaleX(" + (h > 0 ? y / h : 0) + ")";
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
@@ -273,18 +310,7 @@ export default function initPortfolio() {
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") setOpen(false); });
   })();
 
-  /* ========================================================
-     9. TICKER
-     ======================================================== */
-  (function ticker() {
-    var host = $("#ticker");
-    if (!host) return;
-    var items = ["React", "Next.js", "TypeScript", "Node.js", "Express", "FastAPI", "PostgreSQL", "MongoDB",
-      "Python", "Java", "Docker", "Azure", "Databricks", "Tailwind", "Framer Motion", "Agentic AI",
-      "LLM", "RAG", "Kotlin", "GraphQL", "WebSockets", "CI/CD"];
-    var html = items.map(function (t) { return "<span>" + t + "</span>"; }).join("");
-    host.innerHTML = html + html;
-  })();
+  /* 9. TICKER is rendered by components/Ticker.jsx. */
 
   /* ========================================================
      10. CURSOR + MAGNETIC
@@ -293,16 +319,19 @@ export default function initPortfolio() {
     if (TOUCH || REDUCED) return;
     var ring = $("#cur"), dot = $("#curDot");
     if (!ring || !dot) return;
-    var mx = window.innerWidth / 2, my = window.innerHeight / 2, rx = mx, ry = my;
+    var mx = window.innerWidth / 2, my = window.innerHeight / 2, rx = mx, ry = my, raf = 0;
+    // The trailing ring only animates while it is catching up, so an idle page does no per-frame work.
+    function loop() {
+      rx = lerp(rx, mx, 0.16); ry = lerp(ry, my, 0.16);
+      ring.style.transform = "translate(" + rx + "px," + ry + "px) translate(-50%,-50%)";
+      raf = Math.abs(rx - mx) + Math.abs(ry - my) > 0.3 ? requestAnimationFrame(loop) : 0;
+    }
     window.addEventListener("mousemove", function (e) {
       mx = e.clientX; my = e.clientY;
       dot.style.transform = "translate(" + mx + "px," + my + "px) translate(-50%,-50%)";
+      if (!raf) raf = requestAnimationFrame(loop);
     }, { passive: true });
-    (function loop() {
-      rx = lerp(rx, mx, 0.16); ry = lerp(ry, my, 0.16);
-      ring.style.transform = "translate(" + rx + "px," + ry + "px) translate(-50%,-50%)";
-      requestAnimationFrame(loop);
-    })();
+    loop();
     $$("a,button,[data-cur],input,textarea").forEach(function (el) {
       el.addEventListener("mouseenter", function () {
         ring.classList.add("grow");
@@ -350,17 +379,13 @@ export default function initPortfolio() {
   /* ========================================================
      12. SCROLL-LINKED MOTION (GSAP ScrollTrigger when present)
      ======================================================== */
-  // eslint-disable-next-line no-unused-vars
-  var scrollT = 0; // 0..1 across the hero, drives the 3D morph
-  (function scrollMotion() {
+  // Called with GSAP once the motion chunk loads; without it (reduced motion,
+  // or the chunk failed) it falls back to a plain scroll listener.
+  if (REDUCED) scrollMotion();
+  function scrollMotion(gsap, ScrollTrigger) {
     var fill = $("#tlFill"), tl = $("#tl");
     function manual() {
-      var hero = $("#hero");
       function on() {
-        if (hero) {
-          var hb = hero.getBoundingClientRect();
-          scrollT = clamp(-hb.top / Math.max(1, hb.height), 0, 1);
-        }
         if (tl && fill) {
           var r = tl.getBoundingClientRect();
           var p = clamp((window.innerHeight * 0.75 - r.top) / Math.max(1, r.height), 0, 1);
@@ -378,15 +403,17 @@ export default function initPortfolio() {
       on();
     }
 
-    if (window.gsap && window.ScrollTrigger && !REDUCED) {
-      var gsap = window.gsap, ScrollTrigger = window.ScrollTrigger;
+    if (gsap && ScrollTrigger && !REDUCED) {
       gsap.registerPlugin(ScrollTrigger);
-      if ($("#hero")) {
-        gsap.to({}, {
-          scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true,
-            onUpdate: function (self) { scrollT = self.progress; } }
+      // Sections use content-visibility:auto, so their real height is only known once they
+      // first render; re-measure trigger positions when that happens.
+      var refreshT;
+      $$(".section,.foot").forEach(function (s) {
+        s.addEventListener("contentvisibilityautostatechange", function () {
+          clearTimeout(refreshT);
+          refreshT = setTimeout(function () { ScrollTrigger.refresh(); }, 120);
         });
-      }
+      });
       if (tl && fill) {
         gsap.to(fill, { height: "100%", ease: "none",
           scrollTrigger: { trigger: tl, start: "top 72%", end: "bottom 62%", scrub: 0.4 } });
@@ -403,103 +430,10 @@ export default function initPortfolio() {
     } else {
       manual();
     }
-  })();
+  }
 
 
-  /* ========================================================
-     13. WEBGL IDENTITY FIELD
-     The monogram condenses out of noise on load, then dissolves
-     into a slow data-lattice as the page scrolls away from it.
-     ======================================================== */
-  (function field() {
-    var cv = $("#field");
-    if (!cv || !window.THREE) return;
-    var THREE = window.THREE;
-    var gl;
-    try {
-      gl = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true, powerPreference: "high-performance" });
-    } catch (e) { return; }
-
-    function size() { return [cv.clientWidth || 480, cv.clientHeight || 480]; }
-    var d = size(), W = d[0], H = d[1];
-    gl.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-    gl.setSize(W, H, false);
-
-    var scene = new THREE.Scene();
-    var cam = new THREE.PerspectiveCamera(40, W / H, 0.1, 120);
-    cam.position.set(0, 0, 23);
-
-    var grp = new THREE.Group();
-    scene.add(grp);
-
-    var R = 7.1;
-    var wireMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0 });
-    var wire = new THREE.LineSegments(
-      new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(R, 2)), wireMat
-    );
-    grp.add(wire);
-
-    var ptMat = new THREE.PointsMaterial({
-      color: 0xffffff, size: 0.058, sizeAttenuation: true,
-      transparent: true, opacity: 0, depthWrite: false
-    });
-    var shell = new THREE.Points(new THREE.IcosahedronGeometry(R * 1.015, 4), ptMat);
-    grp.add(shell);
-
-    function ring(radius, rx, rz, op) {
-      var pts = new THREE.EllipseCurve(0, 0, radius, radius, 0, Math.PI * 2).getPoints(160);
-      var g = new THREE.BufferGeometry().setFromPoints(pts);
-      var m = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0 });
-      var l = new THREE.LineLoop(g, m);
-      l.rotation.x = rx; l.rotation.z = rz;
-      l.userData.target = op;
-      grp.add(l);
-      return m;
-    }
-    var rings = [
-      { m: ring(R * 1.46, Math.PI * 0.44, 0.22, 0.30), t: 0.30 },
-      { m: ring(R * 1.72, Math.PI * 0.40, -0.55, 0.16), t: 0.16 }
-    ];
-
-    var mx = 0, my = 0, tx = 0, ty = 0, t0 = performance.now();
-    window.addEventListener("mousemove", function (e) {
-      tx = (e.clientX / window.innerWidth - 0.5);
-      ty = (e.clientY / window.innerHeight - 0.5);
-    }, { passive: true });
-
-    function resize() {
-      var s2 = size(); W = s2[0]; H = s2[1];
-      if (!W || !H) return;
-      cam.aspect = W / H; cam.updateProjectionMatrix();
-      gl.setSize(W, H, false);
-    }
-    window.addEventListener("resize", resize);
-    if (window.ResizeObserver) { try { new ResizeObserver(resize).observe(cv); } catch (e) {} }
-    resize();
-
-    var running = true;
-    document.addEventListener("visibilitychange", function () { running = !document.hidden; });
-
-    function frame(now) {
-      requestAnimationFrame(frame);
-      if (!running) return;
-      var el = (now - t0) / 1000;
-      var e = REDUCED ? 1 : clamp((el - 0.35) / 1.9, 0, 1);
-      var ee = 1 - Math.pow(1 - e, 3);
-
-      grp.scale.setScalar(0.62 + ee * 0.38);
-      wireMat.opacity = 0.15 * ee;
-      ptMat.opacity = 0.46 * ee;
-      for (var i = 0; i < rings.length; i++) rings[i].m.opacity = rings[i].t * ee;
-
-      mx = lerp(mx, tx, 0.05); my = lerp(my, ty, 0.05);
-      grp.rotation.y = (REDUCED ? 0 : el * 0.085) + mx * 0.55;
-      grp.rotation.x = -0.12 + my * 0.34;
-      cam.position.z = 23 - ee * 1.4;
-      gl.render(scene, cam);
-    }
-    requestAnimationFrame(frame);
-  })();
+  /* 13. WEBGL IDENTITY FIELD lives in ./heroField.js (loaded on first interaction). */
 
   /* ========================================================
      14. COMMAND PALETTE
@@ -530,10 +464,19 @@ export default function initPortfolio() {
     var view = items.slice(), sel = 0;
 
     function render() {
-      if (!view.length) { list.innerHTML = '<li class="cmdk-empty" role="presentation">Nothing matches that. Try “durabolt” or “hire”.</li>'; return; }
-      list.innerHTML = view.map(function (it, i) {
-        return '<li role="option" data-i="' + i + '" class="' + (i === sel ? "sel" : "") + '"><span>' + it.t + "</span><em>" + it.h + "</em></li>";
-      }).join("");
+      // Built with DOM nodes, never innerHTML, so Trusted Types can stay enforced.
+      list.textContent = "";
+      if (!view.length) {
+        list.appendChild(el("li", { className: "cmdk-empty", role: "presentation" }, "Nothing matches that. Try “durabolt” or “hire”."));
+        return;
+      }
+      view.forEach(function (it, i) {
+        var li = el("li", { role: "option", className: i === sel ? "sel" : "", "aria-selected": String(i === sel) });
+        li.dataset.i = i;
+        li.appendChild(el("span", null, it.t));
+        li.appendChild(el("em", null, it.h));
+        list.appendChild(li);
+      });
     }
     function open() {
       box.classList.add("open");
@@ -566,6 +509,8 @@ export default function initPortfolio() {
     box.addEventListener("click", function (e) { if (e.target.hasAttribute("data-close")) close(); });
     var openBtn = $("#openCmd");
     if (openBtn) openBtn.addEventListener("click", open);
+    var cmdKey = $("#cmdKey");
+    if (cmdKey && /Mac|iPod|iPhone|iPad/.test(navigator.platform || navigator.userAgent || "")) cmdKey.textContent = "⌘";
     document.addEventListener("keydown", function (e) {
       var k = (e.key || "").toLowerCase();
       if ((e.metaKey || e.ctrlKey) && k === "k") { e.preventDefault(); if (box.classList.contains("open")) { close(); } else { open(); } return; }
@@ -665,8 +610,11 @@ export default function initPortfolio() {
           "?subject=" + encodeURIComponent(p.subject) + "&body=" + encodeURIComponent(body);
       }
       function done() {
-        form.innerHTML = '<div class="sent"><b>Message on its way.</b><span>Thanks ' + payload.name.split(" ")[0] +
-          " — I read everything that lands in this inbox and usually reply within a day.</span></div>";
+        var sent = el("div", { className: "sent" });
+        sent.appendChild(el("b", null, "Message on its way."));
+        sent.appendChild(el("span", null, "Thanks " + payload.name.split(" ")[0] +
+          " — I read everything that lands in this inbox and usually reply within a day."));
+        form.replaceChildren(sent);
         toast("Message prepared");
       }
     });
